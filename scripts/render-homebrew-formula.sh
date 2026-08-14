@@ -82,9 +82,8 @@ render() {
   local version="$1" release_base_url="$2" darwin_arm64_sha="$3" darwin_x64_sha="$4"
   cat <<EOF
 class GoogleServiceGateway < Formula
-  desc "Google Service Usage reader and writer command line gateways"
+  desc "Google Service Usage reader and writer command-line gateways"
   homepage "https://github.com/tacogips/google-service-gateway"
-  version "$version"
   license "MIT"
 
   livecheck do
