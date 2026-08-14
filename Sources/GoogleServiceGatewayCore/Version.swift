@@ -1,3 +1,3 @@
-public enum Version {
+public enum Version: Sendable {
   public static let current = "0.1.0"
 }

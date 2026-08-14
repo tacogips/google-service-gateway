@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build google-service-gateway on Linux amd64
+    name: Build Google Service Usage gateways on Linux amd64
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
@@ -23,15 +23,17 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Build Release CLI In Swift amd64 Container
+      - name: Build Release CLIs In Swift amd64 Container
         env:
           SWIFT_IMAGE: swift@sha256:4c6af6663ed2316002a3b38ff5505a1fc1f2749ec31e84936c32dd336713c569
-          EXECUTABLE_NAME: "google-service-gateway"
+          READER_EXECUTABLE_NAME: "google-service-gateway-reader"
+          WRITER_EXECUTABLE_NAME: "google-service-gateway-writer"
         run: |
           set -euo pipefail
           docker run --rm \
             --platform linux/amd64 \
-            -e EXECUTABLE_NAME \
+            -e READER_EXECUTABLE_NAME \
+            -e WRITER_EXECUTABLE_NAME \
             -v "$GITHUB_WORKSPACE:/workspace" \
             -w /workspace \
             "$SWIFT_IMAGE" \
@@ -39,5 +41,6 @@ jobs:
               set -euo pipefail
               test "$(uname -m)" = "x86_64"
               swift --version
-              swift build -c release --product "$EXECUTABLE_NAME" --triple x86_64-unknown-linux-gnu
+              swift build -c release --product "$READER_EXECUTABLE_NAME" --triple x86_64-unknown-linux-gnu
+              swift build -c release --product "$WRITER_EXECUTABLE_NAME" --triple x86_64-unknown-linux-gnu
             '

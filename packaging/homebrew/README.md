@@ -2,8 +2,10 @@
 
 This project ships two Homebrew release paths:
 
-- Formula: unsigned tarballs containing `bin/google-service-gateway`.
-- Cask: signed, notarized, and stapled macOS DMGs containing the command line tool.
+- Formula: unsigned tarballs containing `bin/google-service-gateway-reader` and
+  `bin/google-service-gateway-writer`.
+- Cask: signed, notarized, and stapled macOS DMGs containing both command line
+  gateways.
 
 Swift formula archives are macOS-only by default. Add Linux archives only after
 the project has a reviewed Swift Linux build and runtime contract.
@@ -32,6 +34,11 @@ formula into a tap checkout:
 scripts/render-homebrew-formula.sh <version> ../homebrew-tap/Formula/google-service-gateway.rb
 ```
 
+The renderer defaults to releases from `tacogips/google-service-gateway` and
+validates every Ruby-interpolated version, URL, checksum, and product token.
+Pass `--dry-run` before the version to emit validated Ruby without writing an
+output file.
+
 ## Cask
 
 Build signed and notarized DMGs on macOS:
@@ -55,6 +62,9 @@ Render the Cask:
 ```bash
 scripts/render-homebrew-cask.sh <version> ../homebrew-tap/Casks/google-service-gateway.rb
 ```
+
+The Cask renderer applies the same interpolation validation and supports the
+same non-writing `--dry-run` mode.
 
 For a tagged release, the local wrapper verifies the tag, builds DMGs, uploads
 release assets, and renders the tap Cask:

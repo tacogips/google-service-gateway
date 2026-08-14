@@ -36,7 +36,8 @@ Check version alignment:
 
 ```bash
 version="$(tr -d '[:space:]' < VERSION)"
-swift run google-service-gateway --version | tail -n 1 | grep -Fx "$version"
+swift run google-service-gateway-reader --version | tail -n 1 | grep -Fx "$version"
+swift run google-service-gateway-writer --version | tail -n 1 | grep -Fx "$version"
 ```
 
 Check the release plan:

@@ -29,9 +29,13 @@ run = "mise tasks ls"
 description = "Build the Swift package"
 run = "swift build"
 
-[tasks.run]
-description = "Run the executable"
-run = "swift run google-service-gateway"
+[tasks.reader]
+description = "Run the read-only Service Usage gateway"
+run = "swift run google-service-gateway-reader"
+
+[tasks.writer]
+description = "Run the Service Usage mutation gateway"
+run = "swift run google-service-gateway-writer"
 
 [tasks.test]
 description = "Run Swift tests"

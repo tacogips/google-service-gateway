@@ -8,18 +8,23 @@ let package = Package(
     .macOS(.v14)
   ],
   products: [
-    .library(name: "AppCore", targets: ["AppCore"]),
-    .executable(name: "google-service-gateway", targets: ["AppCLI"])
+    .library(name: "GoogleServiceGatewayCore", targets: ["GoogleServiceGatewayCore"]),
+    .executable(name: "google-service-gateway-reader", targets: ["GoogleServiceGatewayReader"]),
+    .executable(name: "google-service-gateway-writer", targets: ["GoogleServiceGatewayWriter"])
   ],
   targets: [
-    .target(name: "AppCore"),
+    .target(name: "GoogleServiceGatewayCore"),
     .executableTarget(
-      name: "AppCLI",
-      dependencies: ["AppCore"]
+      name: "GoogleServiceGatewayReader",
+      dependencies: ["GoogleServiceGatewayCore"]
+    ),
+    .executableTarget(
+      name: "GoogleServiceGatewayWriter",
+      dependencies: ["GoogleServiceGatewayCore"]
     ),
     .testTarget(
-      name: "AppCoreTests",
-      dependencies: ["AppCore"]
+      name: "GoogleServiceGatewayCoreTests",
+      dependencies: ["GoogleServiceGatewayCore", "GoogleServiceGatewayReader", "GoogleServiceGatewayWriter"]
     )
   ],
   swiftLanguageModes: [.v6]

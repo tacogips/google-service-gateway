@@ -4,7 +4,7 @@ set -euo pipefail
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd "$script_dir/.." && pwd)"
 artifact_name="google-service-gateway"
-github_repository="user/repo"
+github_repository="tacogips/google-service-gateway"
 
 usage() {
   cat <<EOF
@@ -50,6 +50,12 @@ case "$release_tag" in
     ;;
 esac
 
+version="${release_tag#v}"
+if [[ "$version" == *..* || ! "$version" =~ ^[0-9]+[.][0-9]+[.][0-9]+([-+][0-9A-Za-z][0-9A-Za-z.+-]*)?$ ]]; then
+  printf 'error: unsafe release version: %s\n' "$version" >&2
+  exit 1
+fi
+
 if [[ "$(uname -s)" != "Darwin" ]]; then
   printf 'error: Homebrew Cask release signing must run on macOS\n' >&2
   exit 1
@@ -59,7 +65,6 @@ require_command gh
 require_command git
 require_command shasum
 
-version="${release_tag#v}"
 if [[ "$(tr -d '[:space:]' < "$repo_root/VERSION")" != "$version" ]]; then
   printf 'error: VERSION does not match release tag %s\n' "$release_tag" >&2
   exit 1

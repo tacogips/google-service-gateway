@@ -29,3 +29,9 @@ logs/
 *.log
 
 mise.local.toml
+
+# Riela runtime/session state and temporary artifacts
+.riela/
+.riela-*
+.riela-*.tmp
+*.riela.tmp

@@ -3,7 +3,7 @@ set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd "$script_dir/.." && pwd)"
-product="google-service-gateway"
+products=("google-service-gateway-reader" "google-service-gateway-writer")
 artifact_name="google-service-gateway"
 
 usage() {
@@ -193,8 +193,11 @@ swift_release_bin_path() {
 
   (
     cd "$repo_root"
-    DEVELOPER_DIR="$developer_dir" SDKROOT="$sdkroot" \
-      "$swift_exe" build -c release --product "$product" --triple "$triple" >/dev/null
+    local product
+    for product in "${products[@]}"; do
+      DEVELOPER_DIR="$developer_dir" SDKROOT="$sdkroot" \
+        "$swift_exe" build -c release --product "$product" --triple "$triple" >/dev/null
+    done
     DEVELOPER_DIR="$developer_dir" SDKROOT="$sdkroot" \
       "$swift_exe" build -c release --product "$product" --triple "$triple" --show-bin-path
   )
@@ -207,13 +210,12 @@ assert_codesigning_identity() {
 }
 
 print_plan() {
-  local version target release_dir work_dir dmg_path staged_binary triple install_prefix
+  local version target release_dir work_dir dmg_path triple install_prefix product
   version="$1"
   target="$2"
   release_dir="$3"
   work_dir="$release_dir/work/$artifact_name-$version-$target"
   dmg_path="$release_dir/$artifact_name-$version-$target.dmg"
-  staged_binary="$work_dir/$product"
   triple="$(swift_triple_for_target "$target")"
   install_prefix="$(install_prefix_for_target "$target")"
 
@@ -221,11 +223,13 @@ print_plan() {
   assert_child_path "$release_dir" "$dmg_path"
 
   printf 'Swift Homebrew Cask DMG plan\n'
-  printf '  product: %s\n' "$product"
+  printf '  products: %s %s\n' "${products[0]}" "${products[1]}"
   printf '  target: %s\n' "$target"
   printf '  swift triple: %s\n' "$triple"
   printf '  cask install prefix: %s\n' "$install_prefix"
-  printf '  staged signed binary: %s\n' "$staged_binary"
+  for product in "${products[@]}"; do
+    printf '  staged signed binary: %s\n' "$work_dir/$product"
+  done
   printf '  notarized DMG: %s\n' "$dmg_path"
   printf '  checksum: %s.sha256\n' "$dmg_path"
   printf '  required Apple env: APPLE_SIGNING_IDENTITY, APPLE_ID, APPLE_PASSWORD, APPLE_TEAM_ID\n'
@@ -233,13 +237,12 @@ print_plan() {
 }
 
 build_target() {
-  local version target release_dir work_dir dmg_path staged_binary bin_path notarytool stapler
+  local version target release_dir work_dir dmg_path bin_path notarytool stapler product
   version="$1"
   target="$2"
   release_dir="$3"
   work_dir="$release_dir/work/$artifact_name-$version-$target"
   dmg_path="$release_dir/$artifact_name-$version-$target.dmg"
-  staged_binary="$work_dir/$product"
   notarytool="${NOTARYTOOL:-/Applications/Xcode.app/Contents/Developer/usr/bin/notarytool}"
   stapler="${STAPLER:-/Applications/Xcode.app/Contents/Developer/usr/bin/stapler}"
 
@@ -262,13 +265,14 @@ build_target() {
   mkdir -p "$work_dir"
 
   bin_path="$(swift_release_bin_path "$target" | tail -n 1)"
-  cp "$bin_path/$product" "$staged_binary"
-  chmod 0755 "$staged_binary"
+  for product in "${products[@]}"; do
+    cp "$bin_path/$product" "$work_dir/$product"
+    chmod 0755 "$work_dir/$product"
+    codesign --force --options runtime --timestamp --sign "$APPLE_SIGNING_IDENTITY" "$work_dir/$product"
+    codesign --verify --strict --verbose=2 "$work_dir/$product"
+  done
 
-  codesign --force --options runtime --timestamp --sign "$APPLE_SIGNING_IDENTITY" "$staged_binary"
-  codesign --verify --strict --verbose=2 "$staged_binary"
-
-  hdiutil create -quiet -fs HFS+ -format UDZO -volname "$product" -srcfolder "$work_dir" "$dmg_path"
+  hdiutil create -quiet -fs HFS+ -format UDZO -volname "$artifact_name" -srcfolder "$work_dir" "$dmg_path"
   codesign --force --timestamp --sign "$APPLE_SIGNING_IDENTITY" "$dmg_path"
   codesign --verify --strict --verbose=2 "$dmg_path"
   "$notarytool" submit "$dmg_path" \

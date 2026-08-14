@@ -94,7 +94,8 @@ From the tap checkout:
 ruby -c Formula/google-service-gateway.rb
 brew audit --strict google-service-gateway || brew audit --strict --formula google-service-gateway
 brew install user/tap/google-service-gateway
-google-service-gateway --version
+google-service-gateway-reader --version
+google-service-gateway-writer --version
 brew test user/tap/google-service-gateway
 ```
 
