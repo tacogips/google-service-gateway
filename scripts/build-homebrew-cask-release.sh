@@ -3,7 +3,7 @@ set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd "$script_dir/.." && pwd)"
-products=("google-service-gateway-reader" "google-service-gateway-writer")
+products=("google-service-gateway-reader" "google-service-gateway-writer" "google-service-gateway-auth")
 artifact_name="google-service-gateway"
 
 usage() {
@@ -223,7 +223,7 @@ print_plan() {
   assert_child_path "$release_dir" "$dmg_path"
 
   printf 'Swift Homebrew Cask DMG plan\n'
-  printf '  products: %s %s\n' "${products[0]}" "${products[1]}"
+  printf '  products: %s %s %s\n' "${products[0]}" "${products[1]}" "${products[2]}"
   printf '  target: %s\n' "$target"
   printf '  swift triple: %s\n' "$triple"
   printf '  cask install prefix: %s\n' "$install_prefix"

@@ -21,7 +21,9 @@ public enum GatewayErrorCode: String, Codable, Sendable {
     case .unexpectedError, .cancelled: 1
     case .invalidArgument: 2
     case .configurationError, .authRequired: 3
-    case .authenticationFailed, .permissionDenied, .notFound, .failedPrecondition, .rateLimited, .providerError, .malformedResponse: 4
+    case .authenticationFailed, .permissionDenied, .notFound, .failedPrecondition, .rateLimited,
+      .providerError, .malformedResponse:
+      4
     case .operationFailed: 5
     case .operationTimeout: 6
     }
@@ -37,7 +39,10 @@ public struct GatewayError: Error, Equatable, Sendable, LocalizedError {
   public let operationName: String?
   public let details: [JSONValue]?
 
-  public init(_ code: GatewayErrorCode, _ message: String, httpStatus: Int? = nil, googleCode: Int? = nil, googleStatus: String? = nil, operationName: String? = nil, details: [JSONValue]? = nil) {
+  public init(
+    _ code: GatewayErrorCode, _ message: String, httpStatus: Int? = nil, googleCode: Int? = nil,
+    googleStatus: String? = nil, operationName: String? = nil, details: [JSONValue]? = nil
+  ) {
     self.code = code
     self.message = message
     self.httpStatus = httpStatus
@@ -70,7 +75,8 @@ public enum Redactor {
       for (key, nested) in object.sorted(by: { $0.key < $1.key }) {
         let safeKey = scrub(key, token: token)
         let uniqueKey = collisionSafeKey(safeKey, existingKeys: redacted.keys)
-        redacted[uniqueKey] = isSensitive(key) ? .string("<redacted>") : redact(nested, token: token)
+        redacted[uniqueKey] =
+          isSensitive(key) ? .string("<redacted>") : redact(nested, token: token)
       }
       return .object(redacted)
     case .array(let values): return .array(values.map { redact($0, token: token) })
@@ -99,7 +105,9 @@ public enum Redactor {
 
   private static func isSensitive(_ key: String) -> Bool {
     let normalized = key.lowercased().filter { $0.isLetter || $0.isNumber }
-    return ["authorization", "token", "credential", "secret"].contains { normalized.contains($0) }
+    return ["authorization", "token", "credential", "secret", "keystring", "apikey"].contains {
+      normalized.contains($0)
+    }
   }
 
   private static func collisionSafeKey(

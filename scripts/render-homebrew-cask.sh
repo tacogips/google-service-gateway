@@ -6,6 +6,7 @@ repo_root="$(cd "$script_dir/.." && pwd)"
 artifact_name="google-service-gateway"
 reader_product="google-service-gateway-reader"
 writer_product="google-service-gateway-writer"
+auth_product="google-service-gateway-auth"
 
 usage() {
   cat <<EOF
@@ -90,7 +91,7 @@ cask "google-service-gateway" do
   url "$release_base_url/$artifact_name-#{version}-#{arch}.dmg",
       verified: "github.com/tacogips/google-service-gateway/releases/download/"
   name "google-service-gateway"
-  desc "Google Service Usage reader and writer command line gateways"
+  desc "Google Service Usage, API-key, and OAuth command-line gateways"
   homepage "https://github.com/tacogips/google-service-gateway"
 
   livecheck do
@@ -100,11 +101,12 @@ cask "google-service-gateway" do
 
   binary "$reader_product"
   binary "$writer_product"
+  binary "$auth_product"
 
   caveats do
     <<~EOS
       This cask installs the signed and notarized macOS command line tool.
-      Homebrew links both gateway executables into the native Homebrew prefix.
+      Homebrew links all three gateway executables into the native Homebrew prefix.
     EOS
   end
 end
@@ -142,6 +144,7 @@ main() {
   validate_ruby_token artifact-name "$artifact_name"
   validate_ruby_token reader-product "$reader_product"
   validate_ruby_token writer-product "$writer_product"
+  validate_ruby_token auth-product "$auth_product"
 
   local darwin_arm64_sha darwin_x64_sha
   darwin_arm64_sha="$(sha_for_target "$version" darwin-arm64 "$release_dir")"

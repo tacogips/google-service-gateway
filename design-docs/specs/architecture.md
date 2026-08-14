@@ -7,20 +7,25 @@ Approved for implementation
 ## Scope
 
 `google-service-gateway` manages whether Google APIs are enabled for one Google
-Cloud project through the Google Service Usage REST v1 API. It does not manage
-OAuth consent screens, OAuth clients, end-user OAuth scopes, quotas, service
-identities, organizations, or folders. No live mutation is required for
-development or verification.
+Cloud project through the Google Service Usage REST v1 API, Google API keys
+through API Keys API v2, and end-user OAuth runtime credentials through Google's
+documented OAuth endpoints. General OAuth client and consent-screen setup is an
+assisted Console workflow because Google exposes no supported public mutation
+API for those resources. See `oauth-and-api-keys.md` for that hard provider
+boundary. The package does not manage quotas, service identities, organizations,
+or folders. No live mutation is required for development or verification.
 
-The package has three public products:
+The package has four public products:
 
 - `GoogleServiceGatewayCore`, a reusable Swift library for in-process Riela
   nodes and other Swift callers.
 - `google-service-gateway-reader`, a non-mutating executable for listing and
-  getting services and inspecting long-running operations.
-- `google-service-gateway-writer`, an executable limited to enable, disable,
-  and batch-enable mutations. It performs operation reads only as part of
-  mutation polling.
+  getting services, inspecting long-running operations, and reading API-key
+  metadata.
+- `google-service-gateway-writer`, an executable for Service Usage and API-key
+  mutations, plus the explicitly sensitive API-key-string retrieval command.
+- `google-service-gateway-auth`, an executable for OAuth setup assistance,
+  secure client import, scope resolution, PKCE login, refresh, and revocation.
 
 The reader must never construct or send a mutation request. The writer does not
 duplicate general service-list or service-get commands; callers use the reader
@@ -36,6 +41,8 @@ or the core library for those operations.
   streams, and exit status.
 - `Sources/GoogleServiceGatewayWriter/` owns the corresponding writer process
   adapter and cannot expose unsupported commands.
+- `Sources/GoogleServiceGatewayAuth/` owns interactive loopback login, browser
+  launch, OAuth process commands, and secure-store selection.
 - `Tests/GoogleServiceGatewayCoreTests/` uses injected transports, sleepers,
   and clocks; it does not require credentials or network access.
 
@@ -48,9 +55,10 @@ global process state, or spawn subprocesses.
 
 ## Configuration and Authentication
 
-Every API request needs a bearer access token. Service list, get, enable,
-disable, and batch-enable requests also need a project; `operations.get` needs
-only its operation name and token:
+Service Usage and API Keys API requests need a management bearer access token.
+Service list, get, enable, disable, batch-enable, and API-key list/create
+requests also need a project; resource-name and operation requests derive their
+project from the resource:
 
 - Project precedence is explicit `--project`, then
   `GOOGLE_SERVICE_GATEWAY_PROJECT`, then `GOOGLE_CLOUD_PROJECT`.
@@ -68,18 +76,24 @@ configuration. An explicit `--project` on that command is rejected as
 caller mistake. Ambient `GOOGLE_SERVICE_GATEWAY_PROJECT` and
 `GOOGLE_CLOUD_PROJECT` values are not read and do not affect the command.
 
-Tokens exist in memory only for request authorization. Gateway-owned models
-never return them, and they are never written to disk, placed in URLs, included
-in descriptions, or printed in error, help, or diagnostic output.
+Management bearer tokens exist in memory only for request authorization.
+OAuth client secrets and refresh tokens are stored through
+`SecureCredentialStore`, whose production macOS implementation uses Keychain.
+Gateway-owned routine models never return secrets, and secrets are never placed
+in URLs, descriptions, help, or diagnostic output. Only explicitly sensitive
+`oauth token`, `oauth refresh`, and `api-keys get-key-string` results emit a
+credential value.
 Provider-defined values in successful 2xx payloads are preserved without token
 scrubbing, including values that happen to equal the active token; redaction is
 reserved for data promoted into error and diagnostic paths. Authentication
-errors report only sanitized status and configuration context. The CLI has no
-token refresh, OAuth bootstrap, or credential persistence behavior.
+errors report only sanitized status and configuration context. OAuth bootstrap,
+refresh, revocation, and persistence are isolated in the auth capability.
 
-The production CLI always uses `https://serviceusage.googleapis.com`. A custom
-base URL is available only through explicit core construction so unit tests can
-inject a local or synthetic transport; it is not a CLI option.
+Production CLIs use `https://serviceusage.googleapis.com`,
+`https://apikeys.googleapis.com`, Google's documented OAuth authorization/token
+endpoints, and `https://oauth2.googleapis.com/revoke`. Custom provider URLs are
+available only through explicit core construction so tests can inject synthetic
+transports; they are not CLI options.
 
 ## Resource Validation and Aliases
 
@@ -378,13 +392,13 @@ with the following concrete mapping:
 
 | Reference path | Reference flow | Gateway decision |
 | --- | --- | --- |
-| `../mail-gateway/Package.swift` | Declares a reusable core product and capability-specific executable targets. | Keep one public core library and separate reader/writer products, while limiting this package to the two Service Usage capability boundaries. |
+| `../mail-gateway/Package.swift` | Declares a reusable core product and capability-specific executable targets. | Keep one public core library and separate reader, writer, and auth products. |
 | `../mail-gateway/Sources/MailGatewayCore/MailGatewayCore.swift` | Defines shared exit codes, errors, command results, configuration, and service entry points. | Preserve typed errors and result consistency, but expose strongly typed `Equatable`, `Sendable` domain values and `GatewayJSONCodec` output instead of string output and heterogeneous dictionaries. |
 | `../mail-gateway/Sources/MailGatewayCore/MailGatewayCLI.swift` | Parses arguments, selects a CLI mode, loads process configuration, invokes services, and builds stdout/stderr results inside the public core target. | Intentionally keep argument/environment parsing, help, JSON encoding, standard streams, and exit behavior in process adapters. Riela callers receive domain values and typed errors without importing a CLI facade or process state. |
 | `../mail-gateway/Sources/MailGatewayReader/main.swift`, `MailGatewayDraft/main.swift`, and `MailGatewaySender/main.swift` | Thin entry points choose a mode, invoke the shared CLI facade, write its stdout/stderr, and exit with its status. | Keep entry points equally thin, but each executable can construct only its reader or writer adapter, preventing the reader binary from selecting a mutation mode. |
 | `../mail-gateway/Tests/MailGatewayCoreTests/CommandTests.swift` | Verifies mode-specific help, version, command acceptance, JSON output, and exit behavior. | Retain equivalent contract tests and add injected HTTP, clock, and sleeper coverage for URL construction, pagination, mutation polling, and timeout boundaries. |
-| `../mail-gateway/Sources/MailGatewayCore/GmailOAuthSupport.swift` | Loads, refreshes, and can persist OAuth credentials and token stores. | Do not reuse this flow: accept only an injected ephemeral bearer token and never bootstrap, refresh, or persist credentials. |
-| `../mail-gateway/README.md` | Documents executable boundaries and direct Swift library use. | Document both Service Usage executables plus in-process `GoogleServiceGatewayCore` use for Riela nodes. |
+| `../mail-gateway/Sources/MailGatewayCore/GmailOAuthSupport.swift` | Loads, refreshes, and can persist OAuth credentials and token stores. | Implement Google PKCE and token endpoints directly, behind injectable stores and transports, with macOS Keychain as the production store. |
+| `../mail-gateway/README.md` | Documents executable boundaries and direct Swift library use. | Document all three executables plus in-process `GoogleServiceGatewayCore` use for Riela nodes. |
 
 The command adapter flow is `arguments/environment -> reader or writer adapter
 -> typed core request -> transport/poller -> typed core result or error ->
@@ -410,7 +424,7 @@ and
 
 Implementation replaces the scaffold `AppCore`, `AppCLI`, and `AppCoreTests`
 targets after equivalent version/help and error behavior exists in the new
-targets. Documentation and Homebrew metadata must name both executables; this
+targets. Documentation and Homebrew metadata must name all three executables; this
 issue does not publish artifacts, commit, or push.
 
 Verification is local and non-mutating:
@@ -422,6 +436,7 @@ swift test
 swift build
 swift run google-service-gateway-reader --help
 swift run google-service-gateway-writer --help
+swift run google-service-gateway-auth --help
 ```
 
 Run `swiftlint` directly only when available and report unavailable tooling.

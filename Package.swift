@@ -10,7 +10,8 @@ let package = Package(
   products: [
     .library(name: "GoogleServiceGatewayCore", targets: ["GoogleServiceGatewayCore"]),
     .executable(name: "google-service-gateway-reader", targets: ["GoogleServiceGatewayReader"]),
-    .executable(name: "google-service-gateway-writer", targets: ["GoogleServiceGatewayWriter"])
+    .executable(name: "google-service-gateway-writer", targets: ["GoogleServiceGatewayWriter"]),
+    .executable(name: "google-service-gateway-auth", targets: ["GoogleServiceGatewayAuth"]),
   ],
   targets: [
     .target(name: "GoogleServiceGatewayCore"),
@@ -22,10 +23,19 @@ let package = Package(
       name: "GoogleServiceGatewayWriter",
       dependencies: ["GoogleServiceGatewayCore"]
     ),
+    .executableTarget(
+      name: "GoogleServiceGatewayAuth",
+      dependencies: ["GoogleServiceGatewayCore"]
+    ),
     .testTarget(
       name: "GoogleServiceGatewayCoreTests",
-      dependencies: ["GoogleServiceGatewayCore", "GoogleServiceGatewayReader", "GoogleServiceGatewayWriter"]
-    )
+      dependencies: [
+        "GoogleServiceGatewayCore",
+        "GoogleServiceGatewayReader",
+        "GoogleServiceGatewayWriter",
+        "GoogleServiceGatewayAuth",
+      ]
+    ),
   ],
   swiftLanguageModes: [.v6]
 )

@@ -2,7 +2,8 @@
 
 ## Ownership boundary
 
-`GoogleServiceGatewayCore` is the reusable Service Usage client. It does not
+`GoogleServiceGatewayCore` is the reusable Service Usage, API Keys, and OAuth
+runtime library. It does not
 depend on Riela. The sibling Riela package imports the core product and owns the
 translation between `WorkflowAddonExecutionInput` and gateway requests. This
 keeps the gateway usable by other Swift applications and avoids a package
@@ -17,6 +18,13 @@ The read add-on can call `services.list`, `services.get`, and `operations.get`.
 The write add-on can call `services.enable`, `services.disable`, and
 `services.batchEnable`. A workflow cannot select a mutation through the read
 add-on.
+
+The current version 1 built-ins retain their Service Usage contract. API-key
+and OAuth core clients are available for a future versioned Riela contract;
+adding those operations to version 1 would silently broaden existing node
+capabilities. Headless Riela use should inject
+`RefreshingOAuthAccessTokenProvider` and a host-owned
+`SecureCredentialStore`; interactive browser login remains a host UI operation.
 
 ## Add-on contract
 

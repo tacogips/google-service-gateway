@@ -43,7 +43,12 @@ public struct URLSessionGatewayTransport: GatewayHTTPTransport {
       guard let response = response as? HTTPURLResponse else {
         throw GatewayError(.unexpectedError, "non-HTTP response")
       }
-      return GatewayHTTPResponse(statusCode: response.statusCode, body: data)
+      let headers = response.allHeaderFields.reduce(into: [String: String]()) { result, entry in
+        if let name = entry.key as? String, let value = entry.value as? String {
+          result[name] = value
+        }
+      }
+      return GatewayHTTPResponse(statusCode: response.statusCode, headers: headers, body: data)
     } catch let error as GatewayError {
       throw error
     } catch {

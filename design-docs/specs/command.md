@@ -95,3 +95,6 @@ GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN="$(gcloud auth print-access-token)" \
 Examples must never echo or print the token. Shell history guidance should
 prefer injected environment tooling for persistent use; the examples show only
 process-scoped environment assignment.
+
+OAuth and API-key commands are specified in `oauth-and-api-keys.md`. Their
+secret-output commands are deliberately separate from routine reader output.
