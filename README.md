@@ -1,7 +1,8 @@
 # google-service-gateway
 
-A SwiftPM library and three capability-specific command-line gateways for
-Google Service Usage REST v1, API Keys API v2, and Google OAuth 2.0.
+A SwiftPM library and five capability-specific command-line gateways for
+Google Service Usage REST v1, Cloud Billing API v1, API Keys API v2, and Google
+OAuth 2.0.
 
 ## Development
 
@@ -11,6 +12,8 @@ mise run build
 mise run test
 swift run google-service-gateway-reader --help
 swift run google-service-gateway-writer --help
+swift run google-service-gateway-admin --help
+swift run google-service-gateway-deleter --help
 swift run google-service-gateway-auth --help
 ```
 
@@ -18,13 +21,18 @@ The package uses Swift Package Manager with:
 
 - Library target: `GoogleServiceGatewayCore`
 - Reader executable: `google-service-gateway-reader` (list, get, operation get)
-- Writer executable: `google-service-gateway-writer` (service and API-key mutations)
+- Writer executable: `google-service-gateway-writer` (project creation, service
+  mutations, and non-deleting API-key mutations)
+- Admin executable: `google-service-gateway-admin` (signed, expiring, single-use
+  Cloud Billing link/unlink plans)
+- Deleter executable: `google-service-gateway-deleter` (project and API-key
+  delete/undelete operations)
 - Auth executable: `google-service-gateway-auth` (client import, PKCE login,
   refresh, revoke, scopes, and Google Auth Platform setup assistance)
 
-The reader never sends mutations. The writer only reads operations while polling
-its own mutations. Both commands emit stable JSON on success and error; help
-and version are the only plain-text output.
+The reader never sends mutations. The writer, admin, and deleter only read
+provider state needed to validate or poll their own mutations. Every gateway emits stable JSON on success
+and error; help and version are the only plain-text output.
 
 ## Usage
 
@@ -39,6 +47,22 @@ GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN="$(gcloud auth print-access-token)" \
 GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN="$(gcloud auth print-access-token)" \
   swift run google-service-gateway-writer services disable --project my-project --service gmail --check-usage
 ```
+
+`gcloud` is optional. A service-account credential JSON can be supplied through
+a named environment variable. The gateway signs and exchanges a short-lived
+OAuth assertion without printing the credential or private key:
+
+```bash
+google-service-gateway-reader iam permissions test \
+  --project my-project \
+  --permission serviceusage.services.enable \
+  --permission apikeys.keys.create \
+  --service-account-env GOOGLE_APPLICATION_CREDENTIALS_JSON
+```
+
+The reader, writer, admin, and deleter accept `--service-account-env NAME`.
+OpenSSL must be available for local RSA signing. The IAM permission test reports
+separate `grantedPermissions` and `missingPermissions` arrays.
 
 Aliases are `calendar`, `drive`, `gmail`, `sheets`, and `docs`; complete
 `*.googleapis.com` service names and project numbers are also accepted. Use
@@ -55,6 +79,90 @@ a one-second interval and 120-second timeout. `--no-wait` conflicts with
 `--poll-interval` and `--timeout`. Disable preserves dependents by default and
 skips recent-usage checks unless `--disable-dependents` or `--check-usage` is
 explicitly selected.
+
+## Project bootstrap
+
+The writer can create a GCP project with Cloud Resource Manager v3, enable up
+to 20 APIs, and return the exact
+Google Auth Platform Console handoffs needed to finish user OAuth setup:
+
+```bash
+GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN="$(gcloud auth print-access-token)" \
+  google-service-gateway-writer projects create \
+  --project-id my-google-gateway-123 \
+  --display-name "My Google Gateway" \
+  --parent organizations/123456789 \
+  --label environment=production \
+  --service calendar \
+  --service gmail \
+  --scope calendar.readonly \
+  --scope gmail.send
+```
+
+`--parent`, labels, services, and OAuth scopes are optional. Project creation is
+asynchronous and is polled before service setup. `--no-wait` is therefore
+rejected when services are requested. The caller needs
+`resourcemanager.projects.create` on the selected parent.
+Service accounts must specify `--parent organizations/NUMBER` or
+`--parent folders/NUMBER`; Google rejects parentless project creation by a
+service account.
+
+Billing discovery belongs to the reader. Billing association belongs only to
+the admin executable and uses a signed, credential-bound plan followed by an
+exactly confirmed apply. Store the plan JSON output in a regular file; apply
+also requires an absolute owner-controlled state directory for replay records:
+
+```bash
+google-service-gateway-reader billing accounts list
+google-service-gateway-reader billing projects get --project my-google-gateway-123
+
+google-service-gateway-admin billing projects link plan \
+  --project my-google-gateway-123 \
+  --billing-account billingAccounts/ABCDEF-123456-789012 > billing-plan.json
+
+google-service-gateway-admin billing projects link apply \
+  --plan billing-plan.json \
+  --state-dir /absolute/private/admin-state \
+  --confirm-project projects/my-google-gateway-123 \
+  --confirm-billing-account billingAccounts/ABCDEF-123456-789012
+```
+
+The HMAC key is read from `GOOGLE_SERVICE_GATEWAY_ADMIN_PLAN_KEY` by default and
+must contain at least 32 UTF-8 bytes. Use `--plan-key-env NAME` to select another
+environment variable; never place the key itself in command arguments.
+
+Project deletion and recovery are isolated in the deleter executable:
+
+```bash
+google-service-gateway-deleter projects delete --project my-google-gateway-123
+google-service-gateway-deleter projects undelete --project my-google-gateway-123
+```
+
+Google does not provide a supported public API for creating a general desktop
+OAuth client. Complete that one Console step using the returned
+`oauthClientSetup.consoleUrl`, download the client JSON, and bind it to the
+created project while importing it:
+
+```bash
+google-service-gateway-auth clients import \
+  --project my-google-gateway-123 \
+  --profile personal \
+  --file client_secret.json
+
+google-service-gateway-auth consent setup \
+  --project my-google-gateway-123 \
+  --profile personal \
+  --scope calendar.readonly \
+  --scope gmail.send
+
+google-service-gateway-auth oauth login --profile personal
+google-service-gateway-auth oauth token --profile personal
+```
+
+The import and login commands reject a downloaded OAuth client whose embedded
+project ID does not match the configured project. Client secrets and refresh
+tokens remain in macOS Keychain. Only the explicit `oauth token` command prints
+an access token.
 
 ## OAuth login and credentials
 
@@ -118,9 +226,10 @@ google-service-gateway-auth scopes list --service calendar
 ## API keys
 
 The reader lists and gets API-key metadata. The writer creates restricted keys,
-updates restrictions, retrieves a key string only through an explicit sensitive
-command, and supports delete/undelete. API Keys API must be enabled and the
-management access token needs the corresponding `apikeys.keys.*` permissions.
+updates restrictions, and retrieves a key string only through an explicit
+sensitive command. The deleter owns delete/undelete. API Keys API must be
+enabled and the management access token needs the corresponding
+`apikeys.keys.*` permissions.
 
 ```bash
 GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN="$(gcloud auth print-access-token)" \
@@ -136,11 +245,22 @@ GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN="$(gcloud auth print-access-token)" \
 GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN="$(gcloud auth print-access-token)" \
   google-service-gateway-writer api-keys get-key-string \
   --key projects/123456789/locations/global/keys/KEY_ID
+
+GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN="$(gcloud auth print-access-token)" \
+  google-service-gateway-deleter api-keys delete \
+  --key projects/123456789/locations/global/keys/KEY_ID
 ```
 
 Unrestricted key creation is rejected locally. API restrictions are mandatory,
 and IP, browser-referrer, and iOS bundle restrictions are mutually exclusive in
 the CLI, matching Google's API-key resource model.
+
+API keys are not user-authorization credentials. Gmail requires OAuth user
+consent (or administrator-configured Workspace domain-wide delegation), Google
+Ads requires OAuth plus an approved Ads developer token, and an API key cannot
+open a private spreadsheet. The explicit `api-keys get-key-string` and
+`oauth token` commands provide the corresponding handoff values to downstream
+tools.
 
 Operational output is one JSON object: successes use `ok`, `command`, and
 `data`; failures use `ok`, the recognized `command`, and `error`. Exit statuses

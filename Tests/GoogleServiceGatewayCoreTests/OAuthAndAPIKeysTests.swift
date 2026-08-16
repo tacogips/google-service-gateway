@@ -29,6 +29,32 @@ import Testing
   #expect(throws: GatewayError.self) { try OAuthClientConfiguration.imported(from: hostile) }
 }
 
+@Test func importedOAuthClientCanBeBoundToExpectedProject() async throws {
+  let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(
+    "google-service-gateway-client-\(UUID().uuidString).json")
+  defer { try? FileManager.default.removeItem(at: temporary) }
+  try Data(
+    """
+    {"installed":{"client_id":"client.apps.googleusercontent.com","project_id":"sample-project","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","client_secret":"secret","redirect_uris":["http://localhost"]}}
+    """.utf8
+  ).write(to: temporary)
+  let adapter = AuthAdapter(
+    vault: OAuthCredentialVault(store: MemoryCredentialStore()), authorizer: NeverAuthorizer())
+
+  let accepted = await adapter.run(arguments: [
+    "clients", "import", "--profile", "sample", "--file", temporary.path,
+    "--project", "sample-project"
+  ])
+  #expect(!accepted.isError)
+
+  let rejected = await adapter.run(arguments: [
+    "clients", "import", "--profile", "wrong", "--file", temporary.path,
+    "--project", "different-project"
+  ])
+  #expect(rejected.isError)
+  #expect(rejected.output.contains("does not match"))
+}
+
 @Test func oauthAuthorizationUsesStatePKCEAndOfflineAccess() throws {
   let oauth = GoogleOAuthClient()
   let client = oauthTestClient()
@@ -349,6 +375,21 @@ import Testing
   let deleted = await adapter.run(arguments: ["consent", "delete", "--profile", "personal"])
   #expect(!deleted.isError)
   #expect(try await vault.scopeConfiguration(profile: "personal") == nil)
+}
+
+@Test func oauthLoginRejectsClientFromDifferentConfiguredProject() async throws {
+  let store = MemoryCredentialStore()
+  let vault = OAuthCredentialVault(store: store)
+  try await vault.saveClient(oauthTestClient(), profile: "mismatched")
+  try await vault.saveScopeConfiguration(
+    .init(project: "different-project", scopes: ["openid"]),
+    profile: "mismatched"
+  )
+  let adapter = AuthAdapter(vault: vault, authorizer: NeverAuthorizer())
+
+  let result = await adapter.run(arguments: ["oauth", "login", "--profile", "mismatched"])
+  #expect(result.isError)
+  #expect(result.output.contains("does not match"))
 }
 
 @Test func sensitiveKeyFieldsAreRedactedOnlyOnDiagnosticPaths() throws {

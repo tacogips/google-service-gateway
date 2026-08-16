@@ -56,6 +56,9 @@ public struct AuthAdapter: Sendable {
           throw GatewayError(.configurationError, "could not read OAuth client JSON")
         }
         let client = try OAuthClientConfiguration.imported(from: data)
+        if let project = parsed.project {
+          try validateClientProject(client, expectedProject: project)
+        }
         try await vault.saveClient(client, profile: profile)
         return success(
           command: "clients.import",
@@ -116,9 +119,13 @@ public struct AuthAdapter: Sendable {
       case .login:
         let profile = try parsed.requiredProfile()
         let client = try await vault.client(profile: profile)
+        let configuration = try await vault.scopeConfiguration(profile: profile)
+        if let configuration {
+          try validateClientProject(client, expectedProject: configuration.project)
+        }
         let scopes =
           if parsed.scopes.isEmpty {
-            try await vault.scopeConfiguration(profile: profile)?.scopes ?? []
+            configuration?.scopes ?? []
           } else {
             parsed.scopes
           }
@@ -184,7 +191,7 @@ public struct AuthAdapter: Sendable {
     """
     Usage: google-service-gateway-auth <clients|consent|scopes|oauth> <command> [options]
       clients setup --project PROJECT
-      clients import --profile NAME --file FILE
+      clients import --profile NAME --file FILE [--project PROJECT]
       clients list
       clients delete --profile NAME
       consent setup --project PROJECT [--profile NAME] [--scope ALIAS-OR-URI ...]
@@ -292,7 +299,7 @@ private struct AuthArguments {
         throw invalidOptions()
       }
     case .clientImport:
-      guard project == nil, profile != nil, file != nil, scopes.isEmpty, serviceFilter == nil else {
+      guard profile != nil, file != nil, scopes.isEmpty, serviceFilter == nil else {
         throw invalidOptions()
       }
     case .clientList:
@@ -361,6 +368,20 @@ private func tokenMetadata(_ token: OAuthTokenCredential, profile: String) -> JS
     "expiresAt": .string(ISO8601DateFormatter().string(from: token.expiresAt)),
     "refreshTokenStored": .bool(token.refreshToken != nil),
   ])
+}
+
+private func validateClientProject(
+  _ client: OAuthClientConfiguration,
+  expectedProject: String
+) throws {
+  let expected = String(
+    try GatewayValidation.project(expectedProject).dropFirst("projects/".count))
+  guard client.projectID == expected else {
+    throw GatewayError(
+      .configurationError,
+      "OAuth client project does not match the configured project"
+    )
+  }
 }
 
 private func success<DataValue: GatewayJSONRepresentable>(

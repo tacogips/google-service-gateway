@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 @testable import GoogleServiceGatewayCore
+@testable import GoogleServiceGatewayDeleter
 @testable import GoogleServiceGatewayReader
 @testable import GoogleServiceGatewayWriter
 
@@ -202,14 +203,22 @@ import Testing
 @Test func cliHelpVersionPrettyAndExitContractsAreExact() async throws {
   let readerHelp = await ReaderAdapter().run(arguments: ["--help"], environment: [:])
   let writerHelp = await WriterAdapter().run(arguments: ["--help"], environment: [:])
+  let deleterHelp = await DeleterAdapter().run(arguments: ["--help"], environment: [:])
   #expect(readerHelp.exitStatus == 0 && !readerHelp.isError)
   #expect(writerHelp.exitStatus == 0 && !writerHelp.isError)
+  #expect(deleterHelp.exitStatus == 0 && !deleterHelp.isError)
   #expect(readerHelp.output.contains("services list") && !readerHelp.output.contains("batch-enable"))
-  #expect(writerHelp.output.contains("batch-enable") && !writerHelp.output.contains("services list"))
+  #expect(
+    writerHelp.output.contains("batch-enable")
+      && !writerHelp.output.contains("services list")
+      && !writerHelp.output.contains("api-keys delete"))
+  #expect(deleterHelp.output.contains("api-keys delete") && !deleterHelp.output.contains("enable"))
   let readerVersion = await ReaderAdapter().run(arguments: ["--version"], environment: [:])
   let writerVersion = await WriterAdapter().run(arguments: ["--version"], environment: [:])
+  let deleterVersion = await DeleterAdapter().run(arguments: ["--version"], environment: [:])
   #expect(readerVersion.output == Version.current)
   #expect(writerVersion.output == Version.current)
+  #expect(deleterVersion.output == Version.current)
 
   let prettyTransport = ReviewTransport(steps: [.response(reviewResponse("{\"services\":[]}"))])
   let pretty = await ReaderAdapter(transport: prettyTransport).run(

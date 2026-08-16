@@ -2,10 +2,10 @@
 
 This project ships two Homebrew release paths:
 
-- Formula: unsigned tarballs containing `bin/google-service-gateway-reader` and
-  `bin/google-service-gateway-writer`.
-- Cask: signed, notarized, and stapled macOS DMGs containing both command line
-  gateways.
+- Formula: unsigned tarballs containing the reader, writer, admin, deleter, and auth
+  gateway executables.
+- Cask: signed, notarized, and stapled macOS DMGs containing all five command
+  line gateways.
 
 Swift formula archives are macOS-only by default. Add Linux archives only after
 the project has a reviewed Swift Linux build and runtime contract.

@@ -38,6 +38,48 @@ public enum GatewayValidation {
     return "projects/\(value)"
   }
 
+  public static func projectID(_ input: String) throws -> String {
+    guard !input.allSatisfy({ $0.isNumber }), !input.hasPrefix("projects/") else {
+      throw invalid("invalid project ID")
+    }
+    return String(try project(input).dropFirst("projects/".count))
+  }
+
+  public static func projectDisplayName(_ value: String) throws -> String {
+    let allowedPunctuation: Set<Character> = ["-", "'", "\"", " ", "!"]
+    guard (4...30).contains(value.count), ascii(value),
+      value.allSatisfy({ $0.isLetter || $0.isNumber || allowedPunctuation.contains($0) })
+    else { throw invalid("invalid project display name") }
+    return value
+  }
+
+  public static func projectParent(_ value: String) throws -> String {
+    let components = value.split(separator: "/", omittingEmptySubsequences: false)
+    guard components.count == 2, ["organizations", "folders"].contains(String(components[0])),
+      !components[1].isEmpty, components[1].first != "0",
+      components[1].allSatisfy({ $0.isNumber }), components[1].count <= 30
+    else { throw invalid("invalid project parent") }
+    return value
+  }
+
+  public static func billingAccount(_ value: String) throws -> String {
+    let components = value.split(separator: "/", omittingEmptySubsequences: false)
+    guard components.count == 2, components[0] == "billingAccounts",
+      (1...64).contains(components[1].count),
+      components[1].allSatisfy({ $0.isASCII && ($0.isLetter || $0.isNumber || $0 == "-") })
+    else { throw invalid("invalid billing account") }
+    return value
+  }
+
+  public static func projectLabels(_ labels: [String: String]) throws -> [String: String] {
+    guard labels.count <= 64 else { throw invalid("a project can have at most 64 labels") }
+    for (key, value) in labels {
+      guard validProjectLabel(key, allowEmpty: false), validProjectLabel(value, allowEmpty: true)
+      else { throw invalid("invalid project label") }
+    }
+    return labels
+  }
+
   public static func service(_ input: String) throws -> String {
     let value = input.lowercased()
     if let alias = aliases[value] { return alias }
@@ -85,6 +127,13 @@ public enum GatewayValidation {
     return value
   }
 
+  public static func billingPageSize(_ value: Int) throws -> Int {
+    guard (1...100).contains(value) else {
+      throw invalid("billing page size must be between 1 and 100")
+    }
+    return value
+  }
+
   public static func tokenEnvironmentName(_ value: String) throws -> String {
     guard ascii(value), (1...128).contains(value.count),
       value.first?.isLetter == true || value.first == "_",
@@ -93,6 +142,25 @@ public enum GatewayValidation {
       throw invalid("invalid access-token environment variable name")
     }
     return value
+  }
+
+  public static func iamPermissions(_ values: [String]) throws -> [String] {
+    guard !values.isEmpty, values.count <= 100 else {
+      throw invalid("between 1 and 100 IAM permissions are required")
+    }
+    let permissions = values
+    guard Set(permissions).count == permissions.count,
+      permissions.allSatisfy({ permission in
+        let components = permission.split(separator: ".", omittingEmptySubsequences: false)
+        return (2...8).contains(components.count) && permission.count <= 256
+          && components.allSatisfy { component in
+            !component.isEmpty && component.allSatisfy {
+              $0.isASCII && ($0.isLetter || $0.isNumber || $0 == "_")
+            }
+          }
+      })
+    else { throw invalid("invalid IAM permission") }
+    return permissions.sorted()
   }
 
   public static func apiKeyResource(_ value: String) throws -> String {
@@ -206,6 +274,14 @@ public enum GatewayValidation {
       first.isNumber || first.isLowercase, last.isNumber || last.isLowercase
     else { return false }
     return label.allSatisfy { $0.isNumber || $0.isLowercase || $0 == "-" }
+  }
+
+  private static func validProjectLabel(_ value: String, allowEmpty: Bool) -> Bool {
+    if value.isEmpty { return allowEmpty }
+    guard value.count <= 63, let first = value.first, let last = value.last,
+      first.isLowercase, last.isLowercase || last.isNumber
+    else { return false }
+    return value.allSatisfy { $0.isLowercase || $0.isNumber || $0 == "-" }
   }
 
   private static func ascii(_ value: String) -> Bool {

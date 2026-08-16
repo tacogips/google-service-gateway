@@ -11,6 +11,8 @@ let package = Package(
     .library(name: "GoogleServiceGatewayCore", targets: ["GoogleServiceGatewayCore"]),
     .executable(name: "google-service-gateway-reader", targets: ["GoogleServiceGatewayReader"]),
     .executable(name: "google-service-gateway-writer", targets: ["GoogleServiceGatewayWriter"]),
+    .executable(name: "google-service-gateway-admin", targets: ["GoogleServiceGatewayAdmin"]),
+    .executable(name: "google-service-gateway-deleter", targets: ["GoogleServiceGatewayDeleter"]),
     .executable(name: "google-service-gateway-auth", targets: ["GoogleServiceGatewayAuth"]),
   ],
   targets: [
@@ -24,6 +26,14 @@ let package = Package(
       dependencies: ["GoogleServiceGatewayCore"]
     ),
     .executableTarget(
+      name: "GoogleServiceGatewayAdmin",
+      dependencies: ["GoogleServiceGatewayCore"]
+    ),
+    .executableTarget(
+      name: "GoogleServiceGatewayDeleter",
+      dependencies: ["GoogleServiceGatewayCore"]
+    ),
+    .executableTarget(
       name: "GoogleServiceGatewayAuth",
       dependencies: ["GoogleServiceGatewayCore"]
     ),
@@ -33,6 +43,8 @@ let package = Package(
         "GoogleServiceGatewayCore",
         "GoogleServiceGatewayReader",
         "GoogleServiceGatewayWriter",
+        "GoogleServiceGatewayAdmin",
+        "GoogleServiceGatewayDeleter",
         "GoogleServiceGatewayAuth",
       ]
     ),

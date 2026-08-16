@@ -6,6 +6,8 @@ repo_root="$(cd "$script_dir/.." && pwd)"
 artifact_name="google-service-gateway"
 reader_product="google-service-gateway-reader"
 writer_product="google-service-gateway-writer"
+admin_product="google-service-gateway-admin"
+deleter_product="google-service-gateway-deleter"
 auth_product="google-service-gateway-auth"
 
 usage() {
@@ -83,7 +85,7 @@ render() {
   local version="$1" release_base_url="$2" darwin_arm64_sha="$3" darwin_x64_sha="$4"
   cat <<EOF
 class GoogleServiceGateway < Formula
-  desc "Google Service Usage, API-key, and OAuth command-line gateways"
+  desc "Google Service Usage, Cloud Billing, API-key, and OAuth command-line gateways"
   homepage "https://github.com/tacogips/google-service-gateway"
   license "MIT"
 
@@ -105,12 +107,16 @@ class GoogleServiceGateway < Formula
   def install
     bin.install "bin/$reader_product"
     bin.install "bin/$writer_product"
+    bin.install "bin/$admin_product"
+    bin.install "bin/$deleter_product"
     bin.install "bin/$auth_product"
   end
 
   test do
     assert_match "$version", shell_output("#{bin}/$reader_product --version")
     assert_match "$version", shell_output("#{bin}/$writer_product --version")
+    assert_match "$version", shell_output("#{bin}/$admin_product --version")
+    assert_match "$version", shell_output("#{bin}/$deleter_product --version")
     assert_match "$version", shell_output("#{bin}/$auth_product --version")
   end
 end
@@ -148,6 +154,8 @@ main() {
   validate_ruby_token artifact-name "$artifact_name"
   validate_ruby_token reader-product "$reader_product"
   validate_ruby_token writer-product "$writer_product"
+  validate_ruby_token admin-product "$admin_product"
+  validate_ruby_token deleter-product "$deleter_product"
   validate_ruby_token auth-product "$auth_product"
 
   local darwin_arm64_sha darwin_x64_sha

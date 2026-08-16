@@ -37,6 +37,14 @@ run = "swift run google-service-gateway-reader"
 description = "Run the Service Usage mutation gateway"
 run = "swift run google-service-gateway-writer"
 
+[tasks.admin]
+description = "Run privileged signed-plan mutations"
+run = "swift run google-service-gateway-admin"
+
+[tasks.deleter]
+description = "Run the resource deletion gateway"
+run = "swift run google-service-gateway-deleter"
+
 [tasks.test]
 description = "Run Swift tests"
 run = "swift test"

@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 @testable import GoogleServiceGatewayCore
+@testable import GoogleServiceGatewayDeleter
 @testable import GoogleServiceGatewayReader
 @testable import GoogleServiceGatewayWriter
 
@@ -247,6 +248,19 @@ import Testing
     try findingExpectSuccessEnvelope(execution.output, command: entry.1)
     #expect(execution.exitStatus == 0 && !execution.isError)
   }
+
+  let deletion = await DeleterAdapter(
+    transport: FindingTransport(responses: [findingResponse(
+      "{\"name\":\"operations/delete\",\"done\":false}"
+    )])
+  ).run(
+    arguments: [
+      "api-keys", "delete", "--key", "projects/123/locations/global/keys/key-1", "--no-wait"
+    ],
+    environment: environment
+  )
+  try findingExpectSuccessEnvelope(deletion.output, command: "api-keys.delete")
+  #expect(deletion.exitStatus == 0 && !deletion.isError)
 }
 
 private actor FindingTransport: GatewayHTTPTransport {

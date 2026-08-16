@@ -32,8 +32,9 @@ or claim that a local setup record changed Google-side consent configuration.
 
 - `google-service-gateway-reader` adds API-key metadata list/get operations. It
   never retrieves the key string.
-- `google-service-gateway-writer` adds API-key create, restrict/update, delete,
-  undelete, and the explicitly sensitive `get-key-string` operation.
+- `google-service-gateway-writer` adds API-key create, restrict/update, and the
+  explicitly sensitive `get-key-string` operation.
+- `google-service-gateway-deleter` exclusively owns API-key delete and undelete.
 - `google-service-gateway-auth` owns OAuth client import, assisted setup, scope
   profiles, interactive PKCE login, refresh, token retrieval, and revocation.
 - `GoogleServiceGatewayCore` exposes all clients and storage protocols for
@@ -43,7 +44,7 @@ or claim that a local setup record changed Google-side consent configuration.
 
 ```text
 google-service-gateway-auth clients setup --project PROJECT [--type desktop]
-google-service-gateway-auth clients import --profile NAME --file FILE
+google-service-gateway-auth clients import --profile NAME --file FILE [--project PROJECT]
 google-service-gateway-auth clients list
 google-service-gateway-auth clients delete --profile NAME
 
@@ -64,7 +65,10 @@ Login uses a loopback redirect on `127.0.0.1`, a random CSRF state, and PKCE
 S256. It requests offline access and explicit consent when a new refresh token
 is required. Token responses are checked against the requested state and
 granted scopes. Refresh tokens and imported client secrets are stored in macOS
-Keychain. Access and refresh tokens are never written to ordinary files.
+Keychain. Access and refresh tokens are never written to ordinary files. When
+`clients import --project` is supplied, the downloaded client's embedded project
+ID must match. Login also checks that the imported client project matches any
+project saved by `consent setup --profile`.
 
 `oauth token` and `oauth refresh` intentionally return an access token because
 they are credential-output commands. Other commands never return access or
@@ -95,8 +99,8 @@ google-service-gateway-writer api-keys restrict --key RESOURCE \
   [--allowed-ip CIDR ... | --allowed-referrer PATTERN ... |
    --allowed-bundle-id ID ...]
 google-service-gateway-writer api-keys get-key-string --key RESOURCE
-google-service-gateway-writer api-keys delete --key RESOURCE
-google-service-gateway-writer api-keys undelete --key RESOURCE
+google-service-gateway-deleter api-keys delete --key RESOURCE
+google-service-gateway-deleter api-keys undelete --key RESOURCE
 ```
 
 All mutations poll API Keys API v2 long-running operations by default. API

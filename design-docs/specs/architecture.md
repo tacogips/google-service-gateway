@@ -6,41 +6,55 @@ Approved for implementation
 
 ## Scope
 
-`google-service-gateway` manages whether Google APIs are enabled for one Google
-Cloud project through the Google Service Usage REST v1 API, Google API keys
-through API Keys API v2, and end-user OAuth runtime credentials through Google's
-documented OAuth endpoints. General OAuth client and consent-screen setup is an
-assisted Console workflow because Google exposes no supported public mutation
-API for those resources. See `oauth-and-api-keys.md` for that hard provider
-boundary. The package does not manage quotas, service identities, organizations,
-or folders. No live mutation is required for development or verification.
+`google-service-gateway` creates, deletes, and restores Google Cloud projects,
+manages whether Google APIs are enabled through the Google Service Usage REST
+v1 API, discovers Cloud Billing accounts and project billing state, applies
+signed single-use billing link/unlink plans through an isolated admin capability,
+manages Google API keys through API Keys API v2, and manages end-user
+OAuth runtime credentials through Google's documented OAuth endpoints. General
+OAuth client and consent-screen setup is an assisted Console workflow because
+Google exposes no supported public mutation API for those resources. See
+`oauth-and-api-keys.md` for that hard provider boundary. The package does not
+yet manage quotas, service identities, organizations, folders, or IAM policies. No live mutation
+is required for development or verification.
 
-The package has four public products:
+The package has six public products:
 
 - `GoogleServiceGatewayCore`, a reusable Swift library for in-process Riela
   nodes and other Swift callers.
 - `google-service-gateway-reader`, a non-mutating executable for listing and
   getting services, inspecting long-running operations, and reading API-key
   metadata.
-- `google-service-gateway-writer`, an executable for Service Usage and API-key
-  mutations, plus the explicitly sensitive API-key-string retrieval command.
+- `google-service-gateway-writer`, an executable for GCP project provisioning,
+  Service Usage and non-deleting API-key mutations, plus the explicitly
+  sensitive API-key-string retrieval command.
+- `google-service-gateway-admin`, an executable for signed, expiring, single-use
+  billing link/unlink plans. The Google IAM principal remains the authorization
+  boundary; executable separation is defense in depth.
+- `google-service-gateway-deleter`, the exclusive executable for project and
+  API-key deletion and recovery.
 - `google-service-gateway-auth`, an executable for OAuth setup assistance,
   secure client import, scope resolution, PKCE login, refresh, and revocation.
 
-The reader must never construct or send a mutation request. The writer does not
+The reader must never construct or send a mutation request. The writer must not
+construct resource delete or undelete requests. The writer and deleter do not
 duplicate general service-list or service-get commands; callers use the reader
 or the core library for those operations.
 
 ## Package Boundaries
 
 - `Sources/GoogleServiceGatewayCore/` owns public request and response models,
-  validation, alias resolution, REST request construction, transport and
-  sleeper protocols, error mapping, pagination, and operation polling.
+  project provisioning, validation, alias resolution, REST request construction,
+  transport and sleeper protocols, error mapping, pagination, and operation polling.
 - `Sources/GoogleServiceGatewayReader/` owns only process concerns: argument and
   environment parsing, reader capability selection, JSON encoding, standard
   streams, and exit status.
 - `Sources/GoogleServiceGatewayWriter/` owns the corresponding writer process
   adapter and cannot expose unsupported commands.
+- `Sources/GoogleServiceGatewayAdmin/` owns privileged process parsing, exact
+  confirmation, and durable replay prevention for authenticated admin plans.
+- `Sources/GoogleServiceGatewayDeleter/` owns the restricted project and API-key
+  delete/undelete process adapter.
 - `Sources/GoogleServiceGatewayAuth/` owns interactive loopback login, browser
   launch, OAuth process commands, and secure-store selection.
 - `Tests/GoogleServiceGatewayCoreTests/` uses injected transports, sleepers,
@@ -392,15 +406,15 @@ with the following concrete mapping:
 
 | Reference path | Reference flow | Gateway decision |
 | --- | --- | --- |
-| `../mail-gateway/Package.swift` | Declares a reusable core product and capability-specific executable targets. | Keep one public core library and separate reader, writer, and auth products. |
+| `../mail-gateway/Package.swift` | Declares a reusable core product and capability-specific executable targets. | Keep one public core library and separate reader, writer, admin, deleter, and auth products. |
 | `../mail-gateway/Sources/MailGatewayCore/MailGatewayCore.swift` | Defines shared exit codes, errors, command results, configuration, and service entry points. | Preserve typed errors and result consistency, but expose strongly typed `Equatable`, `Sendable` domain values and `GatewayJSONCodec` output instead of string output and heterogeneous dictionaries. |
 | `../mail-gateway/Sources/MailGatewayCore/MailGatewayCLI.swift` | Parses arguments, selects a CLI mode, loads process configuration, invokes services, and builds stdout/stderr results inside the public core target. | Intentionally keep argument/environment parsing, help, JSON encoding, standard streams, and exit behavior in process adapters. Riela callers receive domain values and typed errors without importing a CLI facade or process state. |
 | `../mail-gateway/Sources/MailGatewayReader/main.swift`, `MailGatewayDraft/main.swift`, and `MailGatewaySender/main.swift` | Thin entry points choose a mode, invoke the shared CLI facade, write its stdout/stderr, and exit with its status. | Keep entry points equally thin, but each executable can construct only its reader or writer adapter, preventing the reader binary from selecting a mutation mode. |
 | `../mail-gateway/Tests/MailGatewayCoreTests/CommandTests.swift` | Verifies mode-specific help, version, command acceptance, JSON output, and exit behavior. | Retain equivalent contract tests and add injected HTTP, clock, and sleeper coverage for URL construction, pagination, mutation polling, and timeout boundaries. |
 | `../mail-gateway/Sources/MailGatewayCore/GmailOAuthSupport.swift` | Loads, refreshes, and can persist OAuth credentials and token stores. | Implement Google PKCE and token endpoints directly, behind injectable stores and transports, with macOS Keychain as the production store. |
-| `../mail-gateway/README.md` | Documents executable boundaries and direct Swift library use. | Document all three executables plus in-process `GoogleServiceGatewayCore` use for Riela nodes. |
+| `../mail-gateway/README.md` | Documents executable boundaries and direct Swift library use. | Document all five executables plus in-process `GoogleServiceGatewayCore` use for Riela nodes. |
 
-The command adapter flow is `arguments/environment -> reader or writer adapter
+The command adapter flow is `arguments/environment -> capability adapter
 -> typed core request -> transport/poller -> typed core result or error ->
 stable JSON and exit status`. Only the middle core request/result segment is
 available to in-process Riela callers. This differs intentionally from
@@ -424,7 +438,7 @@ and
 
 Implementation replaces the scaffold `AppCore`, `AppCLI`, and `AppCoreTests`
 targets after equivalent version/help and error behavior exists in the new
-targets. Documentation and Homebrew metadata must name all three executables; this
+targets. Documentation and Homebrew metadata must name all five executables; this
 issue does not publish artifacts, commit, or push.
 
 Verification is local and non-mutating:
@@ -436,6 +450,8 @@ swift test
 swift build
 swift run google-service-gateway-reader --help
 swift run google-service-gateway-writer --help
+swift run google-service-gateway-admin --help
+swift run google-service-gateway-deleter --help
 swift run google-service-gateway-auth --help
 ```
 
