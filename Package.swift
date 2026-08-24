@@ -15,8 +15,16 @@ let package = Package(
     .executable(name: "google-service-gateway-deleter", targets: ["GoogleServiceGatewayDeleter"]),
     .executable(name: "google-service-gateway-auth", targets: ["GoogleServiceGatewayAuth"]),
   ],
+  dependencies: [
+    .package(url: "https://github.com/apple/swift-crypto.git", from: "4.5.1")
+  ],
   targets: [
-    .target(name: "GoogleServiceGatewayCore"),
+    .target(
+      name: "GoogleServiceGatewayCore",
+      dependencies: [
+        .product(name: "Crypto", package: "swift-crypto", condition: .when(platforms: [.linux]))
+      ]
+    ),
     .executableTarget(
       name: "GoogleServiceGatewayReader",
       dependencies: ["GoogleServiceGatewayCore"]

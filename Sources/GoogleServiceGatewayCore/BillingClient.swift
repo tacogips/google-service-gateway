@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
+
 public struct GoogleCloudBillingClient: Sendable {
   private let transport: any GatewayHTTPTransport
   private let tokenProvider: any AccessTokenProvider

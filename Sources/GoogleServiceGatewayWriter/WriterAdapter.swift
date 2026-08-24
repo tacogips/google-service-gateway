@@ -1,4 +1,8 @@
 import Foundation
+
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
 import GoogleServiceGatewayCore
 
 public struct WriterExecution: Sendable {

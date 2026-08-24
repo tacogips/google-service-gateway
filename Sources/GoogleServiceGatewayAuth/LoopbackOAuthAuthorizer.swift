@@ -1,4 +1,8 @@
-import Darwin
+#if canImport(Darwin)
+  import Darwin
+#elseif canImport(Glibc)
+  import Glibc
+#endif
 import Foundation
 import GoogleServiceGatewayCore
 
@@ -73,14 +77,21 @@ private final class LoopbackHTTPServer: @unchecked Sendable {
   let redirectURI: URL
 
   init() throws {
-    let descriptor = socket(AF_INET, SOCK_STREAM, 0)
+    #if canImport(Darwin)
+      let streamSocketType = SOCK_STREAM
+    #else
+      let streamSocketType = Int32(SOCK_STREAM.rawValue)
+    #endif
+    let descriptor = socket(AF_INET, streamSocketType, 0)
     guard descriptor >= 0 else {
       throw GatewayError(.configurationError, "could not create OAuth callback listener")
     }
     var enabled: Int32 = 1
     setsockopt(descriptor, SOL_SOCKET, SO_REUSEADDR, &enabled, socklen_t(MemoryLayout<Int32>.size))
     var address = sockaddr_in()
-    address.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+    #if canImport(Darwin)
+      address.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+    #endif
     address.sin_family = sa_family_t(AF_INET)
     address.sin_port = 0
     address.sin_addr = in_addr(s_addr: inet_addr("127.0.0.1"))

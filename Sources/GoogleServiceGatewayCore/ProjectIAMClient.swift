@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
+
 public struct ProjectPermissionTestResult: Equatable, Sendable, GatewayJSONRepresentable {
   public let project: String
   public let requestedPermissions: [String]

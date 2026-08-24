@@ -1,5 +1,13 @@
-import CryptoKit
+#if canImport(CryptoKit)
+  import CryptoKit
+#else
+  import Crypto
+#endif
 import Foundation
+
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
 
 public struct GoogleOAuthClient: Sendable {
   private let transport: any GatewayHTTPTransport
