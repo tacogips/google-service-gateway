@@ -1,0 +1,47 @@
+[
+  {
+    "projectID": "tacogips-service-auth-260930",
+    "deleteExit": 0,
+    "verifiedState": "DELETE_REQUESTED"
+  },
+  {
+    "projectID": "tacogips-calendar-auth-260930",
+    "deleteExit": 0,
+    "verifiedState": "DELETE_REQUESTED"
+  },
+  {
+    "projectID": "tacogips-gmail-auth-260930",
+    "deleteExit": 0,
+    "verifiedState": "DELETE_REQUESTED"
+  },
+  {
+    "projectID": "tacogips-docs-auth-260930",
+    "deleteExit": 0,
+    "verifiedState": "DELETE_REQUESTED"
+  },
+  {
+    "projectID": "tacogips-sheets-auth-260930",
+    "deleteExit": 0,
+    "verifiedState": "DELETE_REQUESTED"
+  },
+  {
+    "projectID": "tacogips-drive-auth-260930",
+    "deleteExit": 0,
+    "verifiedState": "DELETE_REQUESTED"
+  },
+  {
+    "projectID": "tacogips-analytics-auth-260930",
+    "deleteExit": 0,
+    "verifiedState": "DELETE_REQUESTED"
+  },
+  {
+    "projectID": "tacogips-marketing-auth-260930",
+    "deleteExit": 0,
+    "verifiedState": "DELETE_REQUESTED"
+  },
+  {
+    "projectID": "tacogips-ocr-auth-260930",
+    "deleteExit": 0,
+    "verifiedState": "DELETE_REQUESTED"
+  }
+]

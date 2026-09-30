@@ -1,0 +1,92 @@
+[
+  {
+    "product": "service",
+    "projectID": "tacogips-service-auth-260930",
+    "services": [
+      "cloudresourcemanager.googleapis.com",
+      "serviceusage.googleapis.com",
+      "cloudbilling.googleapis.com",
+      "apikeys.googleapis.com"
+    ],
+    "createExit": 0,
+    "enableExit": 0
+  },
+  {
+    "product": "calendar",
+    "projectID": "tacogips-calendar-auth-260930",
+    "services": [
+      "calendar-json.googleapis.com"
+    ],
+    "createExit": 0,
+    "enableExit": 0
+  },
+  {
+    "product": "gmail",
+    "projectID": "tacogips-gmail-auth-260930",
+    "services": [
+      "gmail.googleapis.com"
+    ],
+    "createExit": 0,
+    "enableExit": 0
+  },
+  {
+    "product": "docs",
+    "projectID": "tacogips-docs-auth-260930",
+    "services": [
+      "docs.googleapis.com",
+      "drive.googleapis.com"
+    ],
+    "createExit": 0,
+    "enableExit": 0
+  },
+  {
+    "product": "sheets",
+    "projectID": "tacogips-sheets-auth-260930",
+    "services": [
+      "sheets.googleapis.com",
+      "drive.googleapis.com"
+    ],
+    "createExit": 0,
+    "enableExit": 0
+  },
+  {
+    "product": "drive",
+    "projectID": "tacogips-drive-auth-260930",
+    "services": [
+      "drive.googleapis.com"
+    ],
+    "createExit": 0,
+    "enableExit": 0
+  },
+  {
+    "product": "analytics",
+    "projectID": "tacogips-analytics-auth-260930",
+    "services": [
+      "analyticsadmin.googleapis.com",
+      "analyticsdata.googleapis.com",
+      "tagmanager.googleapis.com"
+    ],
+    "createExit": 0,
+    "enableExit": 0
+  },
+  {
+    "product": "marketing",
+    "projectID": "tacogips-marketing-auth-260930",
+    "services": [
+      "googleads.googleapis.com",
+      "adsense.googleapis.com",
+      "admob.googleapis.com"
+    ],
+    "createExit": 0,
+    "enableExit": 0
+  },
+  {
+    "product": "ocr",
+    "projectID": "tacogips-ocr-auth-260930",
+    "services": [
+      "documentai.googleapis.com"
+    ],
+    "createExit": 0,
+    "enableExit": 0
+  }
+]
