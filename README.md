@@ -363,6 +363,12 @@ See `packaging/homebrew/README.md` and `.agents/skills/` for release workflows.
 flow. The existing `oauth login` command remains available and uses the same
 profile, scopes, callback validation, and stored credentials.
 
+`auth status [--profile NAME]` inspects external or saved credentials without
+opening a browser, refreshing a token, or printing credential values. The
+default profile is `google-personal`; service account inputs report `CONFIGURED`
+until a request actually exchanges them. `auth refresh` and `auth revoke` are
+aliases of their existing `oauth` commands and require an explicit profile.
+
 The public `GoogleOAuthBrowserLogin` library API takes a registered desktop
 application client and service scopes, opens the browser, validates the callback,
 and exchanges the code using PKCE. It returns a refreshable credential only when

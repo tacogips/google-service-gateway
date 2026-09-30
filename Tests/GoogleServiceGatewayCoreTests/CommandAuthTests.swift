@@ -39,6 +39,44 @@ func serviceOperationalCommandsShareBrowserLogin(role: String) async throws {
 }
 
 @Test(arguments: ["reader", "writer", "admin", "deleter"])
+func serviceStatusChecksExternalCredentialsWithoutBrowserOrProviderCalls(role: String) async {
+  let authorizer = CommandAuthAuthorizer()
+  let result = await runRoleAuth(role, vault: OAuthCredentialVault(store: CommandAuthStore()), authorizer: authorizer,
+    transport: CommandAuthTransport(), environment: ["GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN": "external-status-token"],
+    arguments: ["auth", "status"])
+  #expect(result.exitStatus == 0)
+  #expect(result.output.contains("READY"))
+  #expect(result.output.contains("EXTERNAL"))
+  #expect(!result.output.contains("external-status-token"))
+  #expect(!(await authorizer.called()))
+}
+
+@Test func serviceStatusReportsMissingAndExpiredSavedCredentialsWithoutAClient() async throws {
+  let vault = OAuthCredentialVault(store: CommandAuthStore())
+  let adapter = AuthAdapter(vault: vault, oauth: GoogleOAuthClient(transport: CommandAuthTransport()), authorizer: CommandAuthAuthorizer())
+  let missing = await adapter.run(arguments: ["auth", "status"], environment: [:])
+  #expect(missing.exitStatus == 0)
+  #expect(missing.output.contains("MISSING"))
+  try await vault.saveToken(.init(accessToken: "expired-status-token", refreshToken: "status-refresh-token", tokenType: "Bearer",
+                                 scopes: ["https://www.googleapis.com/auth/cloud-platform"], expiresAt: .distantPast), profile: "google-personal")
+  let expired = await adapter.run(arguments: ["oauth", "status"], environment: [:])
+  #expect(expired.exitStatus == 0)
+  #expect(expired.output.contains("EXPIRED"))
+  #expect(!expired.output.contains("expired-status-token"))
+  #expect(!expired.output.contains("status-refresh-token"))
+  let invalid = await adapter.run(arguments: ["auth", "status"], environment: ["GOOGLE_SERVICE_GATEWAY_TOKEN_STORE_JSON": "invalid-json"])
+  #expect(invalid.isError)
+  #expect(!invalid.output.contains("EXPIRED"))
+}
+
+@Test func serviceAuthRevokeAliasStillRequiresAnExplicitProfile() async {
+  let result = await AuthAdapter(vault: OAuthCredentialVault(store: CommandAuthStore())).run(arguments: ["auth", "revoke"], environment: [:])
+  #expect(result.isError)
+  #expect(result.output.contains("--profile is required"))
+  #expect(!result.output.contains("unknown auth command"))
+}
+
+@Test(arguments: ["reader", "writer", "admin", "deleter"])
 func serviceOperationalLoginNeedsClientBeforeAuthorizing(role: String) async {
   let authorizer = CommandAuthAuthorizer()
   let result = await runRoleAuth(role, vault: OAuthCredentialVault(store: CommandAuthStore()), authorizer: authorizer,
@@ -54,9 +92,8 @@ private let commandApplicationJSON = #"{"installed":{"client_id":"service-app","
 
 private func runRoleAuth(
   _ role: String, vault: OAuthCredentialVault, authorizer: any InteractiveOAuthAuthorizer,
-  transport: any GatewayHTTPTransport, environment: [String: String]
+  transport: any GatewayHTTPTransport, environment: [String: String], arguments: [String] = ["auth", "login"]
 ) async -> RoleAuthOutcome {
-  let arguments = ["auth", "login"]
   switch role {
   case "reader":
     let result = await ReaderAdapter(transport: transport, vault: vault, authAuthorizer: authorizer).run(arguments: arguments, environment: environment)

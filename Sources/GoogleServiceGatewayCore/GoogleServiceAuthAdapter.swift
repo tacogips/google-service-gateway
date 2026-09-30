@@ -105,6 +105,25 @@ public struct AuthAdapter: Sendable {
         return success(
           command: "scopes.list", data: JSONValue.object(["scopes": .array(values)]),
           pretty: parsed.pretty)
+      case .status:
+        let profile = try parsed.requiredProfile()
+        if let external = try GoogleServiceExternalCredentials.tokenProvider(environment: environment, profile: parsed.profile) {
+          return success(command: "auth.status", data: JSONValue.object([
+            "profile": .string(profile),
+            "state": .string(external is StaticAccessTokenProvider ? "READY" : "CONFIGURED"),
+            "credentialSource": .string("EXTERNAL")
+          ]), pretty: parsed.pretty)
+        }
+        let stored = try await vault.token(profile: profile)
+        let state: String
+        if let stored {
+          state = stored.tokenType.caseInsensitiveCompare("Bearer") != .orderedSame ? "INVALID"
+            : (stored.expiresAt > Date().addingTimeInterval(60) ? "READY" : "EXPIRED")
+        } else { state = "MISSING" }
+        return success(command: "auth.status", data: JSONValue.object([
+          "profile": .string(profile), "state": .string(state),
+          "credentialSource": .string("VAULT"), "refreshTokenStored": .bool(stored?.refreshToken != nil)
+        ]), pretty: parsed.pretty)
       case .login:
         let profile = try parsed.requiredProfile()
         let client: OAuthClientConfiguration
@@ -193,6 +212,9 @@ public struct AuthAdapter: Sendable {
       consent delete --profile NAME
       scopes list [--service SERVICE]
       auth login [--profile NAME] [--scope ALIAS-OR-URI ...] [--login-hint EMAIL] [--no-open] [--timeout SECONDS]
+      auth status [--profile NAME]
+      auth refresh --profile NAME
+      auth revoke --profile NAME
       oauth login [--profile NAME] [--scope ALIAS-OR-URI ...] [--login-hint EMAIL] [--no-open] [--timeout SECONDS]
       oauth refresh --profile NAME
       oauth token --profile NAME
@@ -203,7 +225,7 @@ public struct AuthAdapter: Sendable {
 
 private enum AuthCommand: Equatable {
   case clientSetup, clientImport, clientList, clientDelete, consentSetup, consentGet, consentDelete,
-    scopeList, login, refresh, token, revoke
+    scopeList, login, status, refresh, token, revoke
 }
 
 private struct AuthArguments {
@@ -278,7 +300,7 @@ private struct AuthArguments {
   }
 
   func requiredProfile() throws -> String {
-    if profile == nil, command == .login { return "google-personal" }
+    if profile == nil, command == .login || command == .status { return "google-personal" }
     guard let profile else { throw GatewayError(.invalidArgument, "--profile is required") }
     return profile
   }
@@ -322,8 +344,12 @@ private struct AuthArguments {
       guard project == nil, file == nil, serviceFilter == nil else {
         throw invalidOptions()
       }
+    case .status:
+      guard project == nil, file == nil, scopes.isEmpty, serviceFilter == nil,
+        loginHint == nil, !noOpen else { throw invalidOptions() }
     case .refresh, .token, .revoke:
-      guard project == nil, profile != nil, file == nil, scopes.isEmpty, serviceFilter == nil,
+      guard profile != nil else { throw GatewayError(.invalidArgument, "--profile is required") }
+      guard project == nil, file == nil, scopes.isEmpty, serviceFilter == nil,
         loginHint == nil, !noOpen
       else { throw invalidOptions() }
     }
@@ -345,9 +371,10 @@ private func parseCommand(_ group: String, _ action: String) throws -> AuthComma
   case ("consent", "delete"): .consentDelete
   case ("scopes", "list"): .scopeList
   case ("oauth", "login"), ("auth", "login"): .login
-  case ("oauth", "refresh"): .refresh
+  case ("oauth", "status"), ("auth", "status"): .status
+  case ("oauth", "refresh"), ("auth", "refresh"): .refresh
   case ("oauth", "token"): .token
-  case ("oauth", "revoke"): .revoke
+  case ("oauth", "revoke"), ("auth", "revoke"): .revoke
   default: throw GatewayError(.invalidArgument, "unknown auth command")
   }
 }
