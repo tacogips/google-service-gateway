@@ -9,7 +9,8 @@ for Cloud project setup. The user subsequently authorized Brave Computer Use for
 Google login consent; new or broader access requires action-time confirmation.
 
 Nine bootstrap projects created on 2026-09-30 were deleted at the user's request.
-All were confirmed in `DELETE_REQUESTED` state. No replacements were created.
+All were confirmed in `DELETE_REQUESTED` state. Replacement creation is recorded
+in the 2026-10-01 section below.
 No Desktop OAuth client was created through the browser workflow.
 
 ## Implemented source changes
@@ -76,7 +77,8 @@ enabled APIs in `ai-tools-proj` by project ID. That confirms the token supplied
 from gcloud works for the Service read, not that native login has succeeded.
 
 Client ownership (shared existing client versus one client per new project) is
-pending user clarification. No replacement projects have been created.
+not resolved by the existing-client tests. Replacement projects are recorded
+below; their Google-side OAuth clients are still absent.
 
 ## Native file-storage verification
 
@@ -124,7 +126,8 @@ new-scope approval was pending. No grant is claimed for that attempt. The
 pending confirmation requests the remaining permissions for the already
 registered calendar-gateway OAuth application.
 
-No replacement gateway projects or Google-side OAuth clients have been created.
+At the end of those native-login checks, no replacement gateway projects or
+Google-side OAuth clients had been created.
 The working logins use the existing registered client in ai-tools-proj. Local
 clients register imports an already registered client; it is not Google-side
 client registration. Live registered Web-client/public HTTPS callback validation
@@ -150,3 +153,36 @@ Analytics binary tests now isolate both configuration and credential state so
 negative authentication checks cannot consume live user credentials. The Docs
 inline credential deadline fixture allows decoder entry under full-suite load;
 its tests were moved to a separate file to keep Swift files below 1000 lines.
+
+## Replacement projects created through Service gateway on 2026-10-01
+
+The existing gcloud login supplied an ephemeral access token to Service gateway's
+writer. All nine projects were created by `projects create`; the same command
+completed API enablement and operation polling. Each required API set was then
+verified by `services list --state enabled --all-pages` with Service gateway's
+native file credentials. No Cloud Console or browser automation was used for
+project creation or API enablement. No billing account was linked.
+
+Authoritative command results are in `gateway-auth-projects-2026-10-01.json`.
+All nine create commands and verification reads returned exit 0. Each returned
+project has state ACTIVE, and every required API is present in the enabled list.
+
+| Product | Project ID | Required APIs enabled |
+| --- | --- | --- |
+| Service | tacogips-service-auth-261001 | Cloud Resource Manager, Service Usage, Cloud Billing, API Keys |
+| Calendar | tacogips-calendar-auth-261001 | Calendar |
+| Gmail | tacogips-gmail-auth-261001 | Gmail |
+| Docs | tacogips-docs-auth-261001 | Docs, Drive |
+| Sheets | tacogips-sheets-auth-261001 | Sheets, Drive |
+| Drive | tacogips-drive-auth-261001 | Drive |
+| Analytics | tacogips-analytics-auth-261001 | Analytics Admin, Analytics Data, Tag Manager |
+| Marketing | tacogips-marketing-auth-261001 | Google Ads, AdSense, AdMob, Search Console |
+| OCR | tacogips-ocr-auth-261001 | Document AI |
+
+Project creation and API enablement are complete. These projects do not yet
+have Google-registered OAuth clients or consent-screen configuration. Native
+credentials currently verified still use the existing ai-tools-proj client;
+they are not proof of native authentication through these replacement projects.
+The gateway-only client-registration requirement remains unresolved. Google's
+current instructions still describe Desktop/Web client creation in the Console:
+https://docs.cloud.google.com/mcp/set-up-authentication-mcp-servers .
