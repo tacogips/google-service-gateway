@@ -455,3 +455,9 @@ client, preserving explicit OAuth client environment overrides. A successful
 native login clears a previous gcloud provider selection. Client registration
 is separate from project creation and API enablement. This change does not
 claim that client registration or real authorization is complete.
+
+Project IDs supplied to `services list` and `services get` are resolved through
+Cloud Resource Manager before calling Service Usage, whose resource names use
+project numbers. This requires `resourcemanager.projects.get` in addition to the
+Service Usage read permission. Supplying a project number skips that lookup;
+response project identity checks remain exact.

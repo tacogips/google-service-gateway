@@ -54,3 +54,24 @@ provider lifecycle checks (login/status/refresh/revoke) against an injected
 fixture executable. These are subprocess integration checks, not real Google
 consent or API permission checks. The shared package passed 14 tests and
 `swiftlint lint --quiet` with no errors (one test-file whitespace warning).
+
+## Existing-client discovery and live project identity fix
+
+A preexisting Desktop client for `ai-tools-proj` was found locally in Downloads.
+Its credential values were neither printed nor committed. Private local default
+client files were installed for all nine namespaces for native-flow validation.
+This does not create or relocate OAuth clients into gateway-specific projects.
+The Service provider-free login started using this client but ended with
+`OPERATION_TIMEOUT` before browser consent completed. No token grant is claimed.
+
+A live Service Usage read exposed rejection of project-number response names
+when the CLI was given a project ID. Service reads now resolve IDs through
+Cloud Resource Manager, verify the returned project ID and number, and keep
+exact service response identity checks. Numeric inputs retain the direct path.
+Four new tests, including three malformed-identity cases, cover this behavior;
+all 111 Service tests and lint pass. The live Service reader can now list the
+enabled APIs in `ai-tools-proj` by project ID. That confirms the token supplied
+from gcloud works for the Service read, not that native login has succeeded.
+
+Client ownership (shared existing client versus one client per new project) is
+pending user clarification. No replacement projects have been created.

@@ -26,11 +26,12 @@ public struct GoogleServiceGatewayClient: Sendable {
   }
 
   public func listServices(_ request: ListServicesRequest) async throws -> ServiceListResult {
-    let project = try GatewayValidation.project(request.project)
+    let inputProject = try GatewayValidation.project(request.project)
     let pageSize = try GatewayValidation.pageSize(request.pageSize)
     let pageToken = try GatewayValidation.pageToken(request.pageToken)
     if request.allPages, pageToken != nil { throw GatewayError(.invalidArgument, "--page-token cannot be combined with --all-pages") }
 
+    let project = try await canonicalServiceProject(inputProject)
     var services: [GatewayService] = []
     var pages = 0
     var nextToken = pageToken
@@ -57,8 +58,9 @@ public struct GoogleServiceGatewayClient: Sendable {
   }
 
   public func getService(project inputProject: String, service inputService: String) async throws -> ServiceGetResult {
-    let project = try GatewayValidation.project(inputProject)
+    let requestedProject = try GatewayValidation.project(inputProject)
     let service = try GatewayValidation.service(inputService)
+    let project = try await canonicalServiceProject(requestedProject)
     let json = try await sendJSON(path: "/v1/\(project)/services/\(service)")
     let provider = try providerService(json.value)
     return ServiceGetResult(
@@ -190,10 +192,37 @@ public struct GoogleServiceGatewayClient: Sendable {
     GatewayError(code, message, operationName: mutationTokens.scrub(response.operation.name))
   }
 
-  private func sendJSON(method: String = "GET", path: String, queryItems: [URLQueryItem] = [], body: JSONValue? = nil, percentEncoded: Bool = false, mutationTokens: MutationTokenScrubber? = nil) async throws -> ProviderJSONResponse {
+  /// Service Usage returns project-number resource names. Resolve a supplied
+  /// project ID through Resource Manager before enforcing exact response names.
+  private func canonicalServiceProject(_ project: String) async throws -> String {
+    let id = String(project.dropFirst("projects/".count))
+    if id.allSatisfy({ $0.isNumber }) { return project }
+    var endpoint = URLComponents()
+    endpoint.scheme = "https"
+    endpoint.host = "cloudresourcemanager.googleapis.com"
+    guard let url = endpoint.url else { throw GatewayError(.configurationError, "invalid Resource Manager endpoint") }
+    let response = try await sendJSON(path: "/v3/\(project)", destination: url)
+    guard case .object(let object) = response.value,
+          case .string(let returnedID) = object["projectId"], returnedID == id,
+          case .string(let name) = object["name"], name.hasPrefix("projects/") else {
+      throw GatewayError(.malformedResponse, "project identity response does not match request")
+    }
+    let number = String(name.dropFirst("projects/".count))
+    guard !number.isEmpty, number.utf8.allSatisfy({ (48...57).contains($0) }),
+          try GatewayValidation.project(number) == name else {
+      throw GatewayError(.malformedResponse, "project identity response has no valid project number")
+    }
+    return name
+  }
+
+  private func sendJSON(
+    method: String = "GET", path: String, queryItems: [URLQueryItem] = [],
+    body: JSONValue? = nil, percentEncoded: Bool = false,
+    mutationTokens: MutationTokenScrubber? = nil, destination: URL? = nil
+  ) async throws -> ProviderJSONResponse {
     let token = try await tokenProvider.accessToken()
     mutationTokens?.record(token)
-    var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
+    var components = URLComponents(url: destination ?? baseURL, resolvingAgainstBaseURL: false)
     if percentEncoded { components?.percentEncodedPath = path } else { components?.path = path }
     components?.queryItems = queryItems.isEmpty ? nil : queryItems
     guard let url = components?.url else { throw GatewayError(.invalidArgument, "invalid request URL") }
