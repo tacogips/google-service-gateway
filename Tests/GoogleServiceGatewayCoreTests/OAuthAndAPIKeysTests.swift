@@ -346,7 +346,7 @@ import Testing
   #expect(scopes.output.contains("gmail.send"))
 }
 
-@Test func consentScopeConfigurationDrivesProfileLogin() async throws {
+@Test(arguments: ["oauth", "auth"]) func consentScopeConfigurationDrivesProfileLogin(group: String) async throws {
   let store = MemoryCredentialStore()
   let vault = OAuthCredentialVault(store: store)
   try await vault.saveClient(oauthTestClient(), profile: "personal")
@@ -366,7 +366,7 @@ import Testing
   let get = await adapter.run(arguments: ["consent", "get", "--profile", "personal"])
   #expect(!get.isError)
   #expect(get.output.contains("calendar.readonly"))
-  let login = await adapter.run(arguments: ["oauth", "login", "--profile", "personal"])
+  let login = await adapter.run(arguments: [group, "login", "--profile", "personal"])
   #expect(!login.isError)
   #expect(
     await authorizer.capturedScopes() == [
@@ -375,6 +375,51 @@ import Testing
   let deleted = await adapter.run(arguments: ["consent", "delete", "--profile", "personal"])
   #expect(!deleted.isError)
   #expect(try await vault.scopeConfiguration(profile: "personal") == nil)
+}
+
+@Test(arguments: [false, true]) func browserLoginRejectsIncompleteGrantsWithoutReplacingStoredToken(missingRefresh: Bool) async throws {
+  let vault = OAuthCredentialVault(store: MemoryCredentialStore())
+  try await vault.saveClient(oauthTestClient(), profile: "personal")
+  let previous = OAuthTokenCredential(
+    accessToken: "previous-access", refreshToken: "previous-refresh", tokenType: "Bearer",
+    scopes: ["https://www.googleapis.com/auth/calendar.readonly"], expiresAt: Date().addingTimeInterval(3600)
+  )
+  try await vault.saveToken(previous, profile: "personal")
+  let response = missingRefresh
+    ? "{\"access_token\":\"new-access\",\"expires_in\":3600,\"scope\":\"https://www.googleapis.com/auth/calendar.readonly\"}"
+    : "{\"access_token\":\"new-access\",\"refresh_token\":\"new-refresh\",\"expires_in\":3600,\"scope\":\"openid\"}"
+  let transport = NewRecordingTransport(responses: [newResponse(response)])
+  let adapter = AuthAdapter(
+    vault: vault, oauth: GoogleOAuthClient(transport: transport), authorizer: ScopeCapturingAuthorizer()
+  )
+  let result = await adapter.run(arguments: ["auth", "login", "--profile", "personal", "--scope", "calendar.readonly"])
+  #expect(result.isError)
+  #expect(result.output.contains("AUTHENTICATION_FAILED"))
+  #expect(!result.output.contains("new-access"))
+  #expect(!result.output.contains("new-refresh"))
+  #expect(try await vault.token(profile: "personal") == previous)
+}
+
+@Test(arguments: [Double.nan, .infinity, 0, -1, 3601]) func browserLoginRejectsInvalidTimeoutBeforeAuthorization(timeout: Double) async throws {
+  do {
+    _ = try await GoogleOAuthBrowserLogin(authorizer: NeverAuthorizer()).login(
+      client: oauthTestClient(), scopes: ["calendar.readonly"], timeout: timeout
+    )
+    Issue.record("Invalid timeout was accepted")
+  } catch let error as GatewayError {
+    #expect(error.code == .invalidArgument)
+  }
+}
+
+@Test func browserLoginRejectsWebClientBeforeAuthorization() async throws {
+  let desktop = oauthTestClient()
+  let web = OAuthClientConfiguration(kind: .web, clientID: desktop.clientID, redirectURIs: desktop.redirectURIs)
+  do {
+    _ = try await GoogleOAuthBrowserLogin(authorizer: NeverAuthorizer()).login(client: web, scopes: ["calendar.readonly"])
+    Issue.record("Web client was accepted")
+  } catch let error as GatewayError {
+    #expect(error.code == .configurationError)
+  }
 }
 
 @Test func oauthLoginRejectsClientFromDifferentConfiguredProject() async throws {

@@ -14,6 +14,7 @@ public struct AdminExecution: Sendable {
 public struct AdminAdapter: Sendable {
   private let transport: any GatewayHTTPTransport
   private let vault: OAuthCredentialVault
+  private let authAuthorizer: any InteractiveOAuthAuthorizer
   private let clock: any GatewayWallClock
   private let nonceProvider: any GatewayNonceProvider
   private let replayStore: (any AdminPlanReplayStore)?
@@ -25,10 +26,12 @@ public struct AdminAdapter: Sendable {
     clock: any GatewayWallClock = SystemGatewayWallClock(),
     nonceProvider: any GatewayNonceProvider = UUIDGatewayNonceProvider(),
     replayStore: (any AdminPlanReplayStore)? = nil,
-    serviceAccountSigner: any ServiceAccountJWTSigner = OpenSSLServiceAccountJWTSigner()
+    serviceAccountSigner: any ServiceAccountJWTSigner = OpenSSLServiceAccountJWTSigner(),
+    authAuthorizer: any InteractiveOAuthAuthorizer = LoopbackOAuthAuthorizer()
   ) {
     self.transport = transport
     self.vault = vault
+    self.authAuthorizer = authAuthorizer
     self.clock = clock
     self.nonceProvider = nonceProvider
     self.replayStore = replayStore
@@ -39,6 +42,11 @@ public struct AdminAdapter: Sendable {
     arguments: [String], environment: [String: String] = ProcessInfo.processInfo.environment
   ) async -> AdminExecution {
     let command = adminCommandName(arguments)
+    if arguments.first == "auth" || arguments.first == "oauth" {
+      let result = await AuthAdapter(vault: vault, oauth: GoogleOAuthClient(transport: transport), authorizer: authAuthorizer)
+        .run(arguments: arguments, environment: environment)
+      return .init(output: result.output, isError: result.isError, exitStatus: result.exitStatus)
+    }
     if arguments.contains("--help") || arguments.contains("-h") {
       return .init(output: usage, isError: false, exitStatus: 0)
     }
@@ -51,7 +59,7 @@ public struct AdminAdapter: Sendable {
       guard let keyValue = environment[keyName], keyValue.utf8.count >= 32 else {
         throw GatewayError(.configurationError, "admin plan signing key is required")
       }
-      let provider = try tokenProvider(parsed, environment: environment)
+      let provider = try tokenProvider(parsed, environment: environment, allowDefaultOAuth: !arguments.contains("--access-token-env"))
       let client = GoogleCloudBillingClient(transport: transport, tokenProvider: provider)
       let admin = GoogleCloudBillingAdmin(
         billing: client, clock: clock, nonceProvider: nonceProvider)
@@ -89,8 +97,13 @@ public struct AdminAdapter: Sendable {
     }
   }
 
-  private func tokenProvider(_ parsed: AdminArguments, environment: [String: String]) throws
+  private func tokenProvider(_ parsed: AdminArguments, environment: [String: String], allowDefaultOAuth: Bool) throws
     -> any AccessTokenProvider {
+    if parsed.serviceAccountEnvironment == nil,
+       let external = try GoogleServiceExternalCredentials.tokenProvider(
+         environment: environment, profile: parsed.oauthProfile, tokenEnvironment: parsed.tokenEnvironment,
+         transport: transport, signer: serviceAccountSigner
+       ) { return external }
     if let profile = parsed.oauthProfile {
       return RefreshingOAuthAccessTokenProvider(profile: profile, vault: vault)
     }
@@ -104,6 +117,9 @@ public struct AdminAdapter: Sendable {
     }
     let name = try GatewayValidation.tokenEnvironmentName(parsed.tokenEnvironment)
     guard let token = environment[name], !token.isEmpty else {
+      if allowDefaultOAuth {
+        return RefreshingOAuthAccessTokenProvider(profile: "google-personal", vault: vault, client: GoogleOAuthClient(transport: transport))
+      }
       throw GatewayError(.authRequired, "access token is required")
     }
     return StaticAccessTokenProvider(token: token)
@@ -117,6 +133,7 @@ public struct AdminAdapter: Sendable {
       unlink plan --project PROJECT [--expires-in 60...3600]
       unlink apply --plan FILE --confirm-project projects/PROJECT --confirm-billing-account ACCOUNT --confirm-unlink
     Apply requires --state-dir ABSOLUTE_PATH unless a replay store is injected.
+      auth login [--profile NAME] [--scope ALIAS-OR-URI ...]
     Authentication: --oauth-profile NAME, --service-account-env NAME, or --access-token-env NAME
     Plan signing: --plan-key-env NAME (default GOOGLE_SERVICE_GATEWAY_ADMIN_PLAN_KEY)
     """
