@@ -358,3 +358,49 @@ kinko exec --env APPLE_SIGNING_IDENTITY,APPLE_ID,APPLE_PASSWORD,APPLE_TEAM_ID --
 ```
 
 See `packaging/homebrew/README.md` and `.agents/skills/` for release workflows.
+
+`google-service-gateway-auth auth login --profile NAME` opens the browser OAuth
+flow. The existing `oauth login` command remains available and uses the same
+profile, scopes, callback validation, and stored credentials.
+
+The public `GoogleOAuthBrowserLogin` library API takes a registered desktop
+application client and service scopes, opens the browser, validates the callback,
+and exchanges the code using PKCE. It returns a refreshable credential only when
+all requested scopes were granted. Callers retain their own credential storage
+and role policy; a rejected grant does not replace their stored token.
+
+## Canonical externally obtained credentials
+
+Ordinary commands continue to work without `auth login`. Product variables use
+`GOOGLE_SERVICE_GATEWAY_` with these suffixes:
+
+| Suffix | Value |
+| --- | --- |
+| `ACCESS_TOKEN` | Direct token string |
+| `TOKEN_STORE_JSON` | `OAuthTokenCredential` JSON contents |
+| `TOKEN_STORE_PATH` | Private token file path |
+| `SERVICE_ACCOUNT_JSON` | Service-account JSON contents |
+| `SERVICE_ACCOUNT_PATH` | Private service-account file path |
+| `OAUTH_CLIENT_JSON` | Installed application JSON contents for auth |
+| `OAUTH_CLIENT_PATH` | Private installed application file path for auth |
+
+With `--oauth-profile NAME`, profile-specific inputs use
+`GOOGLE_SERVICE_GATEWAY_CREDENTIAL_<NORMALIZED_NAME>_<SUFFIX>`; uppercase names
+and replace punctuation with underscores. These inputs can supply external
+credentials for that selected profile. Product-level credentials do not override
+an explicitly selected vault profile. Existing `--token-env` and
+`--service-account-env` selectors remain supported; the explicit service-account
+selector retains its existing behavior.
+
+Conflicting token aliases and multiple external sources are rejected without
+printing values. Files must be private regular files owned by the current user;
+symlink destinations and files over 1 MiB are rejected. External token JSON/files
+are read-only and must be fresh. Both ISO-8601 dates and the numeric date encoding
+used by the vault are accepted. Expired external tokens require replacement; no
+application client or browser login is required for fresh tokens.
+
+`auth login` defaults to the `google-personal` profile. Canonical application
+JSON/path inputs configure browser authorization without first importing a client
+into the vault. Profile-specific application inputs override product application
+inputs. Explicit scopes or saved scope configuration are still required. A bundled
+registered application for login without user application setup is not yet selected.

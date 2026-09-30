@@ -7,15 +7,7 @@ public struct AuthExecution: Sendable {
   public let exitStatus: Int32
 }
 
-public protocol InteractiveOAuthAuthorizer: Sendable {
-  func authorize(
-    client: OAuthClientConfiguration,
-    scopes: [String],
-    loginHint: String?,
-    openBrowser: Bool,
-    timeout: TimeInterval
-  ) async throws -> (code: String, request: OAuthAuthorizationRequest)
-}
+public typealias InteractiveOAuthAuthorizer = GoogleServiceGatewayCore.InteractiveOAuthAuthorizer
 
 public struct AuthAdapter: Sendable {
   private let vault: OAuthCredentialVault
@@ -32,7 +24,7 @@ public struct AuthAdapter: Sendable {
     self.authorizer = authorizer
   }
 
-  public func run(arguments: [String]) async -> AuthExecution {
+  public func run(arguments: [String], environment: [String: String] = ProcessInfo.processInfo.environment) async -> AuthExecution {
     let command = authCommandName(arguments)
     if arguments.contains("--help") || arguments.contains("-h") {
       return .init(output: usage, isError: false, exitStatus: 0)
@@ -118,7 +110,10 @@ public struct AuthAdapter: Sendable {
           pretty: parsed.pretty)
       case .login:
         let profile = try parsed.requiredProfile()
-        let client = try await vault.client(profile: profile)
+        let client: OAuthClientConfiguration
+        if let external = try GoogleServiceExternalCredentials.oauthClient(environment: environment, profile: profile) {
+          client = external
+        } else { client = try await vault.client(profile: profile) }
         let configuration = try await vault.scopeConfiguration(profile: profile)
         if let configuration {
           try validateClientProject(client, expectedProject: configuration.project)
@@ -129,22 +124,23 @@ public struct AuthAdapter: Sendable {
           } else {
             parsed.scopes
           }
-        let authorization = try await authorizer.authorize(
+        let token = try await GoogleOAuthBrowserLogin(oauth: oauth, authorizer: authorizer).login(
           client: client,
           scopes: scopes,
           loginHint: parsed.loginHint,
           openBrowser: !parsed.noOpen,
           timeout: parsed.timeout
         )
-        let token = try await oauth.exchange(
-          code: authorization.code, request: authorization.request, client: client)
         try await vault.saveToken(token, profile: profile)
         return success(
           command: "oauth.login", data: tokenMetadata(token, profile: profile),
           pretty: parsed.pretty)
       case .refresh, .token:
         let profile = try parsed.requiredProfile()
-        let client = try await vault.client(profile: profile)
+        let client: OAuthClientConfiguration
+        if let external = try GoogleServiceExternalCredentials.oauthClient(environment: environment, profile: profile) {
+          client = external
+        } else { client = try await vault.client(profile: profile) }
         guard let stored = try await vault.token(profile: profile) else {
           throw GatewayError(.authRequired, "OAuth login is required")
         }
@@ -189,7 +185,7 @@ public struct AuthAdapter: Sendable {
 
   private var usage: String {
     """
-    Usage: google-service-gateway-auth <clients|consent|scopes|oauth> <command> [options]
+    Usage: google-service-gateway-auth <clients|consent|scopes|auth|oauth> <command> [options]
       clients setup --project PROJECT
       clients import --profile NAME --file FILE [--project PROJECT]
       clients list
@@ -198,7 +194,8 @@ public struct AuthAdapter: Sendable {
       consent get --profile NAME
       consent delete --profile NAME
       scopes list [--service SERVICE]
-      oauth login --profile NAME [--scope ALIAS-OR-URI ...] [--login-hint EMAIL] [--no-open] [--timeout SECONDS]
+      auth login [--profile NAME] [--scope ALIAS-OR-URI ...] [--login-hint EMAIL] [--no-open] [--timeout SECONDS]
+      oauth login [--profile NAME] [--scope ALIAS-OR-URI ...] [--login-hint EMAIL] [--no-open] [--timeout SECONDS]
       oauth refresh --profile NAME
       oauth token --profile NAME
       oauth revoke --profile NAME
@@ -283,6 +280,7 @@ private struct AuthArguments {
   }
 
   func requiredProfile() throws -> String {
+    if profile == nil, command == .login { return "google-personal" }
     guard let profile else { throw GatewayError(.invalidArgument, "--profile is required") }
     return profile
   }
@@ -323,7 +321,7 @@ private struct AuthArguments {
         throw invalidOptions()
       }
     case .login:
-      guard project == nil, profile != nil, file == nil, serviceFilter == nil else {
+      guard project == nil, file == nil, serviceFilter == nil else {
         throw invalidOptions()
       }
     case .refresh, .token, .revoke:
@@ -348,7 +346,7 @@ private func parseCommand(_ group: String, _ action: String) throws -> AuthComma
   case ("consent", "get"): .consentGet
   case ("consent", "delete"): .consentDelete
   case ("scopes", "list"): .scopeList
-  case ("oauth", "login"): .login
+  case ("oauth", "login"), ("auth", "login"): .login
   case ("oauth", "refresh"): .refresh
   case ("oauth", "token"): .token
   case ("oauth", "revoke"): .revoke

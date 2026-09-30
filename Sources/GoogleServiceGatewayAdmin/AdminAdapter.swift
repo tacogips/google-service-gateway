@@ -91,6 +91,11 @@ public struct AdminAdapter: Sendable {
 
   private func tokenProvider(_ parsed: AdminArguments, environment: [String: String]) throws
     -> any AccessTokenProvider {
+    if parsed.serviceAccountEnvironment == nil,
+       let external = try GoogleServiceExternalCredentials.tokenProvider(
+         environment: environment, profile: parsed.oauthProfile, tokenEnvironment: parsed.tokenEnvironment,
+         transport: transport, signer: serviceAccountSigner
+       ) { return external }
     if let profile = parsed.oauthProfile {
       return RefreshingOAuthAccessTokenProvider(profile: profile, vault: vault)
     }

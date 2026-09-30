@@ -40,7 +40,13 @@ public struct DeleterAdapter: Sendable {
     do {
       let parsed = try DeleterArguments(arguments)
       let provider: any AccessTokenProvider
-      if let profile = parsed.oauthProfile {
+      if parsed.serviceAccountEnvironment == nil,
+         let external = try GoogleServiceExternalCredentials.tokenProvider(
+           environment: environment, profile: parsed.oauthProfile, tokenEnvironment: parsed.tokenEnvironment,
+           transport: transport, signer: serviceAccountSigner
+         ) {
+        provider = external
+      } else if let profile = parsed.oauthProfile {
         provider = RefreshingOAuthAccessTokenProvider(profile: profile, vault: vault)
       } else if let environmentName = parsed.serviceAccountEnvironment {
         let name = try GatewayValidation.tokenEnvironmentName(environmentName)

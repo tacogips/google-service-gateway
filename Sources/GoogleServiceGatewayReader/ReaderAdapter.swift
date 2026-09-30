@@ -116,6 +116,11 @@ public struct ReaderAdapter: Sendable {
 
   private func tokenProvider(for arguments: ReaderArguments, environment: [String: String]) throws
     -> any AccessTokenProvider {
+    if arguments.serviceAccountEnvironment == nil,
+       let external = try GoogleServiceExternalCredentials.tokenProvider(
+         environment: environment, profile: arguments.oauthProfile, tokenEnvironment: arguments.tokenEnvironment,
+         transport: transport, signer: serviceAccountSigner
+       ) { return external }
     if let profile = arguments.oauthProfile {
       return RefreshingOAuthAccessTokenProvider(profile: profile, vault: vault)
     }
