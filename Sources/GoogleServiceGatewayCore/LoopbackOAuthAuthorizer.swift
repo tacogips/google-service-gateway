@@ -10,21 +10,26 @@ public struct LoopbackOAuthAuthorizer: InteractiveOAuthAuthorizer {
   private let oauth: GoogleOAuthClient
   private let presenter: @Sendable (URL, Bool) async throws -> Void
   private let prefix: String
+  private let callbackSettings: OAuthCallbackSettings?
 
-  public init(oauth: GoogleOAuthClient = GoogleOAuthClient(), prefix: String = "GOOGLE_SERVICE_GATEWAY_") {
+  public init(oauth: GoogleOAuthClient = GoogleOAuthClient(), prefix: String = "GOOGLE_SERVICE_GATEWAY_",
+              callbackSettings: OAuthCallbackSettings? = nil) {
     self.oauth = oauth
     self.prefix = prefix
+    self.callbackSettings = callbackSettings
     presenter = Self.presentAuthorizationURL
   }
 
   public init(
     oauth: GoogleOAuthClient = GoogleOAuthClient(),
     presenter: @escaping @Sendable (URL, Bool) async throws -> Void,
-    prefix: String = "GOOGLE_SERVICE_GATEWAY_"
+    prefix: String = "GOOGLE_SERVICE_GATEWAY_",
+    callbackSettings: OAuthCallbackSettings? = nil
   ) {
     self.oauth = oauth
     self.presenter = presenter
     self.prefix = prefix
+    self.callbackSettings = callbackSettings
   }
 
   public func authorize(
@@ -35,19 +40,30 @@ public struct LoopbackOAuthAuthorizer: InteractiveOAuthAuthorizer {
     timeout: TimeInterval
   ) async throws -> (code: String, request: OAuthAuthorizationRequest) {
     try validateOAuthBrowserLogin(client: client, timeout: timeout)
-    if client.kind == .web || OAuthCallbackSettings.isConfigured(prefix: prefix) {
-      let settings = try OAuthCallbackSettings(prefix: prefix,
-        requestedURI: client.kind == .web && !OAuthCallbackSettings.isConfigured(prefix: prefix)
-          ? client.redirectURIs.first?.absoluteString : nil)
-      let server = try OAuthCallbackServer(settings: settings)
-      let request = try oauth.authorizationRequest(client: client, redirectURI: server.redirectURI,
-        scopes: scopes, loginHint: loginHint)
-      try await presenter(request.authorizationURL, openBrowser)
-      let callback = try await Task.detached { try server.wait(expectedState: request.state, timeout: timeout) }.value
-      guard callback.error == nil, let code = callback.code else {
-        throw GatewayError(.authenticationFailed, "OAuth authorization failed")
+    if client.kind == .web || callbackSettings != nil || OAuthCallbackSettings.isConfigured(prefix: prefix) {
+      do {
+        let settings = try callbackSettings ?? OAuthCallbackSettings(prefix: prefix,
+          requestedURI: client.kind == .web && !OAuthCallbackSettings.isConfigured(prefix: prefix)
+            ? client.redirectURIs.first?.absoluteString : nil)
+        let server = try OAuthCallbackServer(settings: settings)
+        let request = try oauth.authorizationRequest(client: client, redirectURI: server.redirectURI,
+          scopes: scopes, loginHint: loginHint)
+        try await presenter(request.authorizationURL, openBrowser)
+        let callback = try await Task.detached { try server.wait(expectedState: request.state, timeout: timeout) }.value
+        guard callback.error == nil, let code = callback.code else {
+          throw GatewayError(.authenticationFailed, "OAuth authorization failed")
+        }
+        return (code, request)
+      } catch let error as GatewayAuthError {
+        let code: GatewayErrorCode
+        switch error.kind {
+        case .configuration: code = .configurationError
+        case .timeout: code = .operationTimeout
+        case .callback: code = .authenticationFailed
+        case .transport: code = .providerError
+        }
+        throw GatewayError(code, error.description)
       }
-      return (code, request)
     }
     let server = try LoopbackHTTPServer()
     let request = try oauth.authorizationRequest(

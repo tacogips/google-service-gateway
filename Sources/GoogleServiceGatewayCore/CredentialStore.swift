@@ -114,6 +114,12 @@ public struct OAuthCredentialVault: Sendable {
 
   public init(store: any SecureCredentialStore = FileCredentialStore()) { self.store = store }
 
+  public var persistenceBackend: String {
+    if store is FileCredentialStore { return "FILE" }
+    if store is KeychainCredentialStore { return "KEYCHAIN" }
+    return "CUSTOM"
+  }
+
   public func saveClient(_ client: OAuthClientConfiguration, profile: String) async throws {
     try await store.set(
       try JSONEncoder().encode(client), for: clientAccount(try profileName(profile)))

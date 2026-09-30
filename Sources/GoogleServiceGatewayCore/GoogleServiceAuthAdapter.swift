@@ -122,7 +122,7 @@ public struct AuthAdapter: Sendable {
         } else { state = "MISSING" }
         return success(command: "auth.status", data: JSONValue.object([
           "profile": .string(profile), "state": .string(state),
-          "credentialSource": .string("VAULT"), "refreshTokenStored": .bool(stored?.refreshToken != nil)
+          "credentialSource": .string(vault.persistenceBackend), "refreshTokenStored": .bool(stored?.refreshToken != nil)
         ]), pretty: parsed.pretty)
       case .login:
         let profile = try parsed.requiredProfile()
