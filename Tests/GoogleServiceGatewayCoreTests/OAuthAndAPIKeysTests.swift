@@ -68,6 +68,7 @@ import Testing
   #expect(query.contains(URLQueryItem(name: "response_type", value: "code")))
   #expect(query.contains(URLQueryItem(name: "code_challenge_method", value: "S256")))
   #expect(query.contains(URLQueryItem(name: "access_type", value: "offline")))
+  #expect(query.contains(URLQueryItem(name: "include_granted_scopes", value: "false")))
   #expect(query.contains(URLQueryItem(name: "state", value: request.state)))
   #expect(request.codeVerifier.count >= 43)
   #expect(

@@ -51,7 +51,7 @@ public struct GoogleOAuthClient: Sendable {
       URLQueryItem(name: "code_challenge", value: challenge),
       URLQueryItem(name: "code_challenge_method", value: "S256"),
       URLQueryItem(name: "access_type", value: "offline"),
-      URLQueryItem(name: "include_granted_scopes", value: "true"),
+      URLQueryItem(name: "include_granted_scopes", value: "false"),
     ]
     if promptConsent { query.append(URLQueryItem(name: "prompt", value: "consent")) }
     if let loginHint, !loginHint.isEmpty {
