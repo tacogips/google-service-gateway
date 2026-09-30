@@ -23,7 +23,7 @@ public struct AuthAdapter: Sendable {
 
   public func run(arguments: [String], environment: [String: String] = ProcessInfo.processInfo.environment) async -> AuthExecution {
     let command = authCommandName(arguments)
-    if arguments.contains("--help") || arguments.contains("-h") {
+    if arguments.isEmpty || arguments == ["auth"] || arguments == ["oauth"] || arguments.contains("--help") || arguments.contains("-h") {
       return .init(output: usage, isError: false, exitStatus: 0)
     }
     if arguments.contains("--version") {
