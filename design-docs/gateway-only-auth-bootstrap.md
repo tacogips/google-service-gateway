@@ -112,9 +112,10 @@ Swift test suites after pinning the corrected Service SDK. All 28 commands again
 passed 112 provider lifecycle checks using an injected fixture executable. These
 fixture checks do not prove a real gcloud ADC grant.
 
-The shared authentication revision is 2951cd8829d94d0b16e2a3bfdca301e57bb1f862.
-Gmail and OCR pin Service revision a42adf8 for scope isolation. Current patch
-artifacts are rebuilt after these fixes. Publication, tap metadata verification,
+The shared authentication revision is 13c40e2. Gmail and OCR pin Service
+revision 6dc0261, which includes native scope isolation and the updated shared
+provider implementation. Current patch artifacts must be rebuilt after these
+fixes. Publication, tap metadata verification,
 and mise-darwin installation remain incomplete.
 
 Remaining live grants include Docs/Sheets, Analytics reader/admin, Marketing,
@@ -128,3 +129,24 @@ The working logins use the existing registered client in ai-tools-proj. Local
 clients register imports an already registered client; it is not Google-side
 client registration. Live registered Web-client/public HTTPS callback validation
 also remains unproven; those paths currently have local fixture coverage only.
+
+## Completed real provider checks
+
+Service and Drive reader subsequently completed real gcloud ADC browser login.
+Both reported READY, and actual Service Usage and Drive reads succeeded. A real
+Drive attempt first exposed gcloud's mandatory cloud-platform scope requirement;
+the shared provider now includes that scope once in addition to the role's
+scopes. Native OAuth retains the product's scopes without this provider-specific
+addition. Calendar and Gmail role grants were aligned with native scopes, and
+Drive writer requests drive.file rather than full Drive access.
+
+Provider-free Service and Drive reader logins then succeeded, cleared each
+selected gcloud provider binding, and passed actual API reads using private-file
+native credentials. These paths no longer depend on gcloud after the native
+login. No Keychain storage was used. The fixture executable now also rejects
+login requests missing the mandatory Cloud scope; all 112 lifecycle checks pass.
+
+Analytics binary tests now isolate both configuration and credential state so
+negative authentication checks cannot consume live user credentials. The Docs
+inline credential deadline fixture allows decoder entry under full-suite load;
+its tests were moved to a separate file to keep Swift files below 1000 lines.
