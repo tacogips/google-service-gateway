@@ -51,8 +51,11 @@ public struct GoogleOAuthBrowserLogin: Sendable {
 }
 
 func validateOAuthBrowserLogin(client: OAuthClientConfiguration, timeout: TimeInterval) throws {
-  guard client.kind == .installed, !client.clientID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-    throw GatewayError(.configurationError, "Browser login requires a registered desktop OAuth application")
+  guard !client.clientID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+    throw GatewayError(.configurationError, "Browser login requires a registered OAuth application")
+  }
+  if client.kind == .web, client.clientSecret?.isEmpty != false {
+    throw GatewayError(.configurationError, "Web OAuth login requires a client secret")
   }
   guard timeout.isFinite, timeout > 0, timeout <= 3_600 else {
     throw GatewayError(.invalidArgument, "OAuth login timeout must be between 0 and 3600 seconds")

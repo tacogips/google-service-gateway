@@ -85,7 +85,7 @@ import Testing
   #expect(!help.output.contains("services enable"))
 
   let missingToken = await adapter.run(
-    arguments: ["projects", "delete", "--project", "gateway-test-123"],
+    arguments: ["projects", "delete", "--project", "gateway-test-123", "--access-token-env", "TEST_MISSING_TOKEN"],
     environment: [:]
   )
   #expect(missingToken.exitStatus == 3)

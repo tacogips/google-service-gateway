@@ -16,13 +16,14 @@ let package = Package(
     .executable(name: "google-service-gateway-auth", targets: ["GoogleServiceGatewayAuth"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/tacogips/google-gateway-auth.git", revision: "dda86daa5ca1b9a761977e4a9891e4e4380cf4dd"),
+    .package(url: "https://github.com/tacogips/google-gateway-auth.git", revision: "8a3b3ea2af0b367f9ff1a4adc5becc02bf08ac13"),
     .package(url: "https://github.com/apple/swift-crypto.git", from: "4.5.1")
   ],
   targets: [
     .target(
       name: "GoogleServiceGatewayCore",
       dependencies: [
+        .product(name: "GoogleGatewayAuth", package: "google-gateway-auth"),
         .product(name: "Crypto", package: "swift-crypto", condition: .when(platforms: [.linux]))
       ]
     ),

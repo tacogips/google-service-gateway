@@ -161,7 +161,7 @@ google-service-gateway-auth oauth token --profile personal
 
 The import and login commands reject a downloaded OAuth client whose embedded
 project ID does not match the configured project. Client secrets and refresh
-tokens remain in macOS Keychain. Only the explicit `oauth token` command prints
+tokens remain in private local credential files. Only the explicit `oauth token` command prints
 an access token.
 
 ## OAuth login and credentials
@@ -169,7 +169,7 @@ an access token.
 Google does not expose a supported public API for creating general OAuth
 clients or editing the general consent screen. The auth gateway gives a
 project-specific Console handoff, imports Google's downloaded desktop-client
-JSON into macOS Keychain, and then owns the complete PKCE authorization-code,
+JSON into private local credential files, and then owns the complete PKCE authorization-code,
 refresh, and revocation flow without `gcloud`.
 
 ```bash
@@ -207,12 +207,12 @@ google-service-gateway-writer services enable \
 
 `oauth login` opens the system browser and receives the callback on a random
 `127.0.0.1` port. It validates CSRF state and uses PKCE S256. Client secrets and
-refresh tokens are stored in macOS Keychain. Login output contains metadata but
+refresh tokens are stored in private local credential files. Login output contains metadata but
 not tokens; only the explicit `oauth token` and `oauth refresh` commands emit an
 access token.
 
 When consent setup includes `--profile`, the resolved scope set is stored as
-non-secret profile configuration in Keychain. `oauth login` uses it when no
+non-secret profile configuration in private local credential files. `oauth login` uses it when no
 `--scope` flags are supplied. Inspect or remove it with `consent get` and
 `consent delete`.
 
@@ -461,3 +461,31 @@ Cloud Resource Manager before calling Service Usage, whose resource names use
 project numbers. This requires `resourcemanager.projects.get` in addition to the
 Service Usage read permission. Supplying a project number skips that lookup;
 response project identity checks remain exact.
+
+## Native credential storage
+
+Native OAuth credentials use `$XDG_STATE_HOME/google-service-gateway/credentials`
+(default `~/.local/state/google-service-gateway/credentials`). Directories are
+mode 0700 and files mode 0600. CLI login and API calls do not access Keychain.
+Existing Keychain entries are not automatically read or migrated; run native
+`auth login` again to populate the file store. SDK callers may explicitly inject
+`KeychainCredentialStore` when desired. External token JSON/path and access-token
+inputs remain supported.
+
+## Local OAuth client registration and callback routing
+
+`google-service-gateway-auth clients register --file /absolute/client.json
+--product gmail --redirect-uri https://gateway.example.com/oauth/callback
+--listen-host 127.0.0.1 --listen-port 8765` imports an existing registered Google
+Web client and stores its callback settings for Gmail. Use `--replace` to replace
+an existing local default. Products: service, calendar, gmail, docs, sheets,
+drive, analytics, marketing, ocr. This command registers local configuration;
+it does not create an OAuth client or update redirect URIs in Google Cloud.
+
+Each product has `OAUTH_REDIRECT_URI`, `OAUTH_LISTEN_HOST`, and
+`OAUTH_LISTEN_PORT` under its existing environment prefix. Service uses
+`GOOGLE_SERVICE_GATEWAY_`. Environment values override stored callback settings.
+Web redirects must exactly match a URI in the downloaded client JSON and Google
+registration. Use a TLS reverse proxy for public HTTPS URLs, forwarding the
+callback path to the configured local listener. The callback server lasts only
+for the login flow. Desktop clients continue to use HTTP loopback callbacks.

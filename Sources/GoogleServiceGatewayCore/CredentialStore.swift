@@ -112,7 +112,7 @@ public struct KeychainCredentialStore: SecureCredentialStore {
 public struct OAuthCredentialVault: Sendable {
   private let store: any SecureCredentialStore
 
-  public init(store: any SecureCredentialStore = KeychainCredentialStore()) { self.store = store }
+  public init(store: any SecureCredentialStore = FileCredentialStore()) { self.store = store }
 
   public func saveClient(_ client: OAuthClientConfiguration, profile: String) async throws {
     try await store.set(

@@ -75,3 +75,15 @@ from gcloud works for the Service read, not that native login has succeeded.
 
 Client ownership (shared existing client versus one client per new project) is
 pending user clarification. No replacement projects have been created.
+
+## Native file-storage verification
+
+Service native browser consent subsequently succeeded. The first API read was
+blocked by a Keychain access prompt. At the user's request the default OAuth
+vault now uses private local files, with no automatic Keychain access/migration.
+A new login saved the refreshable native credential to that file store; a real
+Service Usage list then succeeded using the native profile without gcloud.
+The shared callback implementation supports configurable local listeners and
+public HTTPS callback URIs for registered Web clients behind a TLS reverse proxy.
+The local clients register command imports an existing registered Google client;
+it does not implement Google-side client creation.

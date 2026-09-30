@@ -4,6 +4,7 @@
   import Crypto
 #endif
 import Foundation
+import GoogleGatewayAuth
 
 #if canImport(FoundationNetworking)
   import FoundationNetworking
@@ -31,11 +32,10 @@ public struct GoogleOAuthClient: Sendable {
     loginHint: String? = nil,
     promptConsent: Bool = true
   ) throws -> OAuthAuthorizationRequest {
-    guard redirectURI.scheme == "http",
-      ["127.0.0.1", "localhost", "::1"].contains(redirectURI.host ?? "")
-    else {
-      throw GatewayError(.invalidArgument, "OAuth redirect URI must use an HTTP loopback host")
-    }
+    do {
+      try OAuthCallbackSettings.validateClientRedirect(kind: client.kind.rawValue,
+        registered: client.redirectURIs.map(\.absoluteString), redirect: redirectURI.absoluteString)
+    } catch { throw GatewayError(.invalidArgument, "OAuth redirect URI is invalid or not registered for this client") }
     let scopes = try GoogleOAuthScopeCatalog.resolve(inputScopes)
     let verifier = randomURLSafeString(byteCount: 48)
     let state = randomURLSafeString(byteCount: 32)
