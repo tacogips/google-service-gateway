@@ -95,6 +95,14 @@ public enum GatewayValidation {
     return value
   }
 
+  static func returnedService(_ value: String) throws -> String {
+    let labels = value.split(separator: ".", omittingEmptySubsequences: false)
+    guard !value.isEmpty, value.count <= 253, ascii(value), value == value.lowercased(),
+      !containsUnsafePathCharacter(value), labels.count >= 2, labels.allSatisfy(validDNSLabel)
+    else { throw GatewayError(.malformedResponse, "invalid service response identifier") }
+    return value
+  }
+
   public static func operation(_ input: String) throws -> String {
     guard input.hasPrefix("operations/") else { throw invalid("invalid operation name") }
     let suffix = input.dropFirst("operations/".count)

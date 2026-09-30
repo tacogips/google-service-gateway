@@ -418,10 +418,10 @@ private func toGatewayService(
   expectedProject: String,
   expectedService: String? = nil
 ) throws -> GatewayService {
-  let pieces = value.name.split(separator: "/")
+  let pieces = value.name.split(separator: "/", omittingEmptySubsequences: false)
   guard pieces.count == 4, pieces[0] == "projects", pieces[2] == "services" else { throw GatewayError(.malformedResponse, "invalid service response name") }
   let parent = "projects/\(pieces[1])"
-  let service = try GatewayValidation.service(String(pieces[3]))
+  let service = try GatewayValidation.returnedService(String(pieces[3]))
   guard parent == expectedProject, expectedService.map({ $0 == service }) ?? true else {
     throw GatewayError(.malformedResponse, "service response name does not match request")
   }

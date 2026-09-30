@@ -49,6 +49,31 @@ import Testing
   await #expect(throws: GatewayError.self) { _ = try await client.listServices(.init(project: "gateway-test-123", state: .enabled)) }
 }
 
+@Test func serviceListAcceptsMarketplaceCatalogResponseNames() async throws {
+  let service = "marketplace-api.endpoints.vendor-project.cloud.goog"
+  let transport = RecordingTransport(responses: [
+    response("{\"services\":[{\"name\":\"projects/123/services/\(service)\",\"state\":\"DISABLED\"}]}")
+  ])
+  let client = GoogleServiceGatewayClient(transport: transport, tokenProvider: StaticAccessTokenProvider(token: "fixture-token"))
+  let result = try await client.listServices(.init(project: "123"))
+  #expect(result.services.first?.serviceId == service)
+  #expect(throws: GatewayError.self) { try GatewayValidation.service(service) }
+}
+
+@Test(arguments: ["bad..example", "bad.example?token=x", "UPPER.example", "bad_example.com", "localhost"])
+func serviceListRejectsMalformedCatalogResponseNames(service: String) async throws {
+  let transport = RecordingTransport(responses: [
+    response("{\"services\":[{\"name\":\"projects/123/services/\(service)\",\"state\":\"DISABLED\"}]}")
+  ])
+  let client = GoogleServiceGatewayClient(transport: transport, tokenProvider: StaticAccessTokenProvider(token: "fixture-token"))
+  do {
+    _ = try await client.listServices(.init(project: "123"))
+    Issue.record("Expected invalid catalog name to fail")
+  } catch let error as GatewayError {
+    #expect(error.code == .malformedResponse)
+  }
+}
+
 private actor RecordingTransport: GatewayHTTPTransport {
   private var captured: [GatewayHTTPRequest] = []
   private var responses: [GatewayHTTPResponse]
