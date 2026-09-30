@@ -4,7 +4,9 @@
 
 Use gcloud for initial Cloud authentication, then use Service gateway to create
 projects and enable APIs. Each gateway should subsequently run provider-free
-native OAuth login without depending on gcloud. Do not use computer automation.
+native OAuth login without depending on gcloud. Do not use computer automation
+for Cloud project setup. The user subsequently authorized Brave Computer Use for
+Google login consent; new or broader access requires action-time confirmation.
 
 Nine bootstrap projects created on 2026-09-30 were deleted at the user's request.
 All were confirmed in `DELETE_REQUESTED` state. No replacements were created.
@@ -48,7 +50,7 @@ provider selection, direct gateway login, or live API grant is claimed by this
 implementation verification. A project-creation/API-enablement-only workflow
 cannot yet satisfy the complete requested native login acceptance requirement.
 
-The final pinned shared-library revision is
+The earlier bootstrap shared-library revision was
 `dda86daa5ca1b9a761977e4a9891e4e4380cf4dd` in `tacogips/google-gateway-auth`. All 28 debug executables passed 112
 provider lifecycle checks (login/status/refresh/revoke) against an injected
 fixture executable. These are subprocess integration checks, not real Google
@@ -87,3 +89,42 @@ The shared callback implementation supports configurable local listeners and
 public HTTPS callback URIs for registered Web clients behind a TLS reverse proxy.
 The local clients register command imports an existing registered Google client;
 it does not implement Google-side client creation.
+
+## Live verification on 2026-10-01
+
+Brave became accessible again. New Drive reader and writer native logins saved
+refreshable private-file credentials. A Drive reader `about get` call succeeded.
+Analytics writer native login and a `gaAccounts` API query also succeeded.
+
+A live OCR login exposed an incremental-authorization defect: the Cloud OAuth
+request included earlier Workspace grants, saved them, and incorrectly reported
+READY even though the OCR API token provider requires exactly cloud-platform.
+Service OAuth browser requests now set include_granted_scopes=false. OCR validates
+the returned scope set before persistence and marks a saved incompatible scope
+set INVALID. The unusable local OCR file was preserved in a private backup before
+replacement login. The replacement grant contains only cloud-platform, and a
+Document AI processor-list call succeeded without gcloud. A fresh Service grant
+also contains only cloud-platform; listing all enabled services succeeded.
+All 15 required API IDs are enabled in the existing ai-tools-proj project.
+
+Service passed 118 Swift Testing functions; OCR passed 35; Gmail passed its full
+Swift test suites after pinning the corrected Service SDK. All 28 commands again
+passed 112 provider lifecycle checks using an injected fixture executable. These
+fixture checks do not prove a real gcloud ADC grant.
+
+The shared authentication revision is 2951cd8829d94d0b16e2a3bfdca301e57bb1f862.
+Gmail and OCR pin Service revision a42adf8 for scope isolation. Current patch
+artifacts are rebuilt after these fixes. Publication, tap metadata verification,
+and mise-darwin installation remain incomplete.
+
+Remaining live grants include Docs/Sheets, Analytics reader/admin, Marketing,
+and Gmail mailbox roles. Docs reached its consent screen and timed out while
+new-scope approval was pending. No grant is claimed for that attempt. The
+pending confirmation requests the remaining permissions for the already
+registered calendar-gateway OAuth application.
+
+No replacement gateway projects or Google-side OAuth clients have been created.
+The working logins use the existing registered client in ai-tools-proj. Local
+clients register imports an already registered client; it is not Google-side
+client registration. Live registered Web-client/public HTTPS callback validation
+also remains unproven; those paths currently have local fixture coverage only.
