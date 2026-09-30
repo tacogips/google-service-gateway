@@ -402,5 +402,25 @@ application client or browser login is required for fresh tokens.
 `auth login` defaults to the `google-personal` profile. Canonical application
 JSON/path inputs configure browser authorization without first importing a client
 into the vault. Profile-specific application inputs override product application
-inputs. Explicit scopes or saved scope configuration are still required. A bundled
+inputs. Explicit scopes and saved scope configuration take precedence; otherwise login
+requests the Cloud Platform scope used by the implemented Cloud API commands. A bundled
 registered application for login without user application setup is not yet selected.
+
+### Authentication from every Service command
+
+Reader, writer, admin, and deleter now accept `auth login` (and the existing
+`oauth login` spelling) through the same Core auth adapter as the dedicated auth
+executable. Authentication runs before API capability parsing and before admin
+plan-signing requirements. Ordinary API mutation boundaries remain unchanged.
+The default profile is `google-personal`. Successful login stores the validated
+application and refreshable user token privately in the vault, so a subsequent
+ordinary command can select that default token without external inputs.
+
+Externally supplied token/service-account credentials still take precedence.
+`--oauth-profile`, `--service-account-env`, and `--access-token-env` retain their
+explicit selection semantics; a missing explicitly selected token variable fails
+rather than silently falling back to the saved default profile. A bundled
+registered application and authorized live browser verification remain pending.
+
+`AuthAdapter` and `AuthExecution` are now public in `GoogleServiceGatewayCore`.
+The auth executable keeps compatibility type aliases for existing imports.

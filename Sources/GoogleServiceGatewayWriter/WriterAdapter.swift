@@ -14,15 +14,18 @@ public struct WriterExecution: Sendable {
 public struct WriterAdapter: Sendable {
   private let transport: any GatewayHTTPTransport
   private let vault: OAuthCredentialVault
+  private let authAuthorizer: any InteractiveOAuthAuthorizer
   private let serviceAccountSigner: any ServiceAccountJWTSigner
 
   public init(
     transport: any GatewayHTTPTransport = URLSessionGatewayTransport(),
     vault: OAuthCredentialVault = OAuthCredentialVault(),
-    serviceAccountSigner: any ServiceAccountJWTSigner = OpenSSLServiceAccountJWTSigner()
+    serviceAccountSigner: any ServiceAccountJWTSigner = OpenSSLServiceAccountJWTSigner(),
+    authAuthorizer: any InteractiveOAuthAuthorizer = LoopbackOAuthAuthorizer()
   ) {
     self.transport = transport
     self.vault = vault
+    self.authAuthorizer = authAuthorizer
     self.serviceAccountSigner = serviceAccountSigner
   }
 
@@ -30,6 +33,11 @@ public struct WriterAdapter: Sendable {
     arguments: [String], environment: [String: String] = ProcessInfo.processInfo.environment
   ) async -> WriterExecution {
     let command = writerCommandName(arguments)
+    if arguments.first == "auth" || arguments.first == "oauth" {
+      let result = await AuthAdapter(vault: vault, oauth: GoogleOAuthClient(transport: transport), authorizer: authAuthorizer)
+        .run(arguments: arguments, environment: environment)
+      return .init(output: result.output, isError: result.isError, exitStatus: result.exitStatus)
+    }
     if arguments.contains("--help") || arguments.contains("-h") {
       return .init(output: usage, isError: false, exitStatus: 0)
     }
@@ -74,10 +82,10 @@ public struct WriterAdapter: Sendable {
           credentialJSON: credential, transport: transport, signer: serviceAccountSigner)
       } else {
         let name = try GatewayValidation.tokenEnvironmentName(parsed.tokenEnvironment)
-        guard let token = environment[name], !token.isEmpty else {
-          throw GatewayError(.authRequired, "access token is required")
-        }
-        provider = StaticAccessTokenProvider(token: token)
+        if let token = environment[name], !token.isEmpty { provider = StaticAccessTokenProvider(token: token)
+        } else if !arguments.contains("--access-token-env") {
+          provider = RefreshingOAuthAccessTokenProvider(profile: "google-personal", vault: vault, client: GoogleOAuthClient(transport: transport))
+        } else { throw GatewayError(.authRequired, "access token is required") }
       }
       switch parsed.command {
       case .projectCreate:
@@ -160,6 +168,7 @@ public struct WriterAdapter: Sendable {
       api-keys get-key-string --key RESOURCE
     Restriction options: --allowed-ip CIDR | --allowed-referrer PATTERN | --allowed-bundle-id ID
     Polling options: --no-wait | --poll-interval SECONDS --timeout SECONDS
+      auth login [--profile NAME] [--scope ALIAS-OR-URI ...]
     Authentication: --oauth-profile NAME, --service-account-env NAME, or --access-token-env NAME
     """
   }

@@ -14,15 +14,18 @@ public struct ReaderExecution: Sendable {
 public struct ReaderAdapter: Sendable {
   private let transport: any GatewayHTTPTransport
   private let vault: OAuthCredentialVault
+  private let authAuthorizer: any InteractiveOAuthAuthorizer
   private let serviceAccountSigner: any ServiceAccountJWTSigner
 
   public init(
     transport: any GatewayHTTPTransport = URLSessionGatewayTransport(),
     vault: OAuthCredentialVault = OAuthCredentialVault(),
-    serviceAccountSigner: any ServiceAccountJWTSigner = OpenSSLServiceAccountJWTSigner()
+    serviceAccountSigner: any ServiceAccountJWTSigner = OpenSSLServiceAccountJWTSigner(),
+    authAuthorizer: any InteractiveOAuthAuthorizer = LoopbackOAuthAuthorizer()
   ) {
     self.transport = transport
     self.vault = vault
+    self.authAuthorizer = authAuthorizer
     self.serviceAccountSigner = serviceAccountSigner
   }
 
@@ -30,6 +33,11 @@ public struct ReaderAdapter: Sendable {
     arguments: [String], environment: [String: String] = ProcessInfo.processInfo.environment
   ) async -> ReaderExecution {
     let command = readerCommandName(arguments)
+    if arguments.first == "auth" || arguments.first == "oauth" {
+      let result = await AuthAdapter(vault: vault, oauth: GoogleOAuthClient(transport: transport), authorizer: authAuthorizer)
+        .run(arguments: arguments, environment: environment)
+      return .init(output: result.output, isError: result.isError, exitStatus: result.exitStatus)
+    }
     if arguments.contains("--help") || arguments.contains("-h") {
       return .init(output: usage, isError: false, exitStatus: 0)
     }
@@ -49,7 +57,7 @@ public struct ReaderAdapter: Sendable {
     }
     do {
       let parsed = try ReaderArguments(arguments, environment: environment)
-      let tokenProvider = try tokenProvider(for: parsed, environment: environment)
+      let tokenProvider = try tokenProvider(for: parsed, environment: environment, allowDefaultOAuth: !arguments.contains("--access-token-env"))
       switch parsed.command {
       case .list:
         let client = GoogleServiceGatewayClient(transport: transport, tokenProvider: tokenProvider)
@@ -114,7 +122,7 @@ public struct ReaderAdapter: Sendable {
     }
   }
 
-  private func tokenProvider(for arguments: ReaderArguments, environment: [String: String]) throws
+  private func tokenProvider(for arguments: ReaderArguments, environment: [String: String], allowDefaultOAuth: Bool) throws
     -> any AccessTokenProvider {
     if arguments.serviceAccountEnvironment == nil,
        let external = try GoogleServiceExternalCredentials.tokenProvider(
@@ -134,6 +142,9 @@ public struct ReaderAdapter: Sendable {
     }
     let name = try GatewayValidation.tokenEnvironmentName(arguments.tokenEnvironment)
     guard let token = environment[name], !token.isEmpty else {
+      if allowDefaultOAuth {
+        return RefreshingOAuthAccessTokenProvider(profile: "google-personal", vault: vault, client: GoogleOAuthClient(transport: transport))
+      }
       throw GatewayError(.authRequired, "access token is required")
     }
     return StaticAccessTokenProvider(token: token)
@@ -151,6 +162,7 @@ public struct ReaderAdapter: Sendable {
       billing accounts get --billing-account billingAccounts/ACCOUNT
       billing projects get --project PROJECT
       iam permissions test --project PROJECT --permission IAM_PERMISSION [--permission IAM_PERMISSION ...]
+      auth login [--profile NAME] [--scope ALIAS-OR-URI ...]
     Authentication: --oauth-profile NAME, --service-account-env NAME, or --access-token-env NAME
     """
   }
