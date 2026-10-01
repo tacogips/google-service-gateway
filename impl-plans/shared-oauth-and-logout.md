@@ -93,8 +93,20 @@ callback or live registered Web-client grant is claimed.
 Historical records clearly mark extra per-product projects as the earlier
 implementation mistake. The shared Service configuration is authoritative.
 
-## Remaining delivery work
+## Delivery completed
 
-Publish the rebuilt patch releases and signed Calendar Casks, update Homebrew
-metadata, and update/verify the mise-darwin installations. Service is 0.1.6;
-Calendar 0.1.9; Gmail 0.1.17; Docs 0.3.6; Analytics 0.1.5; Marketing and OCR 0.1.4.
+All seven patch releases are public. All 56 remote assets match local SHA-256
+checksums. Calendar Casks were signed, notarized, stapled and accepted by
+Gatekeeper. The tap metadata workflow succeeded and all 14 formula/Cask metadata
+records match release versions and Ruby checksums.
+
+All 13 Homebrew packages passed audit, fetch, upgrade and formula tests. All 28
+installed executables passed 112 smoke checks and report native credentials ready.
+Mise-darwin desktop configuration validates, Calendar 0.1.9 is installed, and
+its release/update record was committed and pushed in 40b7f79. A Finder preference
+difference is unrelated and was preserved. Old Calendar package directories,
+command links and local repository directory are absent.
+
+Authentication requirements are verified. Google Ads developer-token API access,
+AdMob live writes and deployed Web callbacks remain explicitly outside the
+completed authentication evidence; no unsupported result is claimed.

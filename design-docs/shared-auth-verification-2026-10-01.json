@@ -1006,16 +1006,16 @@
   ],
   "liveAllRoleNativeAuthenticationVerified": true,
   "liveAllRoleExternalJSONAPIRequestsVerified": false,
-  "allGatewayReleasesPublished": false,
+  "allGatewayReleasesPublished": true,
   "unitSuites": {
-    "shared": 32,
+    "shared": 35,
     "service": 120,
     "calendar": 137,
     "gmailXCTest": 157,
     "gmailSwiftTesting": 178,
     "documents": 180,
     "analytics": 304,
-    "marketing": 125,
+    "marketing": 126,
     "ocr": 37
   },
   "retiredProductDefaults": "Backed up privately; eight auto-created product client files removed from active configuration; global environment inputs preserved.",
@@ -2730,5 +2730,1439 @@
     "inlineJSONAPIRequest": true,
     "logoutMissing": true,
     "loginAgain": true
-  }
+  },
+  "publishedReleases": [
+    {
+      "repo": "google-calendar-gateway",
+      "version": "0.1.9",
+      "releaseURL": "https://github.com/tacogips/google-calendar-gateway/releases/tag/v0.1.9",
+      "assetCount": 8,
+      "passed": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "version": "0.1.17",
+      "releaseURL": "https://github.com/tacogips/gmail-gateway/releases/tag/v0.1.17",
+      "assetCount": 20,
+      "passed": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "version": "0.3.6",
+      "releaseURL": "https://github.com/tacogips/google-documents-gateway/releases/tag/v0.3.6",
+      "assetCount": 4,
+      "passed": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "version": "0.1.5",
+      "releaseURL": "https://github.com/tacogips/google-analytics-gateway/releases/tag/v0.1.5",
+      "assetCount": 12,
+      "passed": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "version": "0.1.4",
+      "releaseURL": "https://github.com/tacogips/google-marketing-gateway/releases/tag/v0.1.4",
+      "assetCount": 4,
+      "passed": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "version": "0.1.4",
+      "releaseURL": "https://github.com/tacogips/google-document-ocr-gateway/releases/tag/v0.1.4",
+      "assetCount": 4,
+      "passed": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "version": "0.1.6",
+      "releaseURL": "https://github.com/tacogips/google-service-gateway/releases/tag/v0.1.6",
+      "assetCount": 4,
+      "passed": true
+    }
+  ],
+  "publishedReleaseAssetDigests": [
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-arm64.dmg",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-arm64.dmg.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-x64.dmg",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-x64.dmg.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-draft-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-draft-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-draft-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-draft-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-message-box-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-message-box-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-message-box-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-message-box-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-reader-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-reader-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-reader-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-reader-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-sender-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-sender-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-sender-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-sender-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-threads-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-threads-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-threads-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-threads-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "asset": "google-documents-gateway-0.3.6-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "asset": "google-documents-gateway-0.3.6-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "asset": "google-documents-gateway-0.3.6-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "asset": "google-documents-gateway-0.3.6-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-admin-0.1.5-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-admin-0.1.5-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-admin-0.1.5-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-admin-0.1.5-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-reader-0.1.5-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-reader-0.1.5-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-reader-0.1.5-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-reader-0.1.5-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-writer-0.1.5-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-writer-0.1.5-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-writer-0.1.5-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-writer-0.1.5-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "asset": "google-marketing-gateway-0.1.4-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "asset": "google-marketing-gateway-0.1.4-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "asset": "google-marketing-gateway-0.1.4-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "asset": "google-marketing-gateway-0.1.4-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "asset": "google-document-ocr-gateway-0.1.4-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "asset": "google-document-ocr-gateway-0.1.4-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "asset": "google-document-ocr-gateway-0.1.4-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "asset": "google-document-ocr-gateway-0.1.4-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "asset": "google-service-gateway-0.1.6-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "asset": "google-service-gateway-0.1.6-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "asset": "google-service-gateway-0.1.6-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "asset": "google-service-gateway-0.1.6-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    }
+  ],
+  "homebrewPackageChecks": [
+    {
+      "formula": "google-calendar-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-reader",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-draft",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-sender",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-threads",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-message-box",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-documents-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-analytics-gateway-reader",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-analytics-gateway-writer",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-analytics-gateway-admin",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-marketing-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-document-ocr-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-service-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    }
+  ],
+  "tapMetadataChecks": [
+    {
+      "name": "google-calendar-gateway",
+      "kind": "formula",
+      "version": "0.1.9",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-reader",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-draft",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-sender",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-threads",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-message-box",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "google-documents-gateway",
+      "kind": "formula",
+      "version": "0.3.6",
+      "passed": true
+    },
+    {
+      "name": "google-analytics-gateway-reader",
+      "kind": "formula",
+      "version": "0.1.5",
+      "passed": true
+    },
+    {
+      "name": "google-analytics-gateway-writer",
+      "kind": "formula",
+      "version": "0.1.5",
+      "passed": true
+    },
+    {
+      "name": "google-analytics-gateway-admin",
+      "kind": "formula",
+      "version": "0.1.5",
+      "passed": true
+    },
+    {
+      "name": "google-marketing-gateway",
+      "kind": "formula",
+      "version": "0.1.4",
+      "passed": true
+    },
+    {
+      "name": "google-document-ocr-gateway",
+      "kind": "formula",
+      "version": "0.1.4",
+      "passed": true
+    },
+    {
+      "name": "google-service-gateway",
+      "kind": "formula",
+      "version": "0.1.6",
+      "passed": true
+    },
+    {
+      "name": "google-calendar-gateway",
+      "kind": "cask",
+      "version": "0.1.9",
+      "passed": true
+    }
+  ],
+  "installedExecutableChecks": [
+    {
+      "repo": "google-calendar-gateway",
+      "product": "google-calendar-gateway-reader",
+      "version": "0.1.9",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "product": "google-calendar-gateway-writer",
+      "version": "0.1.9",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-reader",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-draft",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-sender",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-threads",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-message-box",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-documents-gateway",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-docs-gateway-reader",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-docs-gateway-writer",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-sheet-gateway-reader",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-sheet-gateway-writer",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-drive-gateway-reader",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-drive-gateway-writer",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "product": "google-analytics-gateway-reader",
+      "version": "0.1.5",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "product": "google-analytics-gateway-writer",
+      "version": "0.1.5",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "product": "google-analytics-gateway-admin",
+      "version": "0.1.5",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway-reader",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway-writer",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway-deleter",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway-admin",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "product": "google-document-ocr-gateway",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-reader",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-writer",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-admin",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-deleter",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-auth",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    }
+  ],
+  "installedNativeCredentialStatus": [
+    {
+      "product": "google-calendar-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-calendar-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-draft",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-sender",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-threads",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-message-box",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-documents-gateway",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-docs-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-docs-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-sheet-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-sheet-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-drive-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-drive-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-analytics-gateway-reader",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-analytics-gateway-writer",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-analytics-gateway-admin",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway-reader",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway-writer",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway-deleter",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway-admin",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-document-ocr-gateway",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-admin",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-deleter",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-auth",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    }
+  ],
+  "miseDarwinDelivery": {
+    "sourceCommit": "40b7f79",
+    "pushed": true,
+    "desktopConfigurationValid": true,
+    "calendarPackageVersion": "0.1.9",
+    "unrelatedHostDrift": "Finder preference differs; left unchanged",
+    "oldCalendarPackageDirectoriesAbsent": true,
+    "oldCalendarCommandLinksAbsent": true
+  },
+  "sharedClientAudit": {
+    "registeredDesktopClientPresent": true,
+    "privateFileModeVerified": true,
+    "projectMatchesSharedServiceProject": true,
+    "productDefaultsRetired": true
+  },
+  "sharedDependencyAudit": [
+    {
+      "repo": "google-service-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    }
+  ]
 }
