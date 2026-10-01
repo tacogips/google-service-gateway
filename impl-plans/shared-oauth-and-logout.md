@@ -42,20 +42,35 @@ locally. Do not claim local import creates a client at Google.
 
 These unit tests do not prove browser grants or live API access for every role.
 
+## Updated evidence
+
+All nine products now share the common logout ownership policy. Every executable
+role supports local logout. Marketing product/role combinations without an
+implemented OAuth profile reject explicitly. Shared callback imports containing
+an empty object preserve native receiver defaults (shared commit 2833101).
+
+Full suites pass: shared 32, Service 120, Calendar 137, Gmail 157 XCTest plus
+178 Swift Testing, Docs/Sheets/Drive 180, Analytics 304, Marketing 125, OCR 37.
+SwiftLint ran in all modified packages and exited 0 (existing warnings remain).
+
+CLI fixture verification passed 168 checks over all 28 executable composition
+roots: gcloud login, status, refresh, native local logout, login again, revoke.
+The fake gcloud process exercises CLI plumbing; it does not prove Google consent.
+
+Service gateway enabled and verified all 17 required APIs in shared project
+`tacogips-service-auth-261001`. Eight extra product default client files created
+by earlier work were privately backed up and retired. Global environment sources
+were preserved. See `design-docs/shared-auth-verification-2026-10-01.json`.
+
 ## Remaining work
 
-1. Add logout integration and ownership tests to Gmail, Docs/Sheets/Drive,
-   Analytics, Marketing and OCR; pin the shared library and Service SDK where used.
-2. Test auth login/status/logout/relogin for every executable role and Marketing
-   product selector. Test inline JSON and file credential resolution/API access.
-3. Back up the unnecessary per-product defaults created during earlier work and
-   remove them from active configuration so the shared Service default is selected.
-   Preserve deliberate user overrides and global environment inputs.
-4. Enable all requested APIs in the shared Service project through Service gateway.
-5. Complete actual native Google login and real API checks for every role, using
-   the authorized browser grants. Preserve caller credentials during verification.
-6. Correct historical project records to distinguish actual extra resources from
-   the requested shared configuration. Do not create additional separate projects.
-7. Commit/push remaining changes, bump patch versions and release modified gateways;
+1. Complete real native Google login, logout/relogin and API checks for every
+   role through the shared client, using the authorized browser grants. Verify
+   both inline JSON and file credential API access without changing global inputs.
+2. Verify shared Web callback registration/settings and native flow where required;
+   fixture callback success alone is insufficient for deployed HTTPS claims.
+3. Preserve historical records of the mistakenly created separate resources,
+   clearly distinguishing them from the requested shared configuration.
+4. Publish patch releases for modified gateways, rebuild signed Calendar Casks,
    update Homebrew metadata and mise-darwin installations. Service 0.1.5 is already
    published, so its next patch must be 0.1.6. Other prepared versions are unpublished.
