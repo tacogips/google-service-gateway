@@ -1424,5 +1424,74 @@
     "regressionTestsPassed": 2,
     "fullSuiteTestsPassed": 126,
     "liveNativeLoginAfterFixVerified": false
+  },
+  "rebuiltPatchArtifacts": [
+    {
+      "repo": "google-calendar-gateway",
+      "version": "0.1.9",
+      "sourceCommit": "46973fba802e285f5a8704fcb1c223cac4dbdbea",
+      "archives": 2,
+      "nativeVersionChecks": 2,
+      "passed": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "version": "0.1.17",
+      "sourceCommit": "420f114a3db0f4228c4b365648c59a429a8db45c",
+      "archives": 10,
+      "nativeVersionChecks": 5,
+      "passed": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "version": "0.3.6",
+      "sourceCommit": "0fbb468557d91efc80d8d871ab03419d79d33298",
+      "archives": 2,
+      "nativeVersionChecks": 7,
+      "passed": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "version": "0.1.5",
+      "sourceCommit": "129781b94ac722fde41df235132bf071c50ce977",
+      "archives": 6,
+      "nativeVersionChecks": 3,
+      "passed": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "version": "0.1.4",
+      "sourceCommit": "c03041b108ed75560966f80a16b4a4055efb7f9f",
+      "archives": 2,
+      "nativeVersionChecks": 5,
+      "passed": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "version": "0.1.4",
+      "sourceCommit": "f96531f4d99928137bfb812cfea9dc0620576bd7",
+      "archives": 2,
+      "nativeVersionChecks": 1,
+      "passed": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "version": "0.1.6",
+      "sourceCommit": "527964d5645634e7ec34b102ef754c02c6968600",
+      "archives": 2,
+      "nativeVersionChecks": 5,
+      "passed": true
+    }
+  ],
+  "calendarSignedCaskRebuild": {
+    "version": "0.1.9",
+    "architectures": [
+      "arm64",
+      "x86_64"
+    ],
+    "notarizationAccepted": true,
+    "staplerValidationPassed": true,
+    "gatekeeperAccepted": true,
+    "published": false
   }
 }
