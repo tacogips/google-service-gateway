@@ -169,7 +169,7 @@
       },
       "ok": true
     },
-    "googleOAuthClientRegistered": false,
+    "googleOAuthClientRegistered": true,
     "verifyExit": 0,
     "enabledAPIs": [
       "apikeys.googleapis.com",
@@ -177,7 +177,16 @@
       "cloudresourcemanager.googleapis.com",
       "serviceusage.googleapis.com"
     ],
-    "requiredAPIsVerified": true
+    "requiredAPIsVerified": true,
+    "oauthClientKind": "Desktop",
+    "localClientImported": true,
+    "testUserConfigured": true,
+    "nativeLoginVerified": true,
+    "nativeRefreshVerified": true,
+    "nativeRequiredAPIReadVerified": true,
+    "recordPurpose": "Historical provisioning record; separate per-product projects were an implementation mistake, not the user request.",
+    "currentAuthenticationUse": "Shared client for all gateways",
+    "currentVerificationRecord": "shared-auth-verification-2026-10-01.json"
   },
   {
     "product": "calendar",
@@ -284,12 +293,17 @@
       },
       "ok": true
     },
-    "googleOAuthClientRegistered": false,
+    "googleOAuthClientRegistered": true,
     "verifyExit": 0,
     "enabledAPIs": [
       "calendar-json.googleapis.com"
     ],
-    "requiredAPIsVerified": true
+    "requiredAPIsVerified": true,
+    "oauthClientKind": "Desktop",
+    "localClientImported": true,
+    "recordPurpose": "Historical provisioning record; separate per-product projects were an implementation mistake, not the user request.",
+    "currentAuthenticationUse": "Not selected by the current shared-client default; auto-created local client files retired where present.",
+    "currentVerificationRecord": "shared-auth-verification-2026-10-01.json"
   },
   {
     "product": "gmail",
@@ -395,12 +409,17 @@
       },
       "ok": true
     },
-    "googleOAuthClientRegistered": false,
+    "googleOAuthClientRegistered": true,
     "verifyExit": 0,
     "enabledAPIs": [
       "gmail.googleapis.com"
     ],
-    "requiredAPIsVerified": true
+    "requiredAPIsVerified": true,
+    "oauthClientKind": "Desktop",
+    "localClientImported": true,
+    "recordPurpose": "Historical provisioning record; separate per-product projects were an implementation mistake, not the user request.",
+    "currentAuthenticationUse": "Not selected by the current shared-client default; auto-created local client files retired where present.",
+    "currentVerificationRecord": "shared-auth-verification-2026-10-01.json"
   },
   {
     "product": "docs",
@@ -534,7 +553,10 @@
       "docs.googleapis.com",
       "drive.googleapis.com"
     ],
-    "requiredAPIsVerified": true
+    "requiredAPIsVerified": true,
+    "recordPurpose": "Historical provisioning record; separate per-product projects were an implementation mistake, not the user request.",
+    "currentAuthenticationUse": "Not selected by the current shared-client default; auto-created local client files retired where present.",
+    "currentVerificationRecord": "shared-auth-verification-2026-10-01.json"
   },
   {
     "product": "sheets",
@@ -668,7 +690,10 @@
       "drive.googleapis.com",
       "sheets.googleapis.com"
     ],
-    "requiredAPIsVerified": true
+    "requiredAPIsVerified": true,
+    "recordPurpose": "Historical provisioning record; separate per-product projects were an implementation mistake, not the user request.",
+    "currentAuthenticationUse": "Not selected by the current shared-client default; auto-created local client files retired where present.",
+    "currentVerificationRecord": "shared-auth-verification-2026-10-01.json"
   },
   {
     "product": "drive",
@@ -779,7 +804,10 @@
     "enabledAPIs": [
       "drive.googleapis.com"
     ],
-    "requiredAPIsVerified": true
+    "requiredAPIsVerified": true,
+    "recordPurpose": "Historical provisioning record; separate per-product projects were an implementation mistake, not the user request.",
+    "currentAuthenticationUse": "Not selected by the current shared-client default; auto-created local client files retired where present.",
+    "currentVerificationRecord": "shared-auth-verification-2026-10-01.json"
   },
   {
     "product": "analytics",
@@ -971,7 +999,10 @@
       "analyticsdata.googleapis.com",
       "tagmanager.googleapis.com"
     ],
-    "requiredAPIsVerified": true
+    "requiredAPIsVerified": true,
+    "recordPurpose": "Historical provisioning record; separate per-product projects were an implementation mistake, not the user request.",
+    "currentAuthenticationUse": "Not selected by the current shared-client default; auto-created local client files retired where present.",
+    "currentVerificationRecord": "shared-auth-verification-2026-10-01.json"
   },
   {
     "product": "marketing",
@@ -980,7 +1011,8 @@
       "googleads.googleapis.com",
       "adsense.googleapis.com",
       "admob.googleapis.com",
-      "searchconsole.googleapis.com"
+      "searchconsole.googleapis.com",
+      "analyticsdata.googleapis.com"
     ],
     "createExit": 0,
     "createResult": {
@@ -1271,10 +1303,14 @@
     "enabledAPIs": [
       "admob.googleapis.com",
       "adsense.googleapis.com",
+      "analyticsdata.googleapis.com",
       "googleads.googleapis.com",
       "searchconsole.googleapis.com"
     ],
-    "requiredAPIsVerified": true
+    "requiredAPIsVerified": true,
+    "recordPurpose": "Historical provisioning record; separate per-product projects were an implementation mistake, not the user request.",
+    "currentAuthenticationUse": "Not selected by the current shared-client default; auto-created local client files retired where present.",
+    "currentVerificationRecord": "shared-auth-verification-2026-10-01.json"
   },
   {
     "product": "ocr",
@@ -1504,6 +1540,9 @@
     "enabledAPIs": [
       "documentai.googleapis.com"
     ],
-    "requiredAPIsVerified": true
+    "requiredAPIsVerified": true,
+    "recordPurpose": "Historical provisioning record; separate per-product projects were an implementation mistake, not the user request.",
+    "currentAuthenticationUse": "Not selected by the current shared-client default; auto-created local client files retired where present.",
+    "currentVerificationRecord": "shared-auth-verification-2026-10-01.json"
   }
 ]
