@@ -62,6 +62,16 @@ Service gateway enabled and verified all 17 required APIs in shared project
 by earlier work were privately backed up and retired. Global environment sources
 were preserved. See `design-docs/shared-auth-verification-2026-10-01.json`.
 
+## Live verification completed
+
+Real shared-client browser login, native/file/inline JSON API access, external-file
+logout preservation, local logout with missing-token status, and native login
+again pass for 16 roles: Calendar reader/writer; Gmail reader/draft/sender/threads/
+message-box; Docs, Sheets and Drive reader/writer; Analytics reader/writer/admin.
+Nine temporary verification resources were moved to Trash. Global credential
+environment settings remain unchanged. Marketing login currently awaits a Google
+passkey identity check from the user.
+
 ## Remaining work
 
 1. Complete real native Google login, logout/relogin and API checks for every
