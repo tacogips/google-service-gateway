@@ -49,8 +49,8 @@ role supports local logout. Marketing product/role combinations without an
 implemented OAuth profile reject explicitly. Shared callback imports containing
 an empty object preserve native receiver defaults (shared commit 2833101).
 
-Full suites pass: shared 32, Service 120, Calendar 137, Gmail 157 XCTest plus
-178 Swift Testing, Docs/Sheets/Drive 180, Analytics 304, Marketing 125, OCR 37.
+Full suites pass: shared 35, Service 120, Calendar 137, Gmail 157 XCTest plus
+178 Swift Testing, Docs/Sheets/Drive 180, Analytics 304, Marketing 126, OCR 37.
 SwiftLint ran in all modified packages and exited 0 (existing warnings remain).
 
 CLI fixture verification passed 168 checks over all 28 executable composition
@@ -69,8 +69,10 @@ logout preservation, local logout with missing-token status, and native login
 again pass for 16 roles: Calendar reader/writer; Gmail reader/draft/sender/threads/
 message-box; Docs, Sheets and Drive reader/writer; Analytics reader/writer/admin.
 Nine temporary verification resources were moved to Trash. Global credential
-environment settings remain unchanged. Marketing login currently awaits a Google
-passkey identity check from the user.
+environment settings remain unchanged. Marketing Google Ads reader/writer/admin/
+deleter native login, external JSON status, logout and login again also pass. Ads
+API requests need a developer token absent from the resolved Marketing kinko
+environment. The existing Bitwarden passkey allows Google identity verification.
 
 ## Remaining work
 
