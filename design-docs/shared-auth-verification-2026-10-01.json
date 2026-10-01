@@ -1235,5 +1235,194 @@
     "All nine temporary verification Docs, Sheets and Drive folders moved to Trash through Drive gateway.",
     "Analytics roles verified with read queries; no Analytics or Tag Manager settings changed.",
     "Marketing native verification is in progress; Google passkey identity check requires user action."
-  ]
+  ],
+  "serviceLiveCredentialChecks": [
+    {
+      "role": "auth",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "auth",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "auth",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "operation": "services list",
+      "source": "native",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "operation": "services list",
+      "source": "path",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "operation": "services list",
+      "source": "json",
+      "passed": true
+    }
+  ],
+  "serviceExternalLogoutChecks": [
+    {
+      "role": "auth",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "auth",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    }
+  ],
+  "marketingCallbackRegression": {
+    "commit": "c03041b",
+    "cause": "Valid Google callback includes issuer and scope metadata; previous native receiver rejected it.",
+    "regressionTestsPassed": 2,
+    "fullSuiteTestsPassed": 126,
+    "liveNativeLoginAfterFixVerified": false
+  }
 }
