@@ -1493,5 +1493,47 @@
     "staplerValidationPassed": true,
     "gatekeeperAccepted": true,
     "published": false
-  }
+  },
+  "ocrLiveExternalCredentialChecks": [
+    {
+      "source": "path",
+      "operation": "auth status",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "source": "path",
+      "operation": "processors list",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "source": "json",
+      "operation": "auth status",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "source": "json",
+      "operation": "processors list",
+      "exit": 0,
+      "passed": true
+    }
+  ],
+  "ocrExternalLogoutChecks": [
+    {
+      "source": "path",
+      "externalFilePreserved": true,
+      "logoutExit": 0,
+      "statusExit": 0,
+      "passed": true
+    },
+    {
+      "source": "json",
+      "externalFilePreserved": true,
+      "logoutExit": 0,
+      "statusExit": 0,
+      "passed": true
+    }
+  ]
 }
