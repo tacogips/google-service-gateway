@@ -74,15 +74,27 @@ deleter native login, external JSON status, logout and login again also pass. Ad
 API requests need a developer token absent from the resolved Marketing kinko
 environment. The existing Bitwarden passkey allows Google identity verification.
 
-## Remaining work
+## Current live audit
 
-1. Complete real native Google login, logout/relogin and API checks for every
-   role through the shared client, using the authorized browser grants. Verify
-   both inline JSON and file credential API access without changing global inputs.
-2. Verify shared Web callback registration/settings and native flow where required;
-   fixture callback success alone is insufficient for deployed HTTPS claims.
-3. Preserve historical records of the mistakenly created separate resources,
-   clearly distinguishing them from the requested shared configuration.
-4. Publish patch releases for modified gateways, rebuild signed Calendar Casks,
-   update Homebrew metadata and mise-darwin installations. Service 0.1.5 is already
-   published, so its next patch must be 0.1.6. Other prepared versions are unpublished.
+Every one of the 28 executable roots completed native Google login, external
+JSON file and inline JSON readiness checks, native local logout with missing
+credentials, and native login again. Marketing additionally covers all ten
+supported product/role profiles, including the compatibility binary. Live read
+API requests pass for Calendar, Gmail, Docs/Sheets/Drive, Analytics, Service
+reader, OCR and Marketing Search Console/AdSense/AdMob reader/Analytics Data.
+
+Google Ads API verification needs a developer token absent from the resolved
+Marketing kinko environment. AdMob writer currently exposes preview only. These
+are explicit API limits; native OAuth and external credential handling pass.
+No destructive Cloud, billing or ad mutations were used for auth verification.
+Configured Web/public HTTPS callbacks have fixture coverage; no deployed HTTPS
+callback or live registered Web-client grant is claimed.
+
+Historical records clearly mark extra per-product projects as the earlier
+implementation mistake. The shared Service configuration is authoritative.
+
+## Remaining delivery work
+
+Publish the rebuilt patch releases and signed Calendar Casks, update Homebrew
+metadata, and update/verify the mise-darwin installations. Service is 0.1.6;
+Calendar 0.1.9; Gmail 0.1.17; Docs 0.3.6; Analytics 0.1.5; Marketing and OCR 0.1.4.

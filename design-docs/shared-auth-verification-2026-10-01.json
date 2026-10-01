@@ -1004,7 +1004,7 @@
       }
     }
   ],
-  "liveAllRoleNativeAuthenticationVerified": false,
+  "liveAllRoleNativeAuthenticationVerified": true,
   "liveAllRoleExternalJSONAPIRequestsVerified": false,
   "allGatewayReleasesPublished": false,
   "unitSuites": {
@@ -2570,6 +2570,165 @@
       "loginAgain": true,
       "liveAdsAPIRequestsVerified": false,
       "apiBlocker": "Developer token absent from resolved Marketing kinko environment; login customer ID is present."
+    },
+    {
+      "product": "search-console",
+      "role": "reader",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": true,
+      "apiNote": "Authenticated read request with all three credential sources"
+    },
+    {
+      "product": "adsense",
+      "role": "reader",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": true,
+      "apiNote": "Authenticated read request with all three credential sources"
+    },
+    {
+      "product": "admob",
+      "role": "reader",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": true,
+      "apiNote": "Authenticated read request with all three credential sources"
+    },
+    {
+      "product": "admob",
+      "role": "writer",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": false,
+      "apiNote": "AdMob writer exposes request preview only"
+    },
+    {
+      "product": "analytics-data",
+      "role": "reader",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": true,
+      "apiNote": "Authenticated read request with all three credential sources"
+    },
+    {
+      "product": "google-ads",
+      "role": "compat",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": false,
+      "apiNote": "Ads developer token absent"
     }
-  ]
+  ],
+  "cloudNativeRoleChecks": [
+    {
+      "product": "service",
+      "role": "auth",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": false
+    },
+    {
+      "product": "service",
+      "role": "reader",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": true
+    },
+    {
+      "product": "service",
+      "role": "writer",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": false
+    },
+    {
+      "product": "service",
+      "role": "admin",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": false
+    },
+    {
+      "product": "service",
+      "role": "deleter",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": false
+    },
+    {
+      "product": "ocr",
+      "role": "writer",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": true
+    }
+  ],
+  "liveAllRoleExternalJSONCredentialHandlingVerified": true,
+  "apiVerificationLimits": [
+    "Google Ads developer token is absent from the resolved Marketing kinko environment; OAuth and all credential/logout checks pass, Ads API requests remain unverified.",
+    "AdMob writer exposes a request preview only; no live write operation is claimed.",
+    "Service auth/writer/admin/deleter OAuth and external credential status are verified; no destructive or billing operations performed.",
+    "Configured Web/public HTTPS callbacks have fixture coverage; no deployed HTTPS callback or live registered Web-client grant is claimed."
+  ],
+  "customCallbackNativeLogin": {
+    "host": "127.0.0.1",
+    "port": 48573,
+    "path": "/verification/google/callback",
+    "registeredClientKind": "Desktop",
+    "environmentSettingsHonored": true,
+    "liveGoogleLoginPassed": true,
+    "listenerClosedAfterLogin": true
+  },
+  "docsCompatibilityNativeCycle": {
+    "binary": "google-documents-gateway",
+    "nativeLogin": true,
+    "nativeAPIRequest": true,
+    "externalFileAPIRequest": true,
+    "inlineJSONAPIRequest": true,
+    "logoutMissing": true,
+    "loginAgain": true
+  }
 }
