@@ -1,4 +1,5 @@
 import Foundation
+import GoogleGatewayAuth
 
 public struct AuthExecution: Sendable {
   public let output: String
@@ -177,6 +178,8 @@ public struct AuthAdapter: Sendable {
             expiresAt: token.expiresAt,
             refreshTokenStored: token.refreshToken != nil
           ), pretty: parsed.pretty)
+      case .logout:
+        return try await logout(profile: parsed.requiredProfile(), selectedProfile: parsed.profile, environment: environment, pretty: parsed.pretty)
       case .revoke:
         let profile = try parsed.requiredProfile()
         guard let token = try await vault.token(profile: profile) else {
@@ -200,6 +203,20 @@ public struct AuthAdapter: Sendable {
     }
   }
 
+  private func logout(profile: String, selectedProfile: String?, environment: [String: String], pretty: Bool) async throws -> AuthExecution {
+    let external = try GoogleServiceExternalCredentials.tokenProvider(environment: environment, profile: selectedProfile) != nil
+    let result = try await GatewayLogout.performAsync(externalCredential: external) {
+      let exists = try await vault.token(profile: profile) != nil
+      try await vault.removeToken(profile: profile)
+      return exists
+    }
+    return success(command: "auth.logout", data: JSONValue.object([
+      "profile": .string(profile), "state": .string(result.state),
+      "localTokenDeleted": .bool(result.localTokenDeleted),
+      "externalCredentialPreserved": .bool(result.externalCredentialPreserved)
+    ]), pretty: pretty)
+  }
+
   private var usage: String {
     """
     Usage: google-service-gateway-auth <clients|consent|scopes|auth|oauth> <command> [options]
@@ -214,6 +231,7 @@ public struct AuthAdapter: Sendable {
       auth login [--profile NAME] [--scope ALIAS-OR-URI ...] [--login-hint EMAIL] [--no-open] [--timeout SECONDS]
       auth status [--profile NAME]
       auth refresh --profile NAME
+      auth logout [--profile NAME]
       auth revoke --profile NAME
       oauth login [--profile NAME] [--scope ALIAS-OR-URI ...] [--login-hint EMAIL] [--no-open] [--timeout SECONDS]
       oauth refresh --profile NAME
@@ -225,7 +243,7 @@ public struct AuthAdapter: Sendable {
 
 private enum AuthCommand: Equatable {
   case clientSetup, clientImport, clientList, clientDelete, consentSetup, consentGet, consentDelete,
-    scopeList, login, status, refresh, token, revoke
+    scopeList, login, status, refresh, token, revoke, logout
 }
 
 private struct AuthArguments {
@@ -300,7 +318,7 @@ private struct AuthArguments {
   }
 
   func requiredProfile() throws -> String {
-    if profile == nil, command == .login || command == .status { return "google-personal" }
+    if profile == nil, command == .login || command == .status || command == .logout { return "google-personal" }
     guard let profile else { throw GatewayError(.invalidArgument, "--profile is required") }
     return profile
   }
@@ -344,7 +362,7 @@ private struct AuthArguments {
       guard project == nil, file == nil, serviceFilter == nil else {
         throw invalidOptions()
       }
-    case .status:
+    case .status, .logout:
       guard project == nil, file == nil, scopes.isEmpty, serviceFilter == nil,
         loginHint == nil, !noOpen else { throw invalidOptions() }
     case .refresh, .token, .revoke:
@@ -375,6 +393,7 @@ private func parseCommand(_ group: String, _ action: String) throws -> AuthComma
   case ("oauth", "refresh"), ("auth", "refresh"): .refresh
   case ("oauth", "token"): .token
   case ("oauth", "revoke"), ("auth", "revoke"): .revoke
+  case ("oauth", "logout"), ("auth", "logout"): .logout
   default: throw GatewayError(.invalidArgument, "unknown auth command")
   }
 }

@@ -149,3 +149,34 @@ private struct RoleAuthOutcome {
   let isError: Bool
   let exitStatus: Int32
 }
+
+@Test(arguments: ["reader", "writer", "admin", "deleter"])
+func serviceLogoutClearsLocalTokenWithoutNetworkAndPreservesClient(role: String) async throws {
+  let vault = OAuthCredentialVault(store: CommandAuthStore())
+  let authorizer = CommandAuthAuthorizer()
+  let transport = CommandAuthTransport()
+  let login = await runRoleAuth(role, vault: vault, authorizer: authorizer, transport: transport,
+    environment: ["GOOGLE_SERVICE_GATEWAY_OAUTH_CLIENT_JSON": commandApplicationJSON])
+  #expect(login.exitStatus == 0)
+  let logout = await runRoleAuth(role, vault: vault, authorizer: authorizer, transport: transport,
+    environment: [:], arguments: ["auth", "logout"])
+  #expect(logout.exitStatus == 0)
+  #expect(logout.output.contains("LOGGED_OUT"))
+  #expect(try await vault.token(profile: "google-personal") == nil)
+  #expect(try await vault.client(profile: "google-personal").clientID == "service-app")
+  let repeated = await runRoleAuth(role, vault: vault, authorizer: authorizer, transport: transport,
+    environment: [:], arguments: ["auth", "logout"])
+  #expect(repeated.exitStatus == 0)
+}
+
+@Test func serviceLogoutPreservesExternallySelectedCredentialAndLocalToken() async throws {
+  let vault = OAuthCredentialVault(store: CommandAuthStore())
+  try await vault.saveToken(.init(accessToken: "local-fixture", refreshToken: nil, tokenType: "Bearer",
+    scopes: [], expiresAt: .distantFuture), profile: "google-personal")
+  let result = await AuthAdapter(vault: vault).run(arguments: ["auth", "logout"],
+    environment: ["GOOGLE_SERVICE_GATEWAY_ACCESS_TOKEN": "external-fixture"])
+  #expect(result.exitStatus == 0)
+  #expect(result.output.contains("EXTERNAL_CREDENTIAL_PRESERVED"))
+  #expect(try await vault.token(profile: "google-personal")?.accessToken == "local-fixture")
+  #expect(!result.output.contains("external-fixture"))
+}
