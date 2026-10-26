@@ -67,6 +67,38 @@ entry points are safe to move across Swift concurrency boundaries. The core
 returns values and throws typed errors; it does not print, call `exit`, read
 global process state, or spawn subprocesses.
 
+### Cryptography Dependency
+
+The only cryptographic operation in the package is the PKCE S256 challenge in
+`OAuthClient.swift`: `SHA256.hash` over the UTF-8 code verifier, then
+base64url without padding. On Darwin it imports `CryptoKit`. Only on Linux does
+it import `Crypto` from apple/swift-crypto, through the
+`.when(platforms: [.linux])` product condition. The test that checks the
+challenge also runs only where `CryptoKit` is available.
+
+- `Package.swift` requires swift-crypto `from: "5.0.3"`, so every package in
+  the Riela graph can resolve one 5.x version. `Package.resolved` pins 5.0.3 or
+  a later 5.x release. Only the swift-crypto pin, the swift-asn1 pin if needed,
+  and `originHash` may change. The google-gateway-auth revision pin stays as it
+  is.
+- swift-tools-version 6.0, macOS 14 and Swift 6 language mode stay unless the
+  swift-crypto 5 manifest requires more; any such change must be reported.
+- If a dependency caps swift-crypto below 5, report it as a blocker with the
+  exact constraint. Do not work around it.
+- Behavior must not change. The PKCE challenge for a given verifier stays
+  byte-for-byte the same. A source edit is allowed only if swift-crypto 5 breaks
+  the Linux `import Crypto` path or the `SHA256.hash` API. Any such edit stays
+  inside the existing `#if canImport(CryptoKit)` boundary.
+- The release ships as patch version 0.1.7 in `VERSION` and `Version.current`.
+  It is committed and pushed to `main`, with no GitHub release and no Homebrew
+  publication.
+
+Verification: `swift package update swift-crypto`, `swift build`, `swift test`,
+`mise run build`, `mise run test`, `mise run lint`, and a review of
+`git diff Package.resolved`. A macOS build does not compile the swift-crypto
+code path. Linux compilation is verified only if a Linux toolchain or
+container is available; otherwise report it as a verification gap.
+
 ## Configuration and Authentication
 
 Service Usage and API Keys API requests need a management bearer access token.
