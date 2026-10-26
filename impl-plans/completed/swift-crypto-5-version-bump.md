@@ -1,6 +1,6 @@
 # Patch Version Bump to 0.1.7
 
-**Status**: In Progress
+**Status**: Implementation Complete (pending workflow review and reconciliation)
 **Plan ID**: PLAN-SC5-VERSION
 **Depends On**: none (wave 1, runs in parallel with PLAN-SC5-DEPS)
 **Design Reference**: `design-docs/specs/architecture.md#cryptography-dependency`
@@ -32,9 +32,9 @@ so no test edit is needed.
 
 ## Deliverables
 
-- [ ] `VERSION` contains exactly `0.1.7`, followed by one trailing newline as
+- [x] `VERSION` contains exactly `0.1.7`, followed by one trailing newline as
       in the current file.
-- [ ] `Version.swift` line 2 reads `  public static let current = "0.1.7"`.
+- [x] `Version.swift` line 2 reads `  public static let current = "0.1.7"`.
 
 ## Tasks
 
@@ -56,12 +56,12 @@ workflow. Never revert, restore, checkout or stash those files.
 
 **Completion Criteria**:
 
-- [ ] `cat VERSION` prints `0.1.7`.
-- [ ] `grep -n 'current = "0.1.7"' Sources/GoogleServiceGatewayCore/Version.swift`
+- [x] `cat VERSION` prints `0.1.7`.
+- [x] `grep -n 'current = "0.1.7"' Sources/GoogleServiceGatewayCore/Version.swift`
       matches line 2.
-- [ ] `grep -rn '0\.1\.6' VERSION Sources` returns no matches.
-- [ ] `swiftlint lint Sources/GoogleServiceGatewayCore/Version.swift` exits 0.
-- [ ] `git diff --name-only -- VERSION Sources/GoogleServiceGatewayCore/Version.swift`
+- [x] `grep -rn '0\.1\.6' VERSION Sources` returns no matches.
+- [x] `swiftlint lint Sources/GoogleServiceGatewayCore/Version.swift` exits 0.
+- [x] `git diff --name-only -- VERSION Sources/GoogleServiceGatewayCore/Version.swift`
       lists exactly those two files. Do not use an unscoped `git diff --stat`.
 
 ## Invariants
@@ -80,3 +80,6 @@ workflow. Never revert, restore, checkout or stash those files.
 ## Progress Log
 
 - 2026-10-27: Plan created.
+- 2026-10-27: TASK-001 implemented. Pre-edit SHA-256: `VERSION` 1f2110568627307becae713f8b808f3d9d912d4b2a24ed6a78605f03f7437d3c; `Sources/GoogleServiceGatewayCore/Version.swift` 7646978d55e9415db9d55643bc1ae02b4d61e35ab6f8ddc0405bebb6c21648bf. Both now read 0.1.7; only the literal changed in Version.swift. Completion checks and selected-file SwiftLint are recorded in `tmp/sc5-swift-crypto-5-20261027/PLAN-SC5-VERSION/`. Build and test remain serial reconciliation gates per the accepted plan.
+- Verification results: `cat VERSION` exit 0; version grep matched line 2, exit 0; old-version grep found no matches (expected grep exit 1); scoped changed-file listing contained exactly `VERSION` and `Sources/GoogleServiceGatewayCore/Version.swift`, exit 0; exact-byte/newline check exit 0. Logs: `verify-cat.log`, `verify-version-grep.log`, `verify-old-version-grep.log`, `verify-diff-files.log`, `verify-version-bytes-rerun.log` in the plan evidence directory.
+- `swiftlint lint Sources/GoogleServiceGatewayCore/Version.swift` exit 0 (`verify-swiftlint.log`). Strict selected-file command `xargs -0 swiftlint lint --strict --quiet --no-cache < tmp/sc5-swift-crypto-5-20261027/PLAN-SC5-VERSION/changed-swift-files.nul` exit 0 (`verify-strict-swiftlint.log`). An initial extra byte-check attempt used a malformed newline assertion and exited 1; the corrected byte check passed (`verify-version-bytes.log`, `verify-version-bytes-rerun.log`). No source change was needed.

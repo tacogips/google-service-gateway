@@ -17,7 +17,7 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/tacogips/google-gateway-auth.git", revision: "48e0112fb5eb057cf012194cfffaa2581ba29d76"),
-    .package(url: "https://github.com/apple/swift-crypto.git", from: "4.5.1")
+    .package(url: "https://github.com/apple/swift-crypto.git", from: "5.0.3")
   ],
   targets: [
     .target(

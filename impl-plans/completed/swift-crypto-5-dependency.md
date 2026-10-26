@@ -91,10 +91,10 @@ Pitfalls:
 
 **Completion Criteria**:
 
-- [ ] `grep -n 'swift-crypto.git", from: "5.0.3"' Package.swift` matches line 20.
-- [ ] `grep -n -A6 '"identity" : "swift-crypto"' Package.resolved` shows a
+- [x] `grep -n 'swift-crypto.git", from: "5.0.3"' Package.swift` matches line 20.
+- [x] `grep -n -A6 '"identity" : "swift-crypto"' Package.resolved` shows a
       version matching `5\.[0-9]+\.[0-9]+`, at 5.0.3 or later.
-- [ ] `git diff --name-only -- Package.swift Package.resolved Sources/GoogleServiceGatewayCore/OAuthClient.swift`
+- [x] `git diff --name-only -- Package.swift Package.resolved Sources/GoogleServiceGatewayCore/OAuthClient.swift`
       lists `Package.swift` and `Package.resolved`. `OAuthClient.swift`
       appears only if TASK-002 justified an edit. Do not use an unscoped
       `git diff --stat`; other files in the worktree belong to others.
@@ -136,12 +136,12 @@ Test expectations (already present; add nothing new):
 
 **Completion Criteria**:
 
-- [ ] `swift build` prints `exit=0`, and the full log is at `tmp/sc5-build.log`.
-- [ ] `swift test` prints `exit=0`, the log reports 0 failures, and the full
+- [x] `swift build` prints `exit=0`, and the full log is at `tmp/sc5-build.log`.
+- [x] `swift test` prints `exit=0`, the log reports 0 failures, and the full
       log is at `tmp/sc5-test.log`.
-- [ ] `swiftlint lint Sources/GoogleServiceGatewayCore/OAuthClient.swift`
-      exits 0. Run this only if the file was changed.
-- [ ] The Progress Log records the resolved swift-crypto and swift-asn1
+- [x] `OAuthClient.swift` was unchanged, so its conditional SwiftLint command
+      was not required.
+- [x] The Progress Log records the resolved swift-crypto and swift-asn1
       versions, the swift-crypto 5 manifest requirements, the Linux
       verification result or gap, and the exit codes.
 
@@ -166,3 +166,29 @@ Test expectations (already present; add nothing new):
 ## Progress Log
 
 - 2026-10-27: Plan created.
+- 2026-10-27: Changed `Package.swift` to require swift-crypto from 5.0.3 and
+  ran `swift package update swift-crypto` (exit 0; complete log:
+  `tmp/sc5-swift-crypto-5-20261027/PLAN-SC5-DEPS/swift-package-update.log`).
+  SwiftPM resolved swift-crypto 5.0.3 at revision
+  `c2cbadd7263439d8015189668f96ff5b5be565ce`; swift-asn1 stayed at 1.7.1 and
+  google-gateway-auth stayed at revision
+  `48e0112fb5eb057cf012194cfffaa2581ba29d76`. The Package.resolved diff is
+  limited to `originHash` and the swift-crypto pin.
+- 2026-10-27 remediation: `swift --version` reports Swift 6.3.3, satisfying
+  swift-crypto 5.0.3's declared `swift-tools-version:6.2`; the repository root
+  remains at tools version 6.0, so this is an effective minimum toolchain
+  requirement, not a blocker. The manifest requirement is recorded in
+  `tmp/sc5-swift-crypto-5-20261027/PLAN-SC5-DEPS/swift-crypto-manifest-requirements.log`.
+  `swift build > tmp/sc5-build.log 2>&1` exited 0 (complete copy:
+  `tmp/sc5-swift-crypto-5-20261027/PLAN-SC5-DEPS/sc5-build.complete.log`);
+  no swift-crypto or deprecation warning was found. `swift test >
+  tmp/sc5-test.log 2>&1` exited 0 with 120 tests passed and 0 failures
+  (complete copy:
+  `tmp/sc5-swift-crypto-5-20261027/PLAN-SC5-DEPS/sc5-test.complete.log`).
+  Linux Crypto verification remains a gap: `swift sdk list` reports no
+  installed SDKs, and Docker image listing failed with a containerd content
+  store I/O error, so no Linux image/build was attempted.
+  Current `shasum -a 256` values: Package.swift
+  `b4fdf79513897b75c893945da79c5f9c8b047f47a3065c37066f7ab2af7946c1`;
+  Package.resolved
+  `a11a84a09cd975ffa0c6aae0da85a979485845971241a2bc784728f3f4ba09b7`.
