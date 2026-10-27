@@ -33,6 +33,11 @@ public struct ReaderAdapter: Sendable {
     arguments: [String], environment: [String: String] = ProcessInfo.processInfo.environment
   ) async -> ReaderExecution {
     let command = readerCommandName(arguments)
+    if arguments.first == "quotas" {
+      let result = await QuotaAdapter(role: .reader, transport: transport, vault: vault, signer: serviceAccountSigner)
+        .run(arguments: arguments, environment: environment)
+      return .init(output: result.output, isError: result.isError, exitStatus: result.exitStatus)
+    }
     if arguments.first == "auth" || arguments.first == "oauth" {
       let result = await AuthAdapter(vault: vault, oauth: GoogleOAuthClient(transport: transport), authorizer: authAuthorizer)
         .run(arguments: arguments, environment: environment)
@@ -152,7 +157,8 @@ public struct ReaderAdapter: Sendable {
 
   private var usage: String {
     """
-    Usage: google-service-gateway-reader <services|operations|api-keys|billing|iam> <command> [options]
+    Usage: google-service-gateway-reader <services|operations|api-keys|billing|iam|quotas> <command> [options]
+    \(QuotaAdapter.usage(for: .reader))
       services list [--state enabled|disabled|all] [--page-size 1...200] [--page-token TOKEN] [--all-pages]
       services get --service <alias|service-id>
       operations get --operation operations/<id>

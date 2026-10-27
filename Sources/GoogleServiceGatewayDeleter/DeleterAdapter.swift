@@ -34,6 +34,11 @@ public struct DeleterAdapter: Sendable {
     environment: [String: String] = ProcessInfo.processInfo.environment
   ) async -> DeleterExecution {
     let command = deleterCommandName(arguments)
+    if arguments.first == "quotas" {
+      let result = await QuotaAdapter(role: .deleter, transport: transport, vault: vault, signer: serviceAccountSigner)
+        .run(arguments: arguments, environment: environment)
+      return .init(output: result.output, isError: result.isError, exitStatus: result.exitStatus)
+    }
     if arguments.first == "auth" || arguments.first == "oauth" {
       let result = await AuthAdapter(vault: vault, oauth: GoogleOAuthClient(transport: transport), authorizer: authAuthorizer)
         .run(arguments: arguments, environment: environment)
@@ -117,7 +122,8 @@ public struct DeleterAdapter: Sendable {
 
   private var usage: String {
     """
-    Usage: google-service-gateway-deleter <projects|api-keys> <command> [options]
+    Usage: google-service-gateway-deleter <projects|api-keys|quotas> <command> [options]
+    \(QuotaAdapter.usage(for: .deleter))
       projects delete [--project PROJECT] [polling options]
       projects undelete [--project PROJECT] [polling options]
       api-keys delete --key RESOURCE [polling options]

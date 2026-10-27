@@ -33,6 +33,11 @@ public struct WriterAdapter: Sendable {
     arguments: [String], environment: [String: String] = ProcessInfo.processInfo.environment
   ) async -> WriterExecution {
     let command = writerCommandName(arguments)
+    if arguments.first == "quotas" {
+      let result = await QuotaAdapter(role: .writer, transport: transport, vault: vault, signer: serviceAccountSigner)
+        .run(arguments: arguments, environment: environment)
+      return .init(output: result.output, isError: result.isError, exitStatus: result.exitStatus)
+    }
     if arguments.first == "auth" || arguments.first == "oauth" {
       let result = await AuthAdapter(vault: vault, oauth: GoogleOAuthClient(transport: transport), authorizer: authAuthorizer)
         .run(arguments: arguments, environment: environment)
@@ -157,7 +162,8 @@ public struct WriterAdapter: Sendable {
 
   private var usage: String {
     """
-    Usage: google-service-gateway-writer <projects|services|api-keys> <command> [options]
+    Usage: google-service-gateway-writer <projects|services|api-keys|quotas> <command> [options]
+    \(QuotaAdapter.usage(for: .writer))
       projects create --project-id ID --display-name NAME [--parent RESOURCE] [--label KEY=VALUE ...]
         [--service SERVICE ...] [--scope ALIAS-OR-URI ...] [polling options]
       services enable --service SERVICE [polling options]

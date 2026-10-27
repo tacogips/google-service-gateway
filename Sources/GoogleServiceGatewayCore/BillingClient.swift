@@ -41,7 +41,7 @@ public struct GoogleCloudBillingClient: Sendable {
   }
 
   public func getProjectBilling(_ input: String) async throws -> ProjectBillingInfo {
-    let project = try GatewayValidation.project(input)
+    let project = try await billingProject(input)
     return try projectBillingInfo(
       try await send(path: "/v1/\(project)/billingInfo").value,
       expectedProject: String(project.dropFirst("projects/".count))
@@ -50,7 +50,7 @@ public struct GoogleCloudBillingClient: Sendable {
 
   public func updateProjectBilling(project input: String, billingAccount: String?) async throws
     -> BillingMutationResult {
-    let project = try GatewayValidation.project(input)
+    let project = try await billingProject(input)
     let account = try billingAccount.map(GatewayValidation.billingAccount)
     let response = try await send(
       method: "PUT",
@@ -77,10 +77,11 @@ public struct GoogleCloudBillingClient: Sendable {
     method: String = "GET",
     path: String,
     query: [URLQueryItem] = [],
-    body: JSONValue? = nil
+    body: JSONValue? = nil,
+    destination: URL? = nil
   ) async throws -> (value: JSONValue, headers: [String: String]) {
     let token = try await tokenProvider.accessToken()
-    var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
+    var components = URLComponents(url: destination ?? baseURL, resolvingAgainstBaseURL: false)
     components?.path = path
     if !query.isEmpty { components?.queryItems = query }
     guard let url = components?.url else {
@@ -109,12 +110,28 @@ public struct GoogleCloudBillingClient: Sendable {
         httpStatus: response.statusCode)
     }
   }
+
+  private func billingProject(_ input: String) async throws -> String {
+    let project = try GatewayValidation.project(input)
+    let suffix = String(project.dropFirst("projects/".count))
+    guard suffix.utf8.allSatisfy({ (48...57).contains($0) }) else { return project }
+    var endpoint = URLComponents()
+    endpoint.scheme = "https"
+    endpoint.host = "cloudresourcemanager.googleapis.com"
+    guard let url = endpoint.url else { throw GatewayError(.configurationError, "invalid Resource Manager endpoint") }
+    let object = try billingObject(try await send(path: "/v3/\(project)", destination: url).value)
+    guard try billingRequiredString(object, "name") == project else {
+      throw GatewayError(.malformedResponse, "billing project identity does not match request")
+    }
+    let id = try GatewayValidation.projectID(billingRequiredString(object, "projectId"))
+    return "projects/\(id)"
+  }
 }
 
 private func billingAccount(_ value: JSONValue) throws -> BillingAccount {
   let object = try billingObject(value)
   let name = try GatewayValidation.billingAccount(billingRequiredString(object, "name"))
-  let parentAccount = try billingOptionalString(object["masterBillingAccount"])
+  let parentAccount = try billingOptionalString(object["masterBillingAccount"]).flatMap { $0.isEmpty ? nil : $0 }
   if let parentAccount { _ = try GatewayValidation.billingAccount(parentAccount) }
   return BillingAccount(
     name: name,

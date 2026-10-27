@@ -80,6 +80,77 @@ a one-second interval and 120-second timeout. `--no-wait` conflicts with
 skips recent-usage checks unless `--disable-dependents` or `--check-usage` is
 explicitly selected.
 
+## Quotas, usage, and consumer settings (all services)
+
+The quota commands use Service Usage and Cloud Monitoring APIs directly, without
+a browser. Use any supported `*.googleapis.com` service, not only YouTube:
+
+```sh
+google-service-gateway-reader quotas limits --project my-project --service youtube.googleapis.com --all-pages
+google-service-gateway-reader quotas limits --project my-project --service gmail --all-pages
+google-service-gateway-reader quotas usage --project my-project --service serviceusage.googleapis.com \
+  --metric rate --start 2026-10-27T07:00:00Z --end 2026-10-28T07:00:00Z --all-pages
+google-service-gateway-reader quotas usage --project my-project --service gmail --metric requests --all-pages
+```
+
+`quotas limits` returns full consumer quota metrics, units, effective limits,
+dimensions, and any overrides. `quotas usage` returns timestamped Monitoring
+time series. Its metric selector supports `rate` (DELTA quota units), `allocation`
+(GAUGE usage), `exceeded` (BOOL limit-exceeded samples), and `requests` (API request
+counts). `--quota-metric METRIC` optionally filters a quota metric; it is not
+accepted for `requests`. Request counts are not weighted quota units.
+
+The default usage interval is the last 24 hours. Explicit `--start` / `--end`
+accept RFC3339 timestamps. These are raw samples, not an inferred daily total or
+remaining budget: Google quota reset time zones differ, gauges must not be summed,
+and Monitoring data can lag by several minutes. `dataStatus: noData` means no
+series was returned, **not zero usage**. Partial provider results with
+`executionErrors` fail instead of presenting incomplete data as complete.
+
+Both read commands support `--page-size 1...200`, `--page-token`, and `--all-pages`;
+the last two cannot be combined. Provider pagination tokens, INT64 values, resource
+names, bucket dimensions, and time series are retained in `data.records`.
+
+### API and IAM requirements
+
+Quota limits require Service Usage API and `serviceusage.quotas.get`.
+Usage time series require Monitoring API and `monitoring.timeSeries.list` (for
+example, Monitoring Viewer), plus the project's applicable billing prerequisites.
+`cloud-platform` OAuth scope supports both APIs. API activation can be performed
+with the existing writer:
+
+```sh
+google-service-gateway-writer services enable --project my-project --service monitoring.googleapis.com
+```
+
+Some projects receive a billing-required HTTP 403 from Monitoring even after API
+activation. The gateway retains that error and does not attach billing, change
+credentials, enable a different project, or return fabricated zero usage.
+Billing discovery and explicit signed billing plans remain available through the
+existing reader/admin commands. No billing association occurs implicitly.
+
+### Consumer quota overrides
+
+Use the exact percent-encoded limit resource name returned by `quotas limits`:
+
+```sh
+google-service-gateway-reader quotas overrides list --limit "$LIMIT_RESOURCE" --all-pages
+google-service-gateway-writer quotas overrides create --limit "$LIMIT_RESOURCE" --value 1000
+# Regional quotas can also specify: --dimension region=us-east1
+google-service-gateway-writer quotas overrides update --name "$OVERRIDE_RESOURCE" --value 1200
+google-service-gateway-deleter quotas overrides delete --name "$OVERRIDE_RESOURCE"
+```
+
+Mutations require `serviceusage.quotas.update`, preserve Google's quota safety
+checks, and wait for the long-running operation by default. `--no-wait` returns
+the operation; `--poll-interval` and `--timeout` control bounded polling. Creation
+accepts repeated `--dimension KEY=VALUE` for distinct keys. Values use signed
+INT64, with `-1` meaning unlimited where supported by the provider. Updates change
+only `overrideValue`, preserving dimensions. Overrides cannot grant quota above
+the producer/admin-approved maximum; they do not reset daily consumption.
+Request a provider-approved increase or wait for reset when an approved limit is
+exhausted. The gateway does not rotate projects to bypass limits.
+
 ## Project bootstrap
 
 The writer can create a GCP project with Cloud Resource Manager v3, enable up

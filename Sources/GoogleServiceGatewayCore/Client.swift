@@ -194,7 +194,7 @@ public struct GoogleServiceGatewayClient: Sendable {
 
   /// Service Usage returns project-number resource names. Resolve a supplied
   /// project ID through Resource Manager before enforcing exact response names.
-  private func canonicalServiceProject(_ project: String) async throws -> String {
+  func canonicalServiceProject(_ project: String) async throws -> String {
     let id = String(project.dropFirst("projects/".count))
     if id.allSatisfy({ $0.isNumber }) { return project }
     var endpoint = URLComponents()
