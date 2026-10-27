@@ -6,6 +6,9 @@ OAuth 2.0.
 
 ## Development
 
+Source builds require Swift 6.2 or later because `swift-crypto` 5.x uses Swift
+tools 6.2. Development and Linux CI use Swift 6.3.3.
+
 ```bash
 mise install
 mise run build

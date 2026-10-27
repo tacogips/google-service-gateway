@@ -19,13 +19,13 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Check Out Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Build Release CLIs In Swift amd64 Container
         env:
-          SWIFT_IMAGE: swift@sha256:4c6af6663ed2316002a3b38ff5505a1fc1f2749ec31e84936c32dd336713c569
+          SWIFT_IMAGE: swift@sha256:1038d54c80063f5cdfabc4560990c30af64b5de8ebf28161deb22ca4ad5db866 # 6.3.3-noble
           READER_EXECUTABLE_NAME: "google-service-gateway-reader"
           WRITER_EXECUTABLE_NAME: "google-service-gateway-writer"
           ADMIN_EXECUTABLE_NAME: "google-service-gateway-admin"

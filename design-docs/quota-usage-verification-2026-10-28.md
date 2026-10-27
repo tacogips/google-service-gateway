@@ -44,6 +44,12 @@ existing authentication selection and the reader/writer/deleter role boundaries.
 
 Official contracts:
 
+Release follow-up: Linux CI still used Swift 6.1.3 from before the 0.1.7
+`swift-crypto` upgrade. Its dependency resolution failed because Crypto 5.x
+requires tools 6.2. Updated CI to the verified official Swift 6.3.3-noble image,
+pinned by OCI digest, and documented the source-build prerequisite. This changes
+the CI toolchain only, not the 0.1.8 macOS binary payloads.
+
 - https://docs.cloud.google.com/service-usage/docs/reference/rest/v1beta1/services.consumerQuotaMetrics/list
 - https://docs.cloud.google.com/service-usage/docs/reference/rest/v1beta1/services.consumerQuotaMetrics.limits.consumerOverrides/create
 - https://docs.cloud.google.com/service-usage/docs/reference/rest/v1beta1/services.consumerQuotaMetrics.limits.consumerOverrides/patch
