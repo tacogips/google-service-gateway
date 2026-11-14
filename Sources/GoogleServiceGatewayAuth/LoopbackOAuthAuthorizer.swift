@@ -1,0 +1,3 @@
+import GoogleServiceGatewayCore
+
+public typealias LoopbackOAuthAuthorizer = GoogleServiceGatewayCore.LoopbackOAuthAuthorizer
