@@ -1,0 +1,4168 @@
+{
+  "sharedProject": "tacogips-service-auth-261001",
+  "clientConfiguration": "~/.config/google-service-gateway/oauth-client.json",
+  "googleRegistrationMethod": "Console; Service gateway imports registered client locally",
+  "enabledAPIs": [
+    "admob.googleapis.com",
+    "adsense.googleapis.com",
+    "analyticsadmin.googleapis.com",
+    "analyticsdata.googleapis.com",
+    "apikeys.googleapis.com",
+    "calendar-json.googleapis.com",
+    "cloudbilling.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+    "docs.googleapis.com",
+    "documentai.googleapis.com",
+    "drive.googleapis.com",
+    "gmail.googleapis.com",
+    "googleads.googleapis.com",
+    "searchconsole.googleapis.com",
+    "serviceusage.googleapis.com",
+    "sheets.googleapis.com",
+    "tagmanager.googleapis.com"
+  ],
+  "lifecycleEvidenceKind": "CLI fixture gcloud provider, native local logout, no live Google grant",
+  "cliLifecycleChecks": [
+    {
+      "product": "google-calendar-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credentialId\":\"google-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-calendar-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credentialId\":\"google-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"accessMode\":\"read\",\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-draft",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"accessMode\":\"read_send\",\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-sender",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"accessMode\":\"read_send\",\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-threads",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-message-box",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-documents-gateway",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"docs-reader\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\nDeprecated: use google-docs-gateway-reader instead.\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-docs-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"docs-reader\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-docs-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"docs-writer\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-sheet-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"sheets-reader\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-sheet-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"sheets-writer\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-drive-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"drive-reader\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-drive-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"drive-writer\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-analytics-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"externalCredentialPreserved\":false,\"removedLocalRecord\":false,\"state\":\"LOGGED_OUT\"}}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-analytics-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"externalCredentialPreserved\":false,\"removedLocalRecord\":false,\"state\":\"LOGGED_OUT\"}}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-analytics-gateway-admin",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"externalCredentialPreserved\":false,\"removedLocalRecord\":false,\"state\":\"LOGGED_OUT\"}}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-reader\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\nDeprecated: use google-marketing-gateway-reader instead.\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-reader\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-writer\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway-deleter",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-deleter\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway-admin",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-admin\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-document-ocr-gateway",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credential\":\"google-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"ok\":true,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-admin",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-deleter",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-auth",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    }
+  ],
+  "liveAllRoleNativeAuthenticationVerified": true,
+  "liveAllRoleExternalJSONAPIRequestsVerified": false,
+  "allGatewayReleasesPublished": true,
+  "unitSuites": {
+    "shared": 35,
+    "service": 120,
+    "calendar": 137,
+    "gmailXCTest": 157,
+    "gmailSwiftTesting": 178,
+    "documents": 180,
+    "analytics": 304,
+    "marketing": 126,
+    "ocr": 37
+  },
+  "retiredProductDefaults": "Backed up privately; eight auto-created product client files removed from active configuration; global environment inputs preserved.",
+  "liveNativeRoleChecks": [
+    {
+      "product": "calendar",
+      "role": "reader",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "GET /colors"
+    },
+    {
+      "product": "calendar",
+      "role": "writer",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "GET /colors"
+    },
+    {
+      "product": "gmail",
+      "role": "reader",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "profile read"
+    },
+    {
+      "product": "gmail",
+      "role": "draft",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "profile read"
+    },
+    {
+      "product": "gmail",
+      "role": "sender",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "profile read"
+    },
+    {
+      "product": "gmail",
+      "role": "threads",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "profile read"
+    },
+    {
+      "product": "gmail",
+      "role": "message-box",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "profile read"
+    },
+    {
+      "product": "docs",
+      "role": "reader",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "document get"
+    },
+    {
+      "product": "docs",
+      "role": "writer",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "temporary document create"
+    },
+    {
+      "product": "sheets",
+      "role": "reader",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "spreadsheet get"
+    },
+    {
+      "product": "sheets",
+      "role": "writer",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "temporary spreadsheet create"
+    },
+    {
+      "product": "drive",
+      "role": "reader",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "files list"
+    },
+    {
+      "product": "drive",
+      "role": "writer",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "temporary folder create"
+    },
+    {
+      "product": "analytics",
+      "role": "reader",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "gaAccounts read"
+    },
+    {
+      "product": "analytics",
+      "role": "writer",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "gaAccounts read"
+    },
+    {
+      "product": "analytics",
+      "role": "admin",
+      "client": "Shared Service client",
+      "nativeBrowserLogin": true,
+      "nativeCredentialAPIRequest": true,
+      "externalPathAPIRequest": true,
+      "inlineJSONAPIRequest": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "apiOperation": "gaAccounts read"
+    }
+  ],
+  "liveEvidenceNotes": [
+    "Actual Google browser consent and live gateway API calls; no fixture tokens for these checks.",
+    "Gmail product environment overrides were excluded only in verification subprocesses; global environment unchanged.",
+    "All nine temporary verification Docs, Sheets and Drive folders moved to Trash through Drive gateway.",
+    "Analytics roles verified with read queries; no Analytics or Tag Manager settings changed.",
+    "Google passkey verification succeeded using the existing unlocked Bitwarden entry; no password entry or new passkey creation."
+  ],
+  "serviceLiveCredentialChecks": [
+    {
+      "role": "auth",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "auth",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "auth",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "native",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "path",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "json",
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "operation": "services list",
+      "source": "native",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "operation": "services list",
+      "source": "path",
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "operation": "services list",
+      "source": "json",
+      "passed": true
+    }
+  ],
+  "serviceExternalLogoutChecks": [
+    {
+      "role": "auth",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "auth",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "reader",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "writer",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "admin",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "path",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    },
+    {
+      "role": "deleter",
+      "source": "json",
+      "externalPreserved": true,
+      "nativeCredentialPreserved": true,
+      "passed": true
+    }
+  ],
+  "marketingCallbackRegression": {
+    "commit": "c03041b",
+    "cause": "Valid Google callback includes issuer and scope metadata; previous native receiver rejected it.",
+    "regressionTestsPassed": 2,
+    "fullSuiteTestsPassed": 126,
+    "liveNativeLoginAfterFixVerified": true
+  },
+  "rebuiltPatchArtifacts": [
+    {
+      "repo": "google-calendar-gateway",
+      "version": "0.1.9",
+      "sourceCommit": "85419c6d6f3f77447f8c418bb4b526f5a178952a",
+      "archives": 2,
+      "nativeVersionChecks": 2,
+      "passed": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "version": "0.1.17",
+      "sourceCommit": "9004b716d18b4cd8d07234d8a47105b91949cdd5",
+      "archives": 10,
+      "nativeVersionChecks": 5,
+      "passed": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "version": "0.3.6",
+      "sourceCommit": "dadc2f7d0070f92df07278873262f9f7aad5d16e",
+      "archives": 2,
+      "nativeVersionChecks": 7,
+      "passed": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "version": "0.1.5",
+      "sourceCommit": "a37fe125b612d114354a070f89d964b8b302c2f7",
+      "archives": 6,
+      "nativeVersionChecks": 3,
+      "passed": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "version": "0.1.4",
+      "sourceCommit": "6e7614e378d19dd43080039f0ea981e9d8f5b7bd",
+      "archives": 2,
+      "nativeVersionChecks": 5,
+      "passed": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "version": "0.1.4",
+      "sourceCommit": "be0c820843d1ba9c1b1a38b88ff2e829e3bc1753",
+      "archives": 2,
+      "nativeVersionChecks": 1,
+      "passed": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "version": "0.1.6",
+      "sourceCommit": "9111bd95e02d598a1ddeb1886c8b98fb42134dbe",
+      "archives": 2,
+      "nativeVersionChecks": 5,
+      "passed": true
+    }
+  ],
+  "calendarSignedCaskRebuild": {
+    "version": "0.1.9",
+    "architectures": [
+      "arm64",
+      "x86_64"
+    ],
+    "notarizationAccepted": true,
+    "staplerValidationPassed": true,
+    "gatekeeperAccepted": true,
+    "published": false
+  },
+  "ocrLiveExternalCredentialChecks": [
+    {
+      "source": "path",
+      "operation": "auth status",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "source": "path",
+      "operation": "processors list",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "source": "json",
+      "operation": "auth status",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "source": "json",
+      "operation": "processors list",
+      "exit": 0,
+      "passed": true
+    }
+  ],
+  "ocrExternalLogoutChecks": [
+    {
+      "source": "path",
+      "externalFilePreserved": true,
+      "logoutExit": 0,
+      "statusExit": 0,
+      "passed": true
+    },
+    {
+      "source": "json",
+      "externalFilePreserved": true,
+      "logoutExit": 0,
+      "statusExit": 0,
+      "passed": true
+    }
+  ],
+  "sharedCallbackValidation": {
+    "commit": "48e0112",
+    "sharedUnitTestsPassed": 35,
+    "analyticsUsesCommonValidator": true,
+    "marketingUsesCommonValidator": true,
+    "allSevenPackagesPinned": true,
+    "docsCredentialFreeTestsIsolated": true
+  },
+  "cliLifecycleChecksCurrentRevision": [
+    {
+      "product": "google-calendar-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credentialId\":\"google-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-calendar-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credentialId\":\"google-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"accessMode\":\"read\",\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-draft",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"accessMode\":\"read_send\",\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-sender",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"accessMode\":\"read_send\",\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-threads",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "gmail-gateway-message-box",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credentialId\":\"gmail-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-documents-gateway",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"docs-reader\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\nDeprecated: use google-docs-gateway-reader instead.\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-docs-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"docs-reader\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-docs-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"docs-writer\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-sheet-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"sheets-reader\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-sheet-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"sheets-writer\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-drive-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"drive-reader\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-drive-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"credential\":\"drive-writer\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"operation\":\"auth logout\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-analytics-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"externalCredentialPreserved\":false,\"removedLocalRecord\":false,\"state\":\"LOGGED_OUT\"}}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-analytics-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"externalCredentialPreserved\":false,\"removedLocalRecord\":false,\"state\":\"LOGGED_OUT\"}}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-analytics-gateway-admin",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"data\":{\"externalCredentialPreserved\":false,\"removedLocalRecord\":false,\"state\":\"LOGGED_OUT\"}}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-reader\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\nDeprecated: use google-marketing-gateway-reader instead.\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-reader\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-writer\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway-deleter",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-deleter\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-marketing-gateway-admin",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\n  \"externalCredentialPreserved\" : false,\n  \"product\" : \"google-ads\",\n  \"profileId\" : \"google-ads-admin\",\n  \"removed\" : false,\n  \"state\" : \"LOGGED_OUT\"\n}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-document-ocr-gateway",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"credential\":\"google-personal\",\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"ok\":true,\"state\":\"LOGGED_OUT\"}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-reader",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-writer",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-admin",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-deleter",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    },
+    {
+      "product": "google-service-gateway-auth",
+      "checks": {
+        "login": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "status": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "refresh": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "logout": {
+          "diagnostic": "{\"command\":\"auth.logout\",\"data\":{\"externalCredentialPreserved\":false,\"localTokenDeleted\":false,\"profile\":\"google-personal\",\"state\":\"LOGGED_OUT\"},\"ok\":true}\n",
+          "exit": 0,
+          "passed": true
+        },
+        "relogin": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        },
+        "revoke": {
+          "diagnostic": "",
+          "exit": 0,
+          "passed": true
+        }
+      }
+    }
+  ],
+  "marketingNativeAuthenticationChecks": [
+    {
+      "product": "google-ads",
+      "role": "reader",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAdsAPIRequestsVerified": false,
+      "apiBlocker": "Developer token absent from resolved Marketing kinko environment; login customer ID is present."
+    },
+    {
+      "product": "google-ads",
+      "role": "writer",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAdsAPIRequestsVerified": false,
+      "apiBlocker": "Developer token absent from resolved Marketing kinko environment; login customer ID is present."
+    },
+    {
+      "product": "google-ads",
+      "role": "admin",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAdsAPIRequestsVerified": false,
+      "apiBlocker": "Developer token absent from resolved Marketing kinko environment; login customer ID is present."
+    },
+    {
+      "product": "google-ads",
+      "role": "deleter",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAdsAPIRequestsVerified": false,
+      "apiBlocker": "Developer token absent from resolved Marketing kinko environment; login customer ID is present."
+    },
+    {
+      "product": "search-console",
+      "role": "reader",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": true,
+      "apiNote": "Authenticated read request with all three credential sources"
+    },
+    {
+      "product": "adsense",
+      "role": "reader",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": true,
+      "apiNote": "Authenticated read request with all three credential sources"
+    },
+    {
+      "product": "admob",
+      "role": "reader",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": true,
+      "apiNote": "Authenticated read request with all three credential sources"
+    },
+    {
+      "product": "admob",
+      "role": "writer",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": false,
+      "apiNote": "AdMob writer exposes request preview only"
+    },
+    {
+      "product": "analytics-data",
+      "role": "reader",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": true,
+      "apiNote": "Authenticated read request with all three credential sources"
+    },
+    {
+      "product": "google-ads",
+      "role": "compat",
+      "nativeLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "logoutMissing": true,
+      "loginAgain": true,
+      "liveAPIRequestsVerified": false,
+      "apiNote": "Ads developer token absent"
+    }
+  ],
+  "cloudNativeRoleChecks": [
+    {
+      "product": "service",
+      "role": "auth",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": false
+    },
+    {
+      "product": "service",
+      "role": "reader",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": true
+    },
+    {
+      "product": "service",
+      "role": "writer",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": false
+    },
+    {
+      "product": "service",
+      "role": "admin",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": false
+    },
+    {
+      "product": "service",
+      "role": "deleter",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": false
+    },
+    {
+      "product": "ocr",
+      "role": "writer",
+      "nativeBrowserLogin": true,
+      "externalFileStatusReady": true,
+      "inlineJSONStatusReady": true,
+      "externalFilePreservedOnLogout": true,
+      "localLogoutVerifiedMissing": true,
+      "nativeLoginAgain": true,
+      "liveAPIRequestsVerified": true
+    }
+  ],
+  "liveAllRoleExternalJSONCredentialHandlingVerified": true,
+  "apiVerificationLimits": [
+    "Google Ads developer token is absent from the resolved Marketing kinko environment; OAuth and all credential/logout checks pass, Ads API requests remain unverified.",
+    "AdMob writer exposes a request preview only; no live write operation is claimed.",
+    "Service auth/writer/admin/deleter OAuth and external credential status are verified; no destructive or billing operations performed.",
+    "Configured Web/public HTTPS callbacks have fixture coverage; no deployed HTTPS callback or live registered Web-client grant is claimed."
+  ],
+  "customCallbackNativeLogin": {
+    "host": "127.0.0.1",
+    "port": 48573,
+    "path": "/verification/google/callback",
+    "registeredClientKind": "Desktop",
+    "environmentSettingsHonored": true,
+    "liveGoogleLoginPassed": true,
+    "listenerClosedAfterLogin": true
+  },
+  "docsCompatibilityNativeCycle": {
+    "binary": "google-documents-gateway",
+    "nativeLogin": true,
+    "nativeAPIRequest": true,
+    "externalFileAPIRequest": true,
+    "inlineJSONAPIRequest": true,
+    "logoutMissing": true,
+    "loginAgain": true
+  },
+  "publishedReleases": [
+    {
+      "repo": "google-calendar-gateway",
+      "version": "0.1.9",
+      "releaseURL": "https://github.com/tacogips/google-calendar-gateway/releases/tag/v0.1.9",
+      "assetCount": 8,
+      "passed": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "version": "0.1.17",
+      "releaseURL": "https://github.com/tacogips/gmail-gateway/releases/tag/v0.1.17",
+      "assetCount": 20,
+      "passed": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "version": "0.3.6",
+      "releaseURL": "https://github.com/tacogips/google-documents-gateway/releases/tag/v0.3.6",
+      "assetCount": 4,
+      "passed": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "version": "0.1.5",
+      "releaseURL": "https://github.com/tacogips/google-analytics-gateway/releases/tag/v0.1.5",
+      "assetCount": 12,
+      "passed": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "version": "0.1.4",
+      "releaseURL": "https://github.com/tacogips/google-marketing-gateway/releases/tag/v0.1.4",
+      "assetCount": 4,
+      "passed": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "version": "0.1.4",
+      "releaseURL": "https://github.com/tacogips/google-document-ocr-gateway/releases/tag/v0.1.4",
+      "assetCount": 4,
+      "passed": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "version": "0.1.6",
+      "releaseURL": "https://github.com/tacogips/google-service-gateway/releases/tag/v0.1.6",
+      "assetCount": 4,
+      "passed": true
+    }
+  ],
+  "publishedReleaseAssetDigests": [
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-arm64.dmg",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-arm64.dmg.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-x64.dmg",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-x64.dmg.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "asset": "google-calendar-gateway-0.1.9-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-draft-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-draft-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-draft-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-draft-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-message-box-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-message-box-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-message-box-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-message-box-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-reader-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-reader-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-reader-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-reader-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-sender-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-sender-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-sender-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-sender-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-threads-0.1.17-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-threads-0.1.17-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-threads-0.1.17-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "asset": "gmail-gateway-threads-0.1.17-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "asset": "google-documents-gateway-0.3.6-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "asset": "google-documents-gateway-0.3.6-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "asset": "google-documents-gateway-0.3.6-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "asset": "google-documents-gateway-0.3.6-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-admin-0.1.5-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-admin-0.1.5-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-admin-0.1.5-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-admin-0.1.5-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-reader-0.1.5-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-reader-0.1.5-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-reader-0.1.5-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-reader-0.1.5-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-writer-0.1.5-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-writer-0.1.5-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-writer-0.1.5-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "asset": "google-analytics-gateway-writer-0.1.5-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "asset": "google-marketing-gateway-0.1.4-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "asset": "google-marketing-gateway-0.1.4-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "asset": "google-marketing-gateway-0.1.4-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "asset": "google-marketing-gateway-0.1.4-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "asset": "google-document-ocr-gateway-0.1.4-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "asset": "google-document-ocr-gateway-0.1.4-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "asset": "google-document-ocr-gateway-0.1.4-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "asset": "google-document-ocr-gateway-0.1.4-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "asset": "google-service-gateway-0.1.6-darwin-arm64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "asset": "google-service-gateway-0.1.6-darwin-arm64.tar.gz.sha256",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "asset": "google-service-gateway-0.1.6-darwin-x64.tar.gz",
+      "githubDigestMatches": true
+    },
+    {
+      "repo": "google-service-gateway",
+      "asset": "google-service-gateway-0.1.6-darwin-x64.tar.gz.sha256",
+      "githubDigestMatches": true
+    }
+  ],
+  "homebrewPackageChecks": [
+    {
+      "formula": "google-calendar-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-reader",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-draft",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-sender",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-threads",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "gmail-gateway-message-box",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-documents-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-analytics-gateway-reader",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-analytics-gateway-writer",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-analytics-gateway-admin",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-marketing-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-document-ocr-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    },
+    {
+      "formula": "google-service-gateway",
+      "checks": {
+        "audit": 0,
+        "fetch": 0,
+        "install": 0,
+        "test": 0
+      }
+    }
+  ],
+  "tapMetadataChecks": [
+    {
+      "name": "google-calendar-gateway",
+      "kind": "formula",
+      "version": "0.1.9",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-reader",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-draft",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-sender",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-threads",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "gmail-gateway-message-box",
+      "kind": "formula",
+      "version": "0.1.17",
+      "passed": true
+    },
+    {
+      "name": "google-documents-gateway",
+      "kind": "formula",
+      "version": "0.3.6",
+      "passed": true
+    },
+    {
+      "name": "google-analytics-gateway-reader",
+      "kind": "formula",
+      "version": "0.1.5",
+      "passed": true
+    },
+    {
+      "name": "google-analytics-gateway-writer",
+      "kind": "formula",
+      "version": "0.1.5",
+      "passed": true
+    },
+    {
+      "name": "google-analytics-gateway-admin",
+      "kind": "formula",
+      "version": "0.1.5",
+      "passed": true
+    },
+    {
+      "name": "google-marketing-gateway",
+      "kind": "formula",
+      "version": "0.1.4",
+      "passed": true
+    },
+    {
+      "name": "google-document-ocr-gateway",
+      "kind": "formula",
+      "version": "0.1.4",
+      "passed": true
+    },
+    {
+      "name": "google-service-gateway",
+      "kind": "formula",
+      "version": "0.1.6",
+      "passed": true
+    },
+    {
+      "name": "google-calendar-gateway",
+      "kind": "cask",
+      "version": "0.1.9",
+      "passed": true
+    }
+  ],
+  "installedExecutableChecks": [
+    {
+      "repo": "google-calendar-gateway",
+      "product": "google-calendar-gateway-reader",
+      "version": "0.1.9",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "product": "google-calendar-gateway-writer",
+      "version": "0.1.9",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-reader",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-draft",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-sender",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-threads",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "gmail-gateway",
+      "product": "gmail-gateway-message-box",
+      "version": "0.1.17",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-documents-gateway",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-docs-gateway-reader",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-docs-gateway-writer",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-sheet-gateway-reader",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-sheet-gateway-writer",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-drive-gateway-reader",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-documents-gateway",
+      "product": "google-drive-gateway-writer",
+      "version": "0.3.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "product": "google-analytics-gateway-reader",
+      "version": "0.1.5",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "product": "google-analytics-gateway-writer",
+      "version": "0.1.5",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "product": "google-analytics-gateway-admin",
+      "version": "0.1.5",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway-reader",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway-writer",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway-deleter",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "product": "google-marketing-gateway-admin",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "product": "google-document-ocr-gateway",
+      "version": "0.1.4",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-reader",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-writer",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-admin",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-deleter",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    },
+    {
+      "repo": "google-service-gateway",
+      "product": "google-service-gateway-auth",
+      "version": "0.1.6",
+      "checks": {
+        "help": {
+          "exit": 0,
+          "passed": true
+        },
+        "version": {
+          "exit": 0,
+          "passed": true
+        },
+        "authHelp": {
+          "exit": 0,
+          "passed": true
+        },
+        "externalStatus": {
+          "exit": 0,
+          "passed": true,
+          "secretDisclosed": false
+        }
+      }
+    }
+  ],
+  "installedNativeCredentialStatus": [
+    {
+      "product": "google-calendar-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-calendar-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-draft",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-sender",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-threads",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "gmail-gateway-message-box",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-documents-gateway",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-docs-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-docs-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-sheet-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-sheet-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-drive-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-drive-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-analytics-gateway-reader",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-analytics-gateway-writer",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-analytics-gateway-admin",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway-reader",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway-writer",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway-deleter",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-marketing-gateway-admin",
+      "exit": 0,
+      "state": "ready",
+      "passed": true
+    },
+    {
+      "product": "google-document-ocr-gateway",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-reader",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-writer",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-admin",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-deleter",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    },
+    {
+      "product": "google-service-gateway-auth",
+      "exit": 0,
+      "state": "READY",
+      "passed": true
+    }
+  ],
+  "miseDarwinDelivery": {
+    "sourceCommit": "40b7f79",
+    "pushed": true,
+    "desktopConfigurationValid": true,
+    "calendarPackageVersion": "0.1.9",
+    "unrelatedHostDrift": "Finder preference differs; left unchanged",
+    "oldCalendarPackageDirectoriesAbsent": true,
+    "oldCalendarCommandLinksAbsent": true
+  },
+  "sharedClientAudit": {
+    "registeredDesktopClientPresent": true,
+    "privateFileModeVerified": true,
+    "projectMatchesSharedServiceProject": true,
+    "productDefaultsRetired": true
+  },
+  "sharedDependencyAudit": [
+    {
+      "repo": "google-service-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-calendar-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "gmail-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-documents-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-analytics-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-marketing-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    },
+    {
+      "repo": "google-document-ocr-gateway",
+      "sharedRevision": "48e0112fb5eb057cf012194cfffaa2581ba29d76",
+      "passed": true
+    }
+  ]
+}
