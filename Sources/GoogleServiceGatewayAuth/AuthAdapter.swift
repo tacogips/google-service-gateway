@@ -1,0 +1,5 @@
+import GoogleServiceGatewayCore
+
+public typealias AuthExecution = GoogleServiceGatewayCore.AuthExecution
+public typealias AuthAdapter = GoogleServiceGatewayCore.AuthAdapter
+public typealias InteractiveOAuthAuthorizer = GoogleServiceGatewayCore.InteractiveOAuthAuthorizer
