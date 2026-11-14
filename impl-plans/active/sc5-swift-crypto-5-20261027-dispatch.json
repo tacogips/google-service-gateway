@@ -1,0 +1,145 @@
+{
+  "taskId": "sc5-swift-crypto-5-20261027",
+  "workflowMode": "issue-resolution",
+  "implementationBranch": "main",
+  "baseBranch": "main",
+  "remote": "origin",
+  "originalHead": "4cfef44b245893e6de4f30780c70fb0314da70eb",
+  "designDocPaths": [
+    "design-docs/specs/architecture.md"
+  ],
+  "evidenceRoot": "tmp/sc5-swift-crypto-5-20261027",
+  "reviewContext": {
+    "issueReference": "workflowInput issue 'google-service-gateway: move to swift-crypto 5.x' (no URL or number given)",
+    "userProblem": "Every Swift package in the Riela dependency graph must require and build against apple/swift-crypto 5.x so Riela can resolve a single 5.x version. This repository requires swift-crypto from 4.5.1 and Package.resolved pins 4.5.1 (revision 47d3869a7291f085c1fb9fb1e6d3b97a793f45c6).",
+    "requiredOutcomes": [
+      "Package.swift requires .package(url: \"https://github.com/apple/swift-crypto.git\", from: \"5.0.3\").",
+      "Package.resolved pins swift-crypto 5.0.3 or a later 5.x via `swift package update swift-crypto`; only the swift-crypto pin, the swift-asn1 pin if required, and originHash change.",
+      "Any swift-crypto 5 compile error or deprecation is fixed with no behavior change; the PKCE S256 challenge stays byte-for-byte identical.",
+      "VERSION and Version.current are bumped from 0.1.6 to 0.1.7 in the final commit.",
+      "swift build, swift test, mise run build, mise run test and mise run lint pass.",
+      "Changes are committed and pushed to main."
+    ],
+    "nonGoals": [
+      "Publishing GitHub releases, tags, Homebrew formulas or casks.",
+      "Updating any dependency other than swift-crypto (and swift-asn1 only if swift-crypto 5 requires it); no bare `swift package update`.",
+      "Changing the google-gateway-auth revision pin 48e0112fb5eb057cf012194cfffaa2581ba29d76.",
+      "Refactoring the PKCE code, replacing CryptoKit on Darwin, or changing the Linux-only Crypto product condition."
+    ],
+    "constraints": [
+      "If any dependency caps swift-crypto below 5, report a blocker with the exact constraint instead of working around it.",
+      "swift-tools-version 6.0, .macOS(.v14) and swiftLanguageModes [.v6] stay; if swift-crypto 5 requires a change, report a blocker instead of editing.",
+      "Package.resolved is written only by SwiftPM, never hand-edited.",
+      "Any OAuthClient.swift edit stays inside the existing #if canImport(CryptoKit) boundary and leaves the CryptoKit branch untouched.",
+      "Workers never revert, restore, checkout or stash files outside their own writePaths, including the pre-existing design-docs/specs/architecture.md edit.",
+      "Build and test exit codes are recorded from the swift command itself (redirect to log, then echo exit=$?), never through tee.",
+      "Swift files stay under 1000 lines; swiftlint runs on changed Swift files."
+    ],
+    "designDecisionsAndRationale": [
+      "Use from: \"5.0.3\" (not exact or upToNextMinor) so Riela can unify on any 5.x release.",
+      "Use the targeted `swift package update swift-crypto` so unrelated pins do not move.",
+      "Keep CryptoKit on Darwin and Crypto only on Linux, because the only crypto use is SHA256 for PKCE and the existing split already isolates swift-crypto to Linux.",
+      "Version lives in exactly VERSION and Sources/GoogleServiceGatewayCore/Version.swift (precedent commit a30eb3d); tests compare against Version.current so no test edit is needed.",
+      "Two disjoint wave-1 plans; authoritative build/test/lint gates run once in serial reconciliation before the single commit and push."
+    ],
+    "intentionalTradeoffs": [
+      "Plan-local swift build/test runs in PLAN-SC5-DEPS may observe concurrent VERSION/Version.swift edits; they are evidence only, and reconciliation gates are authoritative.",
+      "The Linux `import Crypto` path may remain uncompiled locally; it is recorded as a verification gap rather than installing a toolchain."
+    ],
+    "supportedEdgeCases": [
+      "swift-crypto 5 requires a newer swift-asn1: the swift-asn1 pin may move via SwiftPM.",
+      "swift-crypto 5 breaks the Linux SHA256.hash path: a minimal edit inside the non-CryptoKit branch preserving SHA-256 then base64url-without-padding bytes.",
+      "Resolution conflict or tools/platform requirement beyond 6.0/macOS 14: reported as a blocker with the SwiftPM error text."
+    ],
+    "outOfScopeEdgeCases": [
+      "Working around a dependency cap below swift-crypto 5 with forks, overrides or exact pins.",
+      "Raising tools version, platform minimum or language mode.",
+      "Release packaging, notarization, tap rendering."
+    ],
+    "sourcePaths": [
+      "Package.swift",
+      "Package.resolved",
+      "Sources/GoogleServiceGatewayCore/OAuthClient.swift",
+      "Sources/GoogleServiceGatewayCore/Version.swift",
+      "VERSION",
+      "Tests/GoogleServiceGatewayCoreTests/OAuthAndAPIKeysTests.swift",
+      "Tests/GoogleServiceGatewayCoreTests/RemediationContractTests.swift",
+      "design-docs/specs/architecture.md",
+      "impl-plans/active/swift-crypto-5-dependency.md",
+      "impl-plans/active/swift-crypto-5-version-bump.md"
+    ]
+  },
+  "acceptedDependencies": [],
+  "plans": [
+    {
+      "planId": "PLAN-SC5-DEPS",
+      "planPath": "impl-plans/active/swift-crypto-5-dependency.md",
+      "dependsOn": [],
+      "writePaths": [
+        "Package.swift",
+        "Package.resolved",
+        "Sources/GoogleServiceGatewayCore/OAuthClient.swift",
+        "impl-plans/active/swift-crypto-5-dependency.md",
+        ".build",
+        "tmp/sc5-build.log",
+        "tmp/sc5-test.log"
+      ],
+      "sharedPaths": [],
+      "artifactRoots": [
+        ".build"
+      ],
+      "acceptanceCriteria": [
+        "Package.swift line 20 reads .package(url: \"https://github.com/apple/swift-crypto.git\", from: \"5.0.3\").",
+        "Package.resolved pins swift-crypto at 5.0.3 or a later 5.x; only the swift-crypto pin, swift-asn1 pin (if required) and originHash changed; google-gateway-auth pin unchanged.",
+        "OAuthClient.swift unchanged unless swift-crypto 5 breaks the Linux Crypto path; any edit preserves PKCE challenge bytes.",
+        "swift build and swift test print exit=0 with full logs at tmp/sc5-build.log and tmp/sc5-test.log.",
+        "Progress Log records resolved swift-crypto and swift-asn1 versions, swift-crypto 5 manifest requirements, Linux verification result or gap, and exit codes."
+      ],
+      "verification": [
+        "swift package update swift-crypto",
+        "git diff Package.resolved",
+        "grep -n 'swift-crypto.git\", from: \"5.0.3\"' Package.swift",
+        "grep -n -A6 '\"identity\" : \"swift-crypto\"' Package.resolved",
+        "git diff --name-only -- Package.swift Package.resolved Sources/GoogleServiceGatewayCore/OAuthClient.swift",
+        "mkdir -p tmp && swift build > tmp/sc5-build.log 2>&1; echo \"exit=$?\"",
+        "swift test > tmp/sc5-test.log 2>&1; echo \"exit=$?\""
+      ]
+    },
+    {
+      "planId": "PLAN-SC5-VERSION",
+      "planPath": "impl-plans/active/swift-crypto-5-version-bump.md",
+      "dependsOn": [],
+      "writePaths": [
+        "VERSION",
+        "Sources/GoogleServiceGatewayCore/Version.swift",
+        "impl-plans/active/swift-crypto-5-version-bump.md"
+      ],
+      "sharedPaths": [],
+      "artifactRoots": [],
+      "acceptanceCriteria": [
+        "VERSION contains exactly 0.1.7 with one trailing newline.",
+        "Version.swift line 2 reads `  public static let current = \"0.1.7\"`.",
+        "grep -rn '0\\.1\\.6' VERSION Sources returns no matches.",
+        "swiftlint lint Sources/GoogleServiceGatewayCore/Version.swift exits 0.",
+        "git diff --name-only -- VERSION Sources/GoogleServiceGatewayCore/Version.swift lists exactly those two files."
+      ],
+      "verification": [
+        "cat VERSION",
+        "grep -n 'current = \"0.1.7\"' Sources/GoogleServiceGatewayCore/Version.swift",
+        "grep -rn '0\\.1\\.6' VERSION Sources",
+        "swiftlint lint Sources/GoogleServiceGatewayCore/Version.swift",
+        "git diff --name-only -- VERSION Sources/GoogleServiceGatewayCore/Version.swift"
+      ]
+    }
+  ],
+  "reconciliation": {
+    "verification": [
+      "swift build",
+      "swift test",
+      "mise run build",
+      "mise run test",
+      "mise run lint"
+    ],
+    "commitAndPush": "One commit on main after all gates pass, then push to origin main. No GitHub release or Homebrew publication."
+  }
+}
