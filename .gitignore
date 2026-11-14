@@ -1,0 +1,37 @@
+# This .gitignore file is expanded to the directory where `ign checkout` is executed.
+# It is NOT for the ign-template repository itself.
+
+# Swift build artifacts
+.build/
+.swiftpm/
+dist/
+release/
+*.xcodeproj/
+*.xcworkspace/
+
+.pre-commit-config.yaml
+**/.env
+**/*.private*
+
+# IDE and OS metadata
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary files and logs
+tmp/
+temp/
+.cache/
+logs/
+*.log
+
+mise.local.toml
+
+# Riela runtime/session state and temporary artifacts
+.riela/
+.riela-*
+.riela-*.tmp
+*.riela.tmp
