@@ -1,0 +1,1509 @@
+[
+  {
+    "product": "service",
+    "projectID": "tacogips-service-auth-261001",
+    "services": [
+      "cloudresourcemanager.googleapis.com",
+      "serviceusage.googleapis.com",
+      "cloudbilling.googleapis.com",
+      "apikeys.googleapis.com"
+    ],
+    "createExit": 0,
+    "createResult": {
+      "command": "projects.create",
+      "data": {
+        "createOperation": {
+          "done": true,
+          "metadata": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata",
+            "createTime": "2026-09-30T22:27:43.815Z",
+            "gettable": true,
+            "ready": true
+          },
+          "name": "operations/create_project.global.5258659625445033513",
+          "response": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.Project",
+            "createTime": "2026-09-30T22:27:43.815Z",
+            "displayName": "Gateway Service Auth",
+            "etag": "W/\"b174336a68499a04\"",
+            "labels": {
+              "purpose": "gateway-auth"
+            },
+            "name": "projects/552870764490",
+            "parent": "organizations/26859243241",
+            "projectId": "tacogips-service-auth-261001",
+            "state": "ACTIVE",
+            "updateTime": "2026-09-30T22:27:44.771069Z"
+          }
+        },
+        "oauthClientSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/clients?project=tacogips-service-auth-261001",
+          "project": "projects/tacogips-service-auth-261001",
+          "reason": "Google exposes no supported public API for general OAuth client creation; create a Desktop client in Google Auth Platform and import its JSON."
+        },
+        "oauthConsentSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/overview?project=tacogips-service-auth-261001",
+          "project": "projects/tacogips-service-auth-261001",
+          "scopes": [
+            "openid",
+            "email",
+            "profile"
+          ]
+        },
+        "project": {
+          "createTime": "2026-09-30T22:27:43.815Z",
+          "displayName": "Gateway Service Auth",
+          "labels": {
+            "purpose": "gateway-auth"
+          },
+          "parent": "organizations/26859243241",
+          "projectId": "tacogips-service-auth-261001",
+          "resourceName": "projects/552870764490",
+          "state": "ACTIVE"
+        },
+        "projectId": "tacogips-service-auth-261001",
+        "serviceEnablement": {
+          "operation": {
+            "done": true,
+            "metadata": {
+              "@type": "type.googleapis.com/google.protobuf.Empty"
+            },
+            "name": "operations/acat.p2-552870764490-4c99d1e9-5a70-4433-ba4b-d98751cfa8a4",
+            "response": {
+              "@type": "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse",
+              "services": [
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Creates, reads, and updates metadata for Google Cloud Platform resource containers."
+                    },
+                    "monitoring": {},
+                    "name": "cloudresourcemanager.googleapis.com",
+                    "quota": {},
+                    "title": "Cloud Resource Manager API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/cloud"
+                      ]
+                    }
+                  },
+                  "name": "projects/552870764490/services/cloudresourcemanager.googleapis.com",
+                  "parent": "projects/552870764490",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Enables services that service consumers want to use on Google Cloud Platform, lists the available or enabled services, or disables services that service consumers no longer use."
+                    },
+                    "monitoring": {},
+                    "name": "serviceusage.googleapis.com",
+                    "quota": {},
+                    "title": "Service Usage API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/cloud"
+                      ]
+                    }
+                  },
+                  "name": "projects/552870764490/services/serviceusage.googleapis.com",
+                  "parent": "projects/552870764490",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Allows developers to manage billing for their Google Cloud Platform projects\n    programmatically."
+                    },
+                    "monitoring": {},
+                    "name": "cloudbilling.googleapis.com",
+                    "quota": {},
+                    "title": "Cloud Billing API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/cloud"
+                      ]
+                    }
+                  },
+                  "name": "projects/552870764490/services/cloudbilling.googleapis.com",
+                  "parent": "projects/552870764490",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Manages the API keys associated with developer projects."
+                    },
+                    "monitoring": {},
+                    "name": "apikeys.googleapis.com",
+                    "quota": {},
+                    "title": "API Keys API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/cloud"
+                      ]
+                    }
+                  },
+                  "name": "projects/552870764490/services/apikeys.googleapis.com",
+                  "parent": "projects/552870764490",
+                  "state": "ENABLED"
+                }
+              ]
+            }
+          },
+          "project": "projects/tacogips-service-auth-261001",
+          "requestedServices": [
+            "cloudresourcemanager.googleapis.com",
+            "serviceusage.googleapis.com",
+            "cloudbilling.googleapis.com",
+            "apikeys.googleapis.com"
+          ],
+          "waited": true
+        }
+      },
+      "ok": true
+    },
+    "googleOAuthClientRegistered": false,
+    "verifyExit": 0,
+    "enabledAPIs": [
+      "apikeys.googleapis.com",
+      "cloudbilling.googleapis.com",
+      "cloudresourcemanager.googleapis.com",
+      "serviceusage.googleapis.com"
+    ],
+    "requiredAPIsVerified": true
+  },
+  {
+    "product": "calendar",
+    "projectID": "tacogips-calendar-auth-261001",
+    "services": [
+      "calendar-json.googleapis.com"
+    ],
+    "createExit": 0,
+    "createResult": {
+      "command": "projects.create",
+      "data": {
+        "createOperation": {
+          "done": true,
+          "metadata": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata",
+            "createTime": "2026-09-30T22:28:34.041Z",
+            "gettable": true,
+            "ready": true
+          },
+          "name": "operations/create_project.global.6803691064244106456",
+          "response": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.Project",
+            "createTime": "2026-09-30T22:28:34.041Z",
+            "displayName": "Gateway Calendar Auth",
+            "etag": "W/\"08cb9949a413744e\"",
+            "labels": {
+              "purpose": "gateway-auth"
+            },
+            "name": "projects/166954435249",
+            "parent": "organizations/26859243241",
+            "projectId": "tacogips-calendar-auth-261001",
+            "state": "ACTIVE",
+            "updateTime": "2026-09-30T22:28:35.041994Z"
+          }
+        },
+        "oauthClientSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/clients?project=tacogips-calendar-auth-261001",
+          "project": "projects/tacogips-calendar-auth-261001",
+          "reason": "Google exposes no supported public API for general OAuth client creation; create a Desktop client in Google Auth Platform and import its JSON."
+        },
+        "oauthConsentSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/overview?project=tacogips-calendar-auth-261001",
+          "project": "projects/tacogips-calendar-auth-261001",
+          "scopes": [
+            "openid",
+            "email",
+            "profile"
+          ]
+        },
+        "project": {
+          "createTime": "2026-09-30T22:28:34.041Z",
+          "displayName": "Gateway Calendar Auth",
+          "labels": {
+            "purpose": "gateway-auth"
+          },
+          "parent": "organizations/26859243241",
+          "projectId": "tacogips-calendar-auth-261001",
+          "resourceName": "projects/166954435249",
+          "state": "ACTIVE"
+        },
+        "projectId": "tacogips-calendar-auth-261001",
+        "serviceEnablement": {
+          "operation": {
+            "done": true,
+            "metadata": {
+              "@type": "type.googleapis.com/google.protobuf.Empty"
+            },
+            "name": "operations/acat.p2-166954435249-e2aa6c60-94d2-4c02-99a7-5d5ebc3e00b7",
+            "response": {
+              "@type": "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse",
+              "services": [
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "The Google Calendar API lets you manage your calendars and events."
+                    },
+                    "monitoring": {},
+                    "name": "calendar-json.googleapis.com",
+                    "quota": {},
+                    "title": "Google Calendar API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal",
+                        "serviceusage.googleapis.com/tos/calendar"
+                      ]
+                    }
+                  },
+                  "name": "projects/166954435249/services/calendar-json.googleapis.com",
+                  "parent": "projects/166954435249",
+                  "state": "ENABLED"
+                }
+              ]
+            }
+          },
+          "project": "projects/tacogips-calendar-auth-261001",
+          "requestedServices": [
+            "calendar-json.googleapis.com"
+          ],
+          "waited": true
+        }
+      },
+      "ok": true
+    },
+    "googleOAuthClientRegistered": false,
+    "verifyExit": 0,
+    "enabledAPIs": [
+      "calendar-json.googleapis.com"
+    ],
+    "requiredAPIsVerified": true
+  },
+  {
+    "product": "gmail",
+    "projectID": "tacogips-gmail-auth-261001",
+    "services": [
+      "gmail.googleapis.com"
+    ],
+    "createExit": 0,
+    "createResult": {
+      "command": "projects.create",
+      "data": {
+        "createOperation": {
+          "done": true,
+          "metadata": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata",
+            "createTime": "2026-09-30T22:28:43.920Z",
+            "gettable": true,
+            "ready": true
+          },
+          "name": "operations/create_project.global.8730508006006975840",
+          "response": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.Project",
+            "createTime": "2026-09-30T22:28:43.920Z",
+            "displayName": "Gateway Gmail Auth",
+            "etag": "W/\"01c191da81638346\"",
+            "labels": {
+              "purpose": "gateway-auth"
+            },
+            "name": "projects/556717016946",
+            "parent": "organizations/26859243241",
+            "projectId": "tacogips-gmail-auth-261001",
+            "state": "ACTIVE",
+            "updateTime": "2026-09-30T22:28:44.952409Z"
+          }
+        },
+        "oauthClientSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/clients?project=tacogips-gmail-auth-261001",
+          "project": "projects/tacogips-gmail-auth-261001",
+          "reason": "Google exposes no supported public API for general OAuth client creation; create a Desktop client in Google Auth Platform and import its JSON."
+        },
+        "oauthConsentSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/overview?project=tacogips-gmail-auth-261001",
+          "project": "projects/tacogips-gmail-auth-261001",
+          "scopes": [
+            "openid",
+            "email",
+            "profile"
+          ]
+        },
+        "project": {
+          "createTime": "2026-09-30T22:28:43.920Z",
+          "displayName": "Gateway Gmail Auth",
+          "labels": {
+            "purpose": "gateway-auth"
+          },
+          "parent": "organizations/26859243241",
+          "projectId": "tacogips-gmail-auth-261001",
+          "resourceName": "projects/556717016946",
+          "state": "ACTIVE"
+        },
+        "projectId": "tacogips-gmail-auth-261001",
+        "serviceEnablement": {
+          "operation": {
+            "done": true,
+            "metadata": {
+              "@type": "type.googleapis.com/google.protobuf.Empty"
+            },
+            "name": "operations/acat.p2-556717016946-e44bb283-dee2-4080-b84a-e67bf6a02d3b",
+            "response": {
+              "@type": "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse",
+              "services": [
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "The Gmail API lets you view and manage Gmail mailbox data like\n    threads, messages, and labels."
+                    },
+                    "monitoring": {},
+                    "name": "gmail.googleapis.com",
+                    "quota": {},
+                    "title": "Gmail API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/556717016946/services/gmail.googleapis.com",
+                  "parent": "projects/556717016946",
+                  "state": "ENABLED"
+                }
+              ]
+            }
+          },
+          "project": "projects/tacogips-gmail-auth-261001",
+          "requestedServices": [
+            "gmail.googleapis.com"
+          ],
+          "waited": true
+        }
+      },
+      "ok": true
+    },
+    "googleOAuthClientRegistered": false,
+    "verifyExit": 0,
+    "enabledAPIs": [
+      "gmail.googleapis.com"
+    ],
+    "requiredAPIsVerified": true
+  },
+  {
+    "product": "docs",
+    "projectID": "tacogips-docs-auth-261001",
+    "services": [
+      "docs.googleapis.com",
+      "drive.googleapis.com"
+    ],
+    "createExit": 0,
+    "createResult": {
+      "command": "projects.create",
+      "data": {
+        "createOperation": {
+          "done": true,
+          "metadata": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata",
+            "createTime": "2026-09-30T22:28:52.746Z",
+            "gettable": true,
+            "ready": true
+          },
+          "name": "operations/create_project.global.4828862204768106841",
+          "response": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.Project",
+            "createTime": "2026-09-30T22:28:52.746Z",
+            "displayName": "Gateway Docs Auth",
+            "etag": "W/\"66a8edc0b914cb16\"",
+            "labels": {
+              "purpose": "gateway-auth"
+            },
+            "name": "projects/605496450502",
+            "parent": "organizations/26859243241",
+            "projectId": "tacogips-docs-auth-261001",
+            "state": "ACTIVE",
+            "updateTime": "2026-09-30T22:28:53.559675Z"
+          }
+        },
+        "oauthClientSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/clients?project=tacogips-docs-auth-261001",
+          "project": "projects/tacogips-docs-auth-261001",
+          "reason": "Google exposes no supported public API for general OAuth client creation; create a Desktop client in Google Auth Platform and import its JSON."
+        },
+        "oauthConsentSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/overview?project=tacogips-docs-auth-261001",
+          "project": "projects/tacogips-docs-auth-261001",
+          "scopes": [
+            "openid",
+            "email",
+            "profile"
+          ]
+        },
+        "project": {
+          "createTime": "2026-09-30T22:28:52.746Z",
+          "displayName": "Gateway Docs Auth",
+          "labels": {
+            "purpose": "gateway-auth"
+          },
+          "parent": "organizations/26859243241",
+          "projectId": "tacogips-docs-auth-261001",
+          "resourceName": "projects/605496450502",
+          "state": "ACTIVE"
+        },
+        "projectId": "tacogips-docs-auth-261001",
+        "serviceEnablement": {
+          "operation": {
+            "done": true,
+            "metadata": {
+              "@type": "type.googleapis.com/google.protobuf.Empty"
+            },
+            "name": "operations/acat.p2-605496450502-e108e491-814a-406a-9d00-57f8a30db84d",
+            "response": {
+              "@type": "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse",
+              "services": [
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Reads and writes Google Docs documents."
+                    },
+                    "monitoring": {},
+                    "name": "docs.googleapis.com",
+                    "quota": {},
+                    "title": "Google Docs API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/605496450502/services/docs.googleapis.com",
+                  "parent": "projects/605496450502",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "The Google Drive API allows clients to access resources from Google Drive."
+                    },
+                    "monitoring": {},
+                    "name": "drive.googleapis.com",
+                    "quota": {},
+                    "title": "Google Drive API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/605496450502/services/drive.googleapis.com",
+                  "parent": "projects/605496450502",
+                  "state": "ENABLED"
+                }
+              ]
+            }
+          },
+          "project": "projects/tacogips-docs-auth-261001",
+          "requestedServices": [
+            "docs.googleapis.com",
+            "drive.googleapis.com"
+          ],
+          "waited": true
+        }
+      },
+      "ok": true
+    },
+    "googleOAuthClientRegistered": false,
+    "verifyExit": 0,
+    "enabledAPIs": [
+      "docs.googleapis.com",
+      "drive.googleapis.com"
+    ],
+    "requiredAPIsVerified": true
+  },
+  {
+    "product": "sheets",
+    "projectID": "tacogips-sheets-auth-261001",
+    "services": [
+      "sheets.googleapis.com",
+      "drive.googleapis.com"
+    ],
+    "createExit": 0,
+    "createResult": {
+      "command": "projects.create",
+      "data": {
+        "createOperation": {
+          "done": true,
+          "metadata": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata",
+            "createTime": "2026-09-30T22:29:02.192Z",
+            "gettable": true,
+            "ready": true
+          },
+          "name": "operations/create_project.global.5584445273786470435",
+          "response": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.Project",
+            "createTime": "2026-09-30T22:29:02.192Z",
+            "displayName": "Gateway Sheets Auth",
+            "etag": "W/\"87b333dc3bd6f0cb\"",
+            "labels": {
+              "purpose": "gateway-auth"
+            },
+            "name": "projects/540550168238",
+            "parent": "organizations/26859243241",
+            "projectId": "tacogips-sheets-auth-261001",
+            "state": "ACTIVE",
+            "updateTime": "2026-09-30T22:29:03.181598Z"
+          }
+        },
+        "oauthClientSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/clients?project=tacogips-sheets-auth-261001",
+          "project": "projects/tacogips-sheets-auth-261001",
+          "reason": "Google exposes no supported public API for general OAuth client creation; create a Desktop client in Google Auth Platform and import its JSON."
+        },
+        "oauthConsentSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/overview?project=tacogips-sheets-auth-261001",
+          "project": "projects/tacogips-sheets-auth-261001",
+          "scopes": [
+            "openid",
+            "email",
+            "profile"
+          ]
+        },
+        "project": {
+          "createTime": "2026-09-30T22:29:02.192Z",
+          "displayName": "Gateway Sheets Auth",
+          "labels": {
+            "purpose": "gateway-auth"
+          },
+          "parent": "organizations/26859243241",
+          "projectId": "tacogips-sheets-auth-261001",
+          "resourceName": "projects/540550168238",
+          "state": "ACTIVE"
+        },
+        "projectId": "tacogips-sheets-auth-261001",
+        "serviceEnablement": {
+          "operation": {
+            "done": true,
+            "metadata": {
+              "@type": "type.googleapis.com/google.protobuf.Empty"
+            },
+            "name": "operations/acat.p2-540550168238-df3bd3d9-3da5-4dec-aff9-21c692867963",
+            "response": {
+              "@type": "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse",
+              "services": [
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Reads and writes Google Sheets."
+                    },
+                    "monitoring": {},
+                    "name": "sheets.googleapis.com",
+                    "quota": {},
+                    "title": "Google Sheets API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/540550168238/services/sheets.googleapis.com",
+                  "parent": "projects/540550168238",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "The Google Drive API allows clients to access resources from Google Drive."
+                    },
+                    "monitoring": {},
+                    "name": "drive.googleapis.com",
+                    "quota": {},
+                    "title": "Google Drive API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/540550168238/services/drive.googleapis.com",
+                  "parent": "projects/540550168238",
+                  "state": "ENABLED"
+                }
+              ]
+            }
+          },
+          "project": "projects/tacogips-sheets-auth-261001",
+          "requestedServices": [
+            "sheets.googleapis.com",
+            "drive.googleapis.com"
+          ],
+          "waited": true
+        }
+      },
+      "ok": true
+    },
+    "googleOAuthClientRegistered": false,
+    "verifyExit": 0,
+    "enabledAPIs": [
+      "drive.googleapis.com",
+      "sheets.googleapis.com"
+    ],
+    "requiredAPIsVerified": true
+  },
+  {
+    "product": "drive",
+    "projectID": "tacogips-drive-auth-261001",
+    "services": [
+      "drive.googleapis.com"
+    ],
+    "createExit": 0,
+    "createResult": {
+      "command": "projects.create",
+      "data": {
+        "createOperation": {
+          "done": true,
+          "metadata": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata",
+            "createTime": "2026-09-30T22:29:12.191Z",
+            "gettable": true,
+            "ready": true
+          },
+          "name": "operations/create_project.global.4705460986291936034",
+          "response": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.Project",
+            "createTime": "2026-09-30T22:29:12.191Z",
+            "displayName": "Gateway Drive Auth",
+            "etag": "W/\"c659a45da39e33cb\"",
+            "labels": {
+              "purpose": "gateway-auth"
+            },
+            "name": "projects/509123349917",
+            "parent": "organizations/26859243241",
+            "projectId": "tacogips-drive-auth-261001",
+            "state": "ACTIVE",
+            "updateTime": "2026-09-30T22:29:13.170534Z"
+          }
+        },
+        "oauthClientSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/clients?project=tacogips-drive-auth-261001",
+          "project": "projects/tacogips-drive-auth-261001",
+          "reason": "Google exposes no supported public API for general OAuth client creation; create a Desktop client in Google Auth Platform and import its JSON."
+        },
+        "oauthConsentSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/overview?project=tacogips-drive-auth-261001",
+          "project": "projects/tacogips-drive-auth-261001",
+          "scopes": [
+            "openid",
+            "email",
+            "profile"
+          ]
+        },
+        "project": {
+          "createTime": "2026-09-30T22:29:12.191Z",
+          "displayName": "Gateway Drive Auth",
+          "labels": {
+            "purpose": "gateway-auth"
+          },
+          "parent": "organizations/26859243241",
+          "projectId": "tacogips-drive-auth-261001",
+          "resourceName": "projects/509123349917",
+          "state": "ACTIVE"
+        },
+        "projectId": "tacogips-drive-auth-261001",
+        "serviceEnablement": {
+          "operation": {
+            "done": true,
+            "metadata": {
+              "@type": "type.googleapis.com/google.protobuf.Empty"
+            },
+            "name": "operations/acat.p2-509123349917-12b3d612-7793-4edd-942d-f0c6d84ebd53",
+            "response": {
+              "@type": "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse",
+              "services": [
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "The Google Drive API allows clients to access resources from Google Drive."
+                    },
+                    "monitoring": {},
+                    "name": "drive.googleapis.com",
+                    "quota": {},
+                    "title": "Google Drive API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/509123349917/services/drive.googleapis.com",
+                  "parent": "projects/509123349917",
+                  "state": "ENABLED"
+                }
+              ]
+            }
+          },
+          "project": "projects/tacogips-drive-auth-261001",
+          "requestedServices": [
+            "drive.googleapis.com"
+          ],
+          "waited": true
+        }
+      },
+      "ok": true
+    },
+    "googleOAuthClientRegistered": false,
+    "verifyExit": 0,
+    "enabledAPIs": [
+      "drive.googleapis.com"
+    ],
+    "requiredAPIsVerified": true
+  },
+  {
+    "product": "analytics",
+    "projectID": "tacogips-analytics-auth-261001",
+    "services": [
+      "analyticsadmin.googleapis.com",
+      "analyticsdata.googleapis.com",
+      "tagmanager.googleapis.com"
+    ],
+    "createExit": 0,
+    "createResult": {
+      "command": "projects.create",
+      "data": {
+        "createOperation": {
+          "done": true,
+          "metadata": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata",
+            "createTime": "2026-09-30T22:29:21.313Z",
+            "gettable": true,
+            "ready": true
+          },
+          "name": "operations/create_project.global.6432895036038954412",
+          "response": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.Project",
+            "createTime": "2026-09-30T22:29:21.313Z",
+            "displayName": "Gateway Analytics Auth",
+            "etag": "W/\"345748db0c9e98fb\"",
+            "labels": {
+              "purpose": "gateway-auth"
+            },
+            "name": "projects/610971575534",
+            "parent": "organizations/26859243241",
+            "projectId": "tacogips-analytics-auth-261001",
+            "state": "ACTIVE",
+            "updateTime": "2026-09-30T22:29:22.271164Z"
+          }
+        },
+        "oauthClientSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/clients?project=tacogips-analytics-auth-261001",
+          "project": "projects/tacogips-analytics-auth-261001",
+          "reason": "Google exposes no supported public API for general OAuth client creation; create a Desktop client in Google Auth Platform and import its JSON."
+        },
+        "oauthConsentSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/overview?project=tacogips-analytics-auth-261001",
+          "project": "projects/tacogips-analytics-auth-261001",
+          "scopes": [
+            "openid",
+            "email",
+            "profile"
+          ]
+        },
+        "project": {
+          "createTime": "2026-09-30T22:29:21.313Z",
+          "displayName": "Gateway Analytics Auth",
+          "labels": {
+            "purpose": "gateway-auth"
+          },
+          "parent": "organizations/26859243241",
+          "projectId": "tacogips-analytics-auth-261001",
+          "resourceName": "projects/610971575534",
+          "state": "ACTIVE"
+        },
+        "projectId": "tacogips-analytics-auth-261001",
+        "serviceEnablement": {
+          "operation": {
+            "done": true,
+            "metadata": {
+              "@type": "type.googleapis.com/google.protobuf.Empty"
+            },
+            "name": "operations/acat.p2-610971575534-a248e80b-c278-4f5a-b9d4-1c44fc7a6b23",
+            "response": {
+              "@type": "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse",
+              "services": [
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Manage properties in Google Analytics. \nWarning: Creating multiple Customer Applications, Accounts, or Projects to simulate or act as a single Customer Application, Account, or Project (respectively) or to circumvent Service-specific usage limits or quotas is a direct violation of Google Cloud Platform Terms of Service as well as Google APIs Terms of Service. These actions can result in immediate termination of your GCP project(s) without any warning."
+                    },
+                    "monitoring": {},
+                    "name": "analyticsadmin.googleapis.com",
+                    "quota": {},
+                    "title": "Google Analytics Admin API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/610971575534/services/analyticsadmin.googleapis.com",
+                  "parent": "projects/610971575534",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Accesses report data in Google Analytics. Warning: Creating multiple Customer Applications, Accounts, or Projects to simulate or act as a single Customer Application, Account, or Project (respectively) or to circumvent Service-specific usage limits or quotas is a direct violation of Google Cloud Platform Terms of Service as well as Google APIs Terms of Service. These actions can result in immediate termination of your GCP project(s) without any warning.\n"
+                    },
+                    "monitoredResources": [
+                      {
+                        "description": "Fresh GA4 -> BigQuery Export.",
+                        "displayName": "Fresh BigQuery Export",
+                        "labels": [
+                          {
+                            "description": "The identifier of the GCP resource container associated with this resource (project_id), such as \"my-project\" or \"organizations/123\".",
+                            "key": "resource_container"
+                          },
+                          {
+                            "description": "The cloud location of the BigQuery table.",
+                            "key": "location"
+                          }
+                        ],
+                        "launchStage": "GA",
+                        "type": "analyticsdata.googleapis.com/FreshBigQueryExport"
+                      },
+                      {
+                        "description": "Daily GA4 -> BigQuery Export.",
+                        "displayName": "BigQuery Daily Export",
+                        "labels": [
+                          {
+                            "description": "The identifier of the GCP resource container associated with this resource (project_id), such as \"my-project\" or \"organizations/123\".",
+                            "key": "resource_container"
+                          },
+                          {
+                            "description": "The cloud location of the BigQuery table.",
+                            "key": "location"
+                          }
+                        ],
+                        "launchStage": "GA",
+                        "type": "analyticsdata.googleapis.com/BigQueryDailyExport"
+                      }
+                    ],
+                    "monitoring": {},
+                    "name": "analyticsdata.googleapis.com",
+                    "quota": {},
+                    "title": "Google Analytics Data API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/610971575534/services/analyticsdata.googleapis.com",
+                  "parent": "projects/610971575534",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "This API allows clients to access and modify container and tag\n     configuration."
+                    },
+                    "monitoring": {},
+                    "name": "tagmanager.googleapis.com",
+                    "quota": {},
+                    "title": "Tag Manager API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal",
+                        "serviceusage.googleapis.com/tos/tagmanager"
+                      ]
+                    }
+                  },
+                  "name": "projects/610971575534/services/tagmanager.googleapis.com",
+                  "parent": "projects/610971575534",
+                  "state": "ENABLED"
+                }
+              ]
+            }
+          },
+          "project": "projects/tacogips-analytics-auth-261001",
+          "requestedServices": [
+            "analyticsadmin.googleapis.com",
+            "analyticsdata.googleapis.com",
+            "tagmanager.googleapis.com"
+          ],
+          "waited": true
+        }
+      },
+      "ok": true
+    },
+    "googleOAuthClientRegistered": false,
+    "verifyExit": 0,
+    "enabledAPIs": [
+      "analyticsadmin.googleapis.com",
+      "analyticsdata.googleapis.com",
+      "tagmanager.googleapis.com"
+    ],
+    "requiredAPIsVerified": true
+  },
+  {
+    "product": "marketing",
+    "projectID": "tacogips-marketing-auth-261001",
+    "services": [
+      "googleads.googleapis.com",
+      "adsense.googleapis.com",
+      "admob.googleapis.com",
+      "searchconsole.googleapis.com"
+    ],
+    "createExit": 0,
+    "createResult": {
+      "command": "projects.create",
+      "data": {
+        "createOperation": {
+          "done": true,
+          "metadata": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata",
+            "createTime": "2026-09-30T22:29:32.107Z",
+            "gettable": true,
+            "ready": true
+          },
+          "name": "operations/create_project.global.7199057721348776974",
+          "response": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.Project",
+            "createTime": "2026-09-30T22:29:32.107Z",
+            "displayName": "Gateway Marketing Auth",
+            "etag": "W/\"d4d491e347a1b66a\"",
+            "labels": {
+              "purpose": "gateway-auth"
+            },
+            "name": "projects/925713793240",
+            "parent": "organizations/26859243241",
+            "projectId": "tacogips-marketing-auth-261001",
+            "state": "ACTIVE",
+            "updateTime": "2026-09-30T22:29:32.949059Z"
+          }
+        },
+        "oauthClientSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/clients?project=tacogips-marketing-auth-261001",
+          "project": "projects/tacogips-marketing-auth-261001",
+          "reason": "Google exposes no supported public API for general OAuth client creation; create a Desktop client in Google Auth Platform and import its JSON."
+        },
+        "oauthConsentSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/overview?project=tacogips-marketing-auth-261001",
+          "project": "projects/tacogips-marketing-auth-261001",
+          "scopes": [
+            "openid",
+            "email",
+            "profile"
+          ]
+        },
+        "project": {
+          "createTime": "2026-09-30T22:29:32.107Z",
+          "displayName": "Gateway Marketing Auth",
+          "labels": {
+            "purpose": "gateway-auth"
+          },
+          "parent": "organizations/26859243241",
+          "projectId": "tacogips-marketing-auth-261001",
+          "resourceName": "projects/925713793240",
+          "state": "ACTIVE"
+        },
+        "projectId": "tacogips-marketing-auth-261001",
+        "serviceEnablement": {
+          "operation": {
+            "done": true,
+            "metadata": {
+              "@type": "type.googleapis.com/google.protobuf.Empty"
+            },
+            "name": "operations/acat.p2-925713793240-0ee6813c-7912-4b5b-b427-fc9c31ee8950",
+            "response": {
+              "@type": "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse",
+              "services": [
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Manage your Google Ads accounts, campaigns, and reports with this API."
+                    },
+                    "monitoredResources": [
+                      {
+                        "description": "A Customer in the Google Ads API.",
+                        "displayName": "Customer",
+                        "labels": [
+                          {
+                            "description": "The identity of the GCP resource container associated with this resource.",
+                            "key": "resource_container"
+                          },
+                          {
+                            "description": "The location of the service.",
+                            "key": "location"
+                          },
+                          {
+                            "description": "External customer id associated with the request.",
+                            "key": "external_customer_id"
+                          }
+                        ],
+                        "launchStage": "PRELAUNCH",
+                        "type": "googleads.googleapis.com/Customer"
+                      },
+                      {
+                        "description": "A query fingerprint in the Google Ads API.",
+                        "displayName": "Query Fingerprint",
+                        "labels": [
+                          {
+                            "description": "The identity of the GCP resource container associated with this resource.",
+                            "key": "resource_container"
+                          },
+                          {
+                            "description": "The location of the service.",
+                            "key": "location"
+                          },
+                          {
+                            "description": "Query fingerprint id associated with the request.",
+                            "key": "query_fingerprint"
+                          }
+                        ],
+                        "launchStage": "PRELAUNCH",
+                        "type": "googleads.googleapis.com/InternalQueryFingerprint"
+                      }
+                    ],
+                    "monitoring": {
+                      "consumerDestinations": [
+                        {
+                          "metrics": [
+                            "googleads.googleapis.com/internal/requests_per_organization_per_external_customer_id",
+                            "googleads.googleapis.com/internal/requests_per_organization_per_external_customer_id_per_service_per_method",
+                            "googleads.googleapis.com/internal/requests_per_organization_per_external_customer_id_per_service_per_method_per_resource_type",
+                            "googleads.googleapis.com/internal/requests_per_organization_per_method",
+                            "googleads.googleapis.com/internal/requests_per_organization_per_service_per_method",
+                            "googleads.googleapis.com/internal/requests_per_organization_per_version",
+                            "googleads.googleapis.com/internal/requests_per_project_per_external_customer_id",
+                            "googleads.googleapis.com/internal/requests_per_project_per_external_customer_id_per_service_per_method",
+                            "googleads.googleapis.com/internal/requests_per_project_per_external_customer_id_per_service_per_method_per_resource_type",
+                            "googleads.googleapis.com/internal/requests_per_project_per_method",
+                            "googleads.googleapis.com/internal/requests_per_project_per_resource",
+                            "googleads.googleapis.com/internal/requests_per_project_per_service_per_method",
+                            "googleads.googleapis.com/internal/requests_per_project_per_version",
+                            "googleads.googleapis.com/internal/requests_size_per_organization_per_external_customer_id",
+                            "googleads.googleapis.com/internal/search_requests_bigstore_response_size_per_organization_per_external_customer_id",
+                            "googleads.googleapis.com/internal/search_requests_bigstore_response_size_per_project_per_external_customer_id",
+                            "googleads.googleapis.com/quota/internal/requests_per_organization_per_external_customer_id/exceeded",
+                            "googleads.googleapis.com/quota/internal/requests_per_organization_per_external_customer_id/usage",
+                            "googleads.googleapis.com/quota/internal/requests_per_organization_per_external_customer_id_per_service_per_method/exceeded",
+                            "googleads.googleapis.com/quota/internal/requests_per_organization_per_external_customer_id_per_service_per_method/usage",
+                            "googleads.googleapis.com/quota/internal/requests_per_organization_per_external_customer_id_per_service_per_method_per_resource_type/exceeded",
+                            "googleads.googleapis.com/quota/internal/requests_per_organization_per_external_customer_id_per_service_per_method_per_resource_type/usage",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_external_customer_id/exceeded",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_external_customer_id/usage",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_external_customer_id_per_service_per_method/exceeded",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_external_customer_id_per_service_per_method/usage",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_external_customer_id_per_service_per_method_per_resource_type/exceeded",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_external_customer_id_per_service_per_method_per_resource_type/usage",
+                            "googleads.googleapis.com/quota/internal/requests_size_per_organization_per_external_customer_id/exceeded",
+                            "googleads.googleapis.com/quota/internal/requests_size_per_organization_per_external_customer_id/usage",
+                            "googleads.googleapis.com/quota/internal/search_requests_bigstore_response_size_per_organization_per_external_customer_id/exceeded",
+                            "googleads.googleapis.com/quota/internal/search_requests_bigstore_response_size_per_organization_per_external_customer_id/usage",
+                            "googleads.googleapis.com/quota/internal/search_requests_bigstore_response_size_per_project_per_external_customer_id/exceeded",
+                            "googleads.googleapis.com/quota/internal/search_requests_bigstore_response_size_per_project_per_external_customer_id/usage"
+                          ],
+                          "monitoredResource": "googleads.googleapis.com/Customer"
+                        },
+                        {
+                          "metrics": [
+                            "googleads.googleapis.com/internal/fsu_utilization_per_organization_per_project",
+                            "googleads.googleapis.com/internal/fsu_utilization_per_organization_per_query_fingerprint",
+                            "googleads.googleapis.com/internal/fsu_utilization_per_project_per_query_fingerprint",
+                            "googleads.googleapis.com/internal/requests_per_organization_per_query_fingerprint",
+                            "googleads.googleapis.com/internal/requests_per_project_per_query_fingerprint",
+                            "googleads.googleapis.com/quota/internal/fsu_utilization_per_organization_per_query_fingerprint/exceeded",
+                            "googleads.googleapis.com/quota/internal/fsu_utilization_per_organization_per_query_fingerprint/usage",
+                            "googleads.googleapis.com/quota/internal/fsu_utilization_per_project_per_query_fingerprint/exceeded",
+                            "googleads.googleapis.com/quota/internal/fsu_utilization_per_project_per_query_fingerprint/usage",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_query_fingerprint/exceeded",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_query_fingerprint/usage"
+                          ],
+                          "monitoredResource": "googleads.googleapis.com/InternalQueryFingerprint"
+                        },
+                        {
+                          "metrics": [
+                            "googleads.googleapis.com/quota/internal/requests_per_organization_per_external_customer_id/limit",
+                            "googleads.googleapis.com/quota/internal/requests_per_organization_per_external_customer_id_per_service_per_method/limit",
+                            "googleads.googleapis.com/quota/internal/requests_per_organization_per_external_customer_id_per_service_per_method_per_resource_type/limit",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_external_customer_id/limit",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_external_customer_id_per_service_per_method/limit",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_external_customer_id_per_service_per_method_per_resource_type/limit",
+                            "googleads.googleapis.com/quota/internal/requests_size_per_organization_per_external_customer_id/limit",
+                            "googleads.googleapis.com/quota/internal/search_requests_bigstore_response_size_per_organization_per_external_customer_id/limit",
+                            "googleads.googleapis.com/quota/internal/search_requests_bigstore_response_size_per_project_per_external_customer_id/limit"
+                          ],
+                          "monitoredResource": "googleads.googleapis.com/Customer"
+                        },
+                        {
+                          "metrics": [
+                            "googleads.googleapis.com/quota/internal/fsu_utilization_per_organization_per_query_fingerprint/limit",
+                            "googleads.googleapis.com/quota/internal/fsu_utilization_per_project_per_query_fingerprint/limit",
+                            "googleads.googleapis.com/quota/internal/requests_per_project_per_query_fingerprint/limit"
+                          ],
+                          "monitoredResource": "googleads.googleapis.com/InternalQueryFingerprint"
+                        }
+                      ]
+                    },
+                    "name": "googleads.googleapis.com",
+                    "quota": {},
+                    "title": "Google Ads API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal",
+                        "serviceusage.googleapis.com/tos/google-ads-api"
+                      ]
+                    }
+                  },
+                  "name": "projects/925713793240/services/googleads.googleapis.com",
+                  "parent": "projects/925713793240",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "The AdSense Management API allows publishers to access their inventory and\n    run earnings and performance reports."
+                    },
+                    "monitoring": {},
+                    "name": "adsense.googleapis.com",
+                    "quota": {},
+                    "title": "AdSense Management API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/925713793240/services/adsense.googleapis.com",
+                  "parent": "projects/925713793240",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "The AdMob API allows publishers to programmatically get information about their AdMob account.\n"
+                    },
+                    "monitoring": {},
+                    "name": "admob.googleapis.com",
+                    "quota": {},
+                    "title": "AdMob API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/925713793240/services/admob.googleapis.com",
+                  "parent": "projects/925713793240",
+                  "state": "ENABLED"
+                },
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "The Search Console API provides access to both Search Console data (verified users only) and to public information on an URL basis (anyone)"
+                    },
+                    "monitoring": {},
+                    "name": "searchconsole.googleapis.com",
+                    "quota": {},
+                    "title": "Google Search Console API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/universal"
+                      ]
+                    }
+                  },
+                  "name": "projects/925713793240/services/searchconsole.googleapis.com",
+                  "parent": "projects/925713793240",
+                  "state": "ENABLED"
+                }
+              ]
+            }
+          },
+          "project": "projects/tacogips-marketing-auth-261001",
+          "requestedServices": [
+            "googleads.googleapis.com",
+            "adsense.googleapis.com",
+            "admob.googleapis.com",
+            "searchconsole.googleapis.com"
+          ],
+          "waited": true
+        }
+      },
+      "ok": true
+    },
+    "googleOAuthClientRegistered": false,
+    "verifyExit": 0,
+    "enabledAPIs": [
+      "admob.googleapis.com",
+      "adsense.googleapis.com",
+      "googleads.googleapis.com",
+      "searchconsole.googleapis.com"
+    ],
+    "requiredAPIsVerified": true
+  },
+  {
+    "product": "ocr",
+    "projectID": "tacogips-ocr-auth-261001",
+    "services": [
+      "documentai.googleapis.com"
+    ],
+    "createExit": 0,
+    "createResult": {
+      "command": "projects.create",
+      "data": {
+        "createOperation": {
+          "done": true,
+          "metadata": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata",
+            "createTime": "2026-09-30T22:29:41.428Z",
+            "gettable": true,
+            "ready": true
+          },
+          "name": "operations/create_project.global.9033702484939554485",
+          "response": {
+            "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.Project",
+            "createTime": "2026-09-30T22:29:41.428Z",
+            "displayName": "Gateway Ocr Auth",
+            "etag": "W/\"5992767fa2462fe1\"",
+            "labels": {
+              "purpose": "gateway-auth"
+            },
+            "name": "projects/795321622450",
+            "parent": "organizations/26859243241",
+            "projectId": "tacogips-ocr-auth-261001",
+            "state": "ACTIVE",
+            "updateTime": "2026-09-30T22:29:42.567181Z"
+          }
+        },
+        "oauthClientSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/clients?project=tacogips-ocr-auth-261001",
+          "project": "projects/tacogips-ocr-auth-261001",
+          "reason": "Google exposes no supported public API for general OAuth client creation; create a Desktop client in Google Auth Platform and import its JSON."
+        },
+        "oauthConsentSetup": {
+          "automated": false,
+          "consoleUrl": "https://console.cloud.google.com/auth/overview?project=tacogips-ocr-auth-261001",
+          "project": "projects/tacogips-ocr-auth-261001",
+          "scopes": [
+            "openid",
+            "email",
+            "profile"
+          ]
+        },
+        "project": {
+          "createTime": "2026-09-30T22:29:41.428Z",
+          "displayName": "Gateway Ocr Auth",
+          "labels": {
+            "purpose": "gateway-auth"
+          },
+          "parent": "organizations/26859243241",
+          "projectId": "tacogips-ocr-auth-261001",
+          "resourceName": "projects/795321622450",
+          "state": "ACTIVE"
+        },
+        "projectId": "tacogips-ocr-auth-261001",
+        "serviceEnablement": {
+          "operation": {
+            "done": true,
+            "metadata": {
+              "@type": "type.googleapis.com/google.protobuf.Empty"
+            },
+            "name": "operations/acat.p2-795321622450-5662da05-2927-4f1c-b69c-16df45c51961",
+            "response": {
+              "@type": "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse",
+              "services": [
+                {
+                  "config": {
+                    "authentication": {},
+                    "documentation": {
+                      "summary": "Service to parse structured information from unstructured or semi-structured documents using state-of-the-art Google AI such as natural language, computer vision, translation, and AutoML."
+                    },
+                    "monitoredResources": [
+                      {
+                        "description": "A location in the Document AI API.",
+                        "displayName": "Document AI Location",
+                        "labels": [
+                          {
+                            "description": "The identified of the GCP resource container associated with this resource, such as \"my_project\" or \"organizations/5678\".",
+                            "key": "resource_container"
+                          },
+                          {
+                            "description": "Location of resource.",
+                            "key": "location"
+                          }
+                        ],
+                        "launchStage": "ALPHA",
+                        "type": "documentai.googleapis.com/Location"
+                      },
+                      {
+                        "description": "A specific version of a Document AI processor.",
+                        "displayName": "Document AI Processor Version",
+                        "labels": [
+                          {
+                            "description": "The identifier of the GCP project associated with this resource, such as 'my-project'.",
+                            "key": "resource_container"
+                          },
+                          {
+                            "description": "The physical location of the instance.",
+                            "key": "location"
+                          },
+                          {
+                            "description": "The processor version id of the DocumentAi processor that reports the metric.",
+                            "key": "processor_version_id"
+                          },
+                          {
+                            "description": "The processor type of the DocumentAi processor that reports the metric. .",
+                            "key": "processor_type"
+                          },
+                          {
+                            "description": "The processor id of the DocumentAi processor that reports the metric.",
+                            "key": "processor_id"
+                          }
+                        ],
+                        "launchStage": "EARLY_ACCESS",
+                        "type": "documentai.googleapis.com/ProcessorVersion"
+                      }
+                    ],
+                    "monitoring": {
+                      "consumerDestinations": [
+                        {
+                          "metrics": [
+                            "documentai.googleapis.com/best_effort_online_process_document_pages_eu",
+                            "documentai.googleapis.com/best_effort_online_process_document_pages_regional",
+                            "documentai.googleapis.com/best_effort_online_process_document_pages_us",
+                            "documentai.googleapis.com/deployed_generative_processor_versions_eu",
+                            "documentai.googleapis.com/deployed_generative_processor_versions_regional",
+                            "documentai.googleapis.com/deployed_generative_processor_versions_us",
+                            "documentai.googleapis.com/get_processor_version_requests",
+                            "documentai.googleapis.com/online_process_document_pages_eu",
+                            "documentai.googleapis.com/online_process_document_pages_regional",
+                            "documentai.googleapis.com/online_process_document_pages_us",
+                            "documentai.googleapis.com/processor_online_process_document_requests_eu",
+                            "documentai.googleapis.com/processor_online_process_document_requests_regional",
+                            "documentai.googleapis.com/processor_online_process_document_requests_us",
+                            "documentai.googleapis.com/quota/best_effort_online_process_document_pages_eu/exceeded",
+                            "documentai.googleapis.com/quota/best_effort_online_process_document_pages_eu/usage",
+                            "documentai.googleapis.com/quota/best_effort_online_process_document_pages_regional/exceeded",
+                            "documentai.googleapis.com/quota/best_effort_online_process_document_pages_regional/usage",
+                            "documentai.googleapis.com/quota/best_effort_online_process_document_pages_us/exceeded",
+                            "documentai.googleapis.com/quota/best_effort_online_process_document_pages_us/usage",
+                            "documentai.googleapis.com/quota/deployed_generative_processor_versions_eu/exceeded",
+                            "documentai.googleapis.com/quota/deployed_generative_processor_versions_regional/exceeded",
+                            "documentai.googleapis.com/quota/deployed_generative_processor_versions_us/exceeded",
+                            "documentai.googleapis.com/quota/online_process_document_pages_eu/exceeded",
+                            "documentai.googleapis.com/quota/online_process_document_pages_eu/usage",
+                            "documentai.googleapis.com/quota/online_process_document_pages_regional/exceeded",
+                            "documentai.googleapis.com/quota/online_process_document_pages_regional/usage",
+                            "documentai.googleapis.com/quota/online_process_document_pages_us/exceeded",
+                            "documentai.googleapis.com/quota/online_process_document_pages_us/usage",
+                            "documentai.googleapis.com/quota/processor_online_process_document_requests_eu/exceeded",
+                            "documentai.googleapis.com/quota/processor_online_process_document_requests_eu/usage",
+                            "documentai.googleapis.com/quota/processor_online_process_document_requests_regional/exceeded",
+                            "documentai.googleapis.com/quota/processor_online_process_document_requests_regional/usage",
+                            "documentai.googleapis.com/quota/processor_online_process_document_requests_us/exceeded",
+                            "documentai.googleapis.com/quota/processor_online_process_document_requests_us/usage"
+                          ],
+                          "monitoredResource": "documentai.googleapis.com/Location"
+                        },
+                        {
+                          "metrics": [
+                            "documentai.googleapis.com/processed_document_count",
+                            "documentai.googleapis.com/processed_page_count",
+                            "documentai.googleapis.com/document_processing_latencies",
+                            "documentai.googleapis.com/predicted_entity_count",
+                            "documentai.googleapis.com/entity_confidence_score",
+                            "documentai.googleapis.com/human_review_corrected_entity_count"
+                          ],
+                          "monitoredResource": "documentai.googleapis.com/ProcessorVersion"
+                        },
+                        {
+                          "metrics": [
+                            "documentai.googleapis.com/quota/best_effort_online_process_document_pages_eu/limit",
+                            "documentai.googleapis.com/quota/best_effort_online_process_document_pages_regional/limit",
+                            "documentai.googleapis.com/quota/best_effort_online_process_document_pages_us/limit",
+                            "documentai.googleapis.com/quota/deployed_generative_processor_versions_eu/limit",
+                            "documentai.googleapis.com/quota/deployed_generative_processor_versions_eu/usage",
+                            "documentai.googleapis.com/quota/deployed_generative_processor_versions_regional/limit",
+                            "documentai.googleapis.com/quota/deployed_generative_processor_versions_regional/usage",
+                            "documentai.googleapis.com/quota/deployed_generative_processor_versions_us/limit",
+                            "documentai.googleapis.com/quota/deployed_generative_processor_versions_us/usage",
+                            "documentai.googleapis.com/quota/online_process_document_pages_eu/limit",
+                            "documentai.googleapis.com/quota/online_process_document_pages_regional/limit",
+                            "documentai.googleapis.com/quota/online_process_document_pages_us/limit",
+                            "documentai.googleapis.com/quota/processor_online_process_document_requests_eu/limit",
+                            "documentai.googleapis.com/quota/processor_online_process_document_requests_regional/limit",
+                            "documentai.googleapis.com/quota/processor_online_process_document_requests_us/limit"
+                          ],
+                          "monitoredResource": "documentai.googleapis.com/Location"
+                        }
+                      ]
+                    },
+                    "name": "documentai.googleapis.com",
+                    "quota": {},
+                    "title": "Cloud Document AI API",
+                    "usage": {
+                      "requirements": [
+                        "serviceusage.googleapis.com/tos/cloud"
+                      ]
+                    }
+                  },
+                  "name": "projects/795321622450/services/documentai.googleapis.com",
+                  "parent": "projects/795321622450",
+                  "state": "ENABLED"
+                }
+              ]
+            }
+          },
+          "project": "projects/tacogips-ocr-auth-261001",
+          "requestedServices": [
+            "documentai.googleapis.com"
+          ],
+          "waited": true
+        }
+      },
+      "ok": true
+    },
+    "googleOAuthClientRegistered": false,
+    "verifyExit": 0,
+    "enabledAPIs": [
+      "documentai.googleapis.com"
+    ],
+    "requiredAPIsVerified": true
+  }
+]
