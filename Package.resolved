@@ -6,7 +6,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tacogips/google-gateway-auth.git",
       "state" : {
-        "revision" : "48e0112fb5eb057cf012194cfffaa2581ba29d76"
+        "revision" : "40b310cd6f2abeb2ae8a770643408bd161795417"
       }
     },
     {
